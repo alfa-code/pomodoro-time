@@ -1,0 +1,1 @@
+export const FIRST_CONST = 'TEST';
