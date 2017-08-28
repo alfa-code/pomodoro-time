@@ -34,7 +34,7 @@ var dev = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { modules: true },
+            options: { modules: false },
           },
         ],
       },
@@ -44,7 +44,7 @@ var dev = {
         use: 'babel-loader'
       },
       {
-        test: [/\.css$/, /\.scss$/],
+        test: [/\.scss$/],
         use: [
           require.resolve('style-loader'),
           {
