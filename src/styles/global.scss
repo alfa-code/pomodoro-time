@@ -1,12 +1,7 @@
-body {
-  font-family: 'Roboto';
-  background-image: radial-gradient(circle at 51% 45%, #e5350e, #cd0000);
-}
-
 @font-face {
   font-family: 'Bangers';
   src: url('../static/fonts/Bangers/Bangers.woff2') format('woff2'),
-       url('../static/fonts/Bangers/Bangers.woff') format('woff');
+      url('../static/fonts/Bangers/Bangers.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +9,15 @@ body {
 @font-face {
   font-family: 'Roboto';
   src: url('../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff2') format('woff2'),
-       url('../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff') format('woff');
+      url('../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
+
+:global {
+  body {
+    font-family: 'Roboto';
+    background-image: radial-gradient(circle at 51% 45%, #e5350e, #cd0000);
+  }
+}
+  
