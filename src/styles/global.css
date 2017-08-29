@@ -1,0 +1,11 @@
+body {
+  background-image: radial-gradient(circle at 51% 45%, #e5350e, #cd0000);
+}
+
+@font-face {
+  font-family: 'Bangers';
+  src: url('../static/fonts/Bangers/Bangers.woff2') format('woff2'),
+       url('../static/fonts/Bangers/Bangers.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

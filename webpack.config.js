@@ -34,7 +34,7 @@ var dev = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { modules: true },
+            options: { modules: false },
           },
         ],
       },
@@ -44,7 +44,7 @@ var dev = {
         use: 'babel-loader'
       },
       {
-        test: [/\.css$/, /\.scss$/],
+        test: [/\.scss$/],
         use: [
           require.resolve('style-loader'),
           {
@@ -135,7 +135,7 @@ var build = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { modules: true },
+            options: { modules: false },
           },
         ],
       },
@@ -147,7 +147,7 @@ var build = {
       },
       // prod
       {
-        test: [/\.css$/, /\.scss$/],
+        test: [/\.scss$/],
         use: ExtractTextPlugin.extract({
           fallback: require.resolve('style-loader'),
           use: [

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-
-import Components from '@src/app/modules/index.jsx';
+import MainContainer from '@src/app/components/main-container';
 
 class App extends Component {
   render() {
     return (
-      <Components />
+      <MainContainer />
     );
   }
 }
