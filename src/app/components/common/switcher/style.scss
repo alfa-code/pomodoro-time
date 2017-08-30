@@ -1,0 +1,54 @@
+.switcherContainer {
+  display: block;
+  width: 60px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: #a51d19;
+  position: relative;
+  cursor: pointer;
+}
+
+.switcherContainerOn {
+  .switcherTrigger {
+    transform: translate(2px, -50%);
+  }
+}
+.switcherContainerOff {
+  .switcherTrigger {
+    transform: translate(32px, -50%);
+  }
+}
+
+.switcherTrigger {
+  display: inline-block;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background-color: #ffc500;
+  top: 50%;
+  border-radius: 50%;
+  transition: all .3s;
+}
+
+.switcherText {
+  display: block;
+  color: #ffc500;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-42%);
+  box-sizing: border-box;
+  padding: 0 10px 0 7px;
+  user-select: none;
+}
+
+.switcherTextOn {
+  text-align: right;
+}
+
+.switcherTextOff {
+  text-align: left;
+}
