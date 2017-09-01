@@ -8,6 +8,13 @@
   cursor: pointer;
 }
 
+.switcherDisabled {
+  user-select: none;
+  touch-action: none;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
 .switcherContainerOn {
   .switcherTrigger {
     transform: translate(2px, -50%);

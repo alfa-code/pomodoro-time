@@ -1,23 +1,35 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames'
 import style from './style.scss';
+import * as actions from '@src/actions/index.js';
 
 export default class Switcher extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: false
+      status: this.props.enabled
     }
+  }
+  
+  componentWillReceiveProps(props) {
+    this.setState({
+      status: props.enabled
+    });
   }
 
   toggleSwitcher = () => {
-    this.setState(previousState => {
-      return { status: !this.state.status }
-    })
+    actions.setNotificationsPermission(this.state.status)
   }
 
   setTriggerClass = () => {
     return this.state.status ? style.switcherContainerOn : style.switcherContainerOff
+  }
+
+  setTriggerClassDisabled = () => {
+    if (this.props.permission === 'denied') {
+      return style.switcherDisabled
+    }
   }
 
   getSwitcherText = () => {
@@ -29,7 +41,7 @@ export default class Switcher extends Component {
   }
  
   render() {
-    const switcherClass = classnames(style.switcherContainer, this.setTriggerClass())
+    const switcherClass = classnames(style.switcherContainer, this.setTriggerClass(), this.setTriggerClassDisabled())
     const switcherTextClass = classnames(style.switcherText, this.getSwitcherTextClass())
     return (
       <div 
@@ -44,3 +56,8 @@ export default class Switcher extends Component {
     )
   }
 }
+
+Switcher.propTypes = {
+  enabled: PropTypes.bool,
+  permission: PropTypes.string
+};
