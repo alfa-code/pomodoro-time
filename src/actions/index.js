@@ -15,7 +15,10 @@ export function setNotificationsPermission(val) {
           }
           store.dispatch({
             type: constants.SET_NOTIFICATIONS_PERMISSION,
-            payload: permissionValue
+            payload: {
+              notificationsEnabled: permissionValue,
+              notificationsPermission: window.Notification.permission
+            }
           })
         })
       break;
@@ -24,21 +27,30 @@ export function setNotificationsPermission(val) {
       alert('Вы запретили уведомления!')
       store.dispatch({
         type: constants.SET_NOTIFICATIONS_PERMISSION,
-        payload: permissionValue
+        payload: {
+          notificationsEnabled: permissionValue,
+          notificationsPermission: window.Notification.permission
+        }
       })
       break;
     case constants.NOTIFICATIONS_PERMISSION_GRANTED:
       permissionValue = !val;
       store.dispatch({
         type: constants.SET_NOTIFICATIONS_PERMISSION,
-        payload: permissionValue
+        payload: {
+          notificationsEnabled: permissionValue,
+          notificationsPermission: window.Notification.permission
+        }
       })
       break;
     default:
       permissionValue = false;
       store.dispatch({
         type: constants.SET_NOTIFICATIONS_PERMISSION,
-        payload: permissionValue
+        payload: {
+          notificationsEnabled: permissionValue,
+          notificationsPermission: window.Notification.permission
+        }
       })
   }
 }

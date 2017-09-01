@@ -7,12 +7,9 @@ let startState = {
 }
 
 export default function notifications(state = startState, action) {
-  //debugger
   switch (action.type) {
     case constants.SET_NOTIFICATIONS_PERMISSION:
-      state = Object.assign({}, state, {
-        notificationsEnabled: action.payload
-      });
+      state = Object.assign({}, state, action.payload);
       return state;
     default:
       return state
