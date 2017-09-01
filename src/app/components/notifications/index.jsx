@@ -4,6 +4,32 @@ import Switcher from '@src/app/components/common/switcher'
 import style from './style.scss';
 
 export default class Notifications extends Component {
+  setText() {
+    if (this.props.notifications.notificationsPermission === 'denied') {
+      return (
+        <div>
+          <p>
+            You have disabled the notification.
+          </p>
+          <p>
+            You can change the solution in the browser settings.
+          </p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <p>
+            You can change the audio tone and volume via Settings
+          </p>
+          <p>
+            Desktop Notifications are currently supported in Chrome, Firefox and Safari
+          </p>
+        </div>
+      )
+    }
+  }
+
   render() {
     const notificationsSupport = this.props.notifications.notificationsSupport;
     const notificationsEnabled = this.props.notifications.notificationsEnabled;
@@ -18,12 +44,7 @@ export default class Notifications extends Component {
             <Switcher enabled={notificationsEnabled} permission={notificationsPermission} />
           </div>
           <div className={style.text}>
-            <p>
-              You can change the audio tone and volume via Settings
-            </p>
-            <p>
-              Desktop Notifications are currently supported in Chrome, Firefox and Safari
-            </p>
+            {this.setText()}
           </div>
         </div>
       )
