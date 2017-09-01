@@ -6,4 +6,41 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: 100;
+  text-align: center;
+
+  display: grid;
+  justify-content: center;
+  align-content: center;
+
+  grid-template-areas: 
+  "minutes colon seconds"
+  "minutesLabel . secondsLabel";
+}
+
+.minutes {
+  grid-area: minutes;
+}
+
+.colon {
+  grid-area: colon;
+}
+
+.seconds {
+  grid-area: seconds;
+}
+
+.minutesLabel {
+  grid-area: minutesLabel;
+}
+
+.secondsLabel {
+  grid-area: secondsLabel;
+}
+
+.digit {
+  font-size: 100px;
+}
+
+.label {
+  font-size: 24px;
 }
