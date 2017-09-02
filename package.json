@@ -39,6 +39,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "dependencies": {
+    "moment": "^2.18.1",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "react": "next",

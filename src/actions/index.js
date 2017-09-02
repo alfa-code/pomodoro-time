@@ -54,3 +54,10 @@ export function setNotificationsPermission(val) {
       })
   }
 }
+
+export function setTimerSettings(obj) {
+  store.dispatch({
+    type: constants.SET_TIMER_SETTINGS,
+    payload: obj
+  })
+}

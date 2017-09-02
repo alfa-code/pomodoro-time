@@ -7,15 +7,23 @@
   font-family: 'Roboto';
   transform: translate(-50%, -50%);
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  & > div {
+    margin: 20px;
+  }
+}
+
+.timer {
   display: grid;
   justify-content: center;
   align-content: center;
-
   grid-template-areas: 
   "minutes colon seconds"
   "minutesLabel . secondsLabel";
-}
+} 
 
 .minutes {
   grid-area: minutes;
@@ -44,4 +52,74 @@
 
 .label {
   font-size: 24px;
+}
+
+.controlButton {
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.triangle {
+  width: 50px;
+  height: 50px;
+
+  &:before {
+    display: none;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 25px 0 25px 50px;
+    border-color: transparent transparent transparent #ffffff;
+  }
+}
+
+.square {
+  width: 50px;
+  height: 50px;
+
+  &:before {
+    display: none;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+  }
+
+}
+
+.pause {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  justify-content: space-around;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 100%;
+    background-color: #fff;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 100%;
+    background-color: #fff;
+  }
+
+  
 }
