@@ -24,18 +24,23 @@ export default class Timer extends Component {
   }
 
   componentWillReceiveProps(props) {
-    const { timeEnd, timeDifference } = props.timer
+    const { timerEnabled, timeEnd, timeDifference, timerState } = props.timer
     if (props.timer.timerEnabled) {
-      this.setState({
-        minutes: moment.utc(timeDifference).format("mm"),
-        seconds: moment.utc(timeDifference).format("ss")
-      });
-      //props.timer.timeDifference
-      setTimeout(function() {
-        setTimerSettings({
-          timeDifference: timeEnd - Date.now()
-        });
-      }, 1000)
+      switch (timerState) {
+        case constants.TIMER_STATE_ON:
+          this.setState({
+            minutes: moment.utc(timeDifference).format("mm"),
+            seconds: moment.utc(timeDifference).format("ss")
+          });
+          setTimeout(function() {
+            setTimerSettings({
+              timeDifference: timeEnd - Date.now()
+            });
+          }, 1000)
+          break;
+        case constants.TIMER_STATE_BREAK:
+          break;
+      }
     }
   }
 
