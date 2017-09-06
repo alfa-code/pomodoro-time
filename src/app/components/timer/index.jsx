@@ -24,21 +24,51 @@ export default class Timer extends Component {
   }
 
   componentWillReceiveProps(props) {
-    const { timerEnabled, timeEnd, timeDifference, timerState } = props.timer
-    if (props.timer.timerEnabled) {
+    const { timerEnabled, timeEnd, timeDifference, timerState, breakTime, period } = props.timer
+    if (timerEnabled) {
       switch (timerState) {
         case constants.TIMER_STATE_ON:
-          this.setState({
-            minutes: moment.utc(timeDifference).format("mm"),
-            seconds: moment.utc(timeDifference).format("ss")
-          });
-          setTimeout(function() {
+          console.log()
+          if (timeDifference <= 0) {
             setTimerSettings({
-              timeDifference: timeEnd - Date.now()
+              timerState: constants.TIMER_STATE_BREAK,
+              timerEnabled: true,
+              timeNow: Date.now(),
+              timeEnd: Date.now() + (breakTime * 60 * 1000),
+              timeDifference: (Date.now() + (breakTime * 60 * 1000)) - Date.now()
             });
-          }, 1000)
+          } else {
+            this.setState({
+              minutes: moment.utc(timeDifference).format("mm"),
+              seconds: moment.utc(timeDifference).format("ss")
+            });
+            setTimeout(function() {
+              setTimerSettings({
+                timeDifference: timeEnd - Date.now()
+              });
+            }, 1000)
+          }
           break;
         case constants.TIMER_STATE_BREAK:
+          if (timeDifference <= 0) {
+            setTimerSettings({
+              timerState: constants.TIMER_STATE_ON,
+              timerEnabled: true,
+              timeNow: Date.now(),
+              timeEnd: Date.now() + (period * 60 * 1000),
+              timeDifference: (Date.now() + (period * 60 * 1000)) - Date.now()
+            });
+          } else {
+            this.setState({
+              minutes: moment.utc(timeDifference).format("mm"),
+              seconds: moment.utc(timeDifference).format("ss")
+            });
+            setTimeout(function() {
+              setTimerSettings({
+                timeDifference: timeEnd - Date.now()
+              });
+            }, 1000)
+          }
           break;
       }
     }
@@ -64,6 +94,7 @@ export default class Timer extends Component {
 
   controlButtonOnClick = () => {
     const { timerState, period } = this.props.timer
+    console.log(timerState)
     switch (timerState) {
       case constants.TIMER_STATE_OFF:
         setTimerSettings({
@@ -76,7 +107,7 @@ export default class Timer extends Component {
         break;
       case constants.TIMER_STATE_ON:
         setTimerSettings({
-          timerState: constants.TIMER_STATE_BREAK
+          timerState: constants.TIMER_STATE_OFF
         });
         break;
       case constants.TIMER_STATE_BREAK:

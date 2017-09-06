@@ -4,8 +4,8 @@ let startState = {
   timerTime: 0,
   timerState: constants.TIMER_STATE_OFF, // off, on, break
   timerEnabled: false,
-  period: 25, // minutes
-  break: 5, // minutes
+  period: 0.2, // minutes
+  breakTime: 0.1, // minutes
   timeNow: Date.now(),
   timeEnd: 0,
   timeDifference: 0
