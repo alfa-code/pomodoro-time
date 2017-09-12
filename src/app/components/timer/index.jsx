@@ -150,10 +150,11 @@ export default class Timer extends Component {
 Timer.propTypes = {
   timer: PropTypes.shape({
     timerTime: PropTypes.digit,
-    timerState: PropTypes.string, 
+    timerState: PropTypes.string,
+    mode: PropTypes.string,
     timerActivated: PropTypes.bool,
     period: PropTypes.digit,
-    break: PropTypes.digit, 
+    breakTime: PropTypes.digit, 
     timeStart: PropTypes.digit,
     timeEnd: PropTypes.digit,
     timeDifference: PropTypes.digit
