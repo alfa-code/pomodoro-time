@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import moment from 'moment'
 
-import { sendNotification } from '@src/actions/sendNotification.js';
+import sendNotification from '@src/actions/sendNotification.js';
 import { setTimerSettings } from '@src/actions/index.js';
 
 import classnames from 'classnames';
@@ -19,10 +19,6 @@ export default class Timer extends Component {
       minutes: '00',
       seconds: '00'
     }
-  }
-
-  send () {
-    //sendNotification(1, 2, 3, 4);
   }
 
   componentDidMount () {
@@ -57,9 +53,11 @@ export default class Timer extends Component {
       switch (mode) {
         case constants.TIMER_MODE_POMODORO:
           this.startNewTimer(constants.TIMER_MODE_BREAK, breakTime);
+          sendNotification('Помидор окончен', 'notyfy-1', 'Передохни немного...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
           break;
         case constants.TIMER_MODE_BREAK:
           this.startNewTimer(constants.TIMER_MODE_POMODORO, period);
+          sendNotification('Отдых окончен', 'notyfy-2', 'За работу...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
           break;
       }
       
@@ -120,7 +118,6 @@ export default class Timer extends Component {
     return (
       <div 
         className={style.container}
-        onClick={this.send}
       >
         <div 
           className={style.controlButton}
