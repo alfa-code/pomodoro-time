@@ -34,8 +34,6 @@ export default class Timer extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props)
-
     const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
 
     if (timerActivated) {
@@ -107,37 +105,14 @@ export default class Timer extends Component {
     }
   }
 
-  startNewTimer = (timerMode, time) => {
-    const { period, breakTime, mode } = this.props.timer
-    // switch (mode) {
-    //   case constants.TIMER_MODE_POMODORO:
-    //     setTimerSettings({
-    //       mode: constants.TIMER_MODE_POMODORO,
-    //       timerState: constants.TIMER_STATE_WORKING,
-    //       timerActivated: true,
-    //       timeStart: Date.now(),
-    //       timeEnd: Date.now() + (period * 60 * 1000),
-    //       timeDifference: period * 60 * 1000
-    //     });
-    //     break;
-    //   case constants.TIMER_MODE_BREAK:
-    //     setTimerSettings({
-    //       mode: constants.TIMER_MODE_BREAK,
-    //       timerState: constants.TIMER_STATE_WORKING,
-    //       timerActivated: true,
-    //       timeStart: Date.now(),
-    //       timeEnd: Date.now() + (breakTime * 60 * 1000),
-    //       timeDifference: breakTime * 60 * 1000
-    //     });
-    //     break;
-    // }
+  startNewTimer = (timerMode, timerPeriod) => {
     setTimerSettings({
       mode: timerMode,
       timerState: constants.TIMER_STATE_WORKING,
       timerActivated: true,
       timeStart: Date.now(),
-      timeEnd: Date.now() + (time * 60 * 1000),
-      timeDifference: time * 60 * 1000
+      timeEnd: Date.now() + (timerPeriod * 60 * 1000),
+      timeDifference: timerPeriod * 60 * 1000
     });
   }
 
