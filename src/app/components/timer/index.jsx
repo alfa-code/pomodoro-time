@@ -14,112 +14,134 @@ import style from './style.scss';
 export default class Timer extends Component {
   constructor(props) {
     super(props)
+    this.timer;
     this.state = {
       minutes: '00',
       seconds: '00'
     }
   }
+
   send () {
     //sendNotification(1, 2, 3, 4);
   }
 
+  componentDidMount () {
+    const { period } = this.props.timer
+    this.setState({
+      minutes: moment.utc(period * 60 * 1000).format("mm"),
+      seconds: moment.utc(period * 60 * 1000).format("ss")
+    });
+  }
+
   componentWillReceiveProps(props) {
-    const { timerEnabled, timeEnd, timeDifference, timerState, breakTime, period } = props.timer
-    if (timerEnabled) {
+    console.log(props)
+
+    const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
+
+    if (timerActivated) {
       switch (timerState) {
-        case constants.TIMER_STATE_ON:
-          console.log()
-          if (timeDifference <= 0) {
+        case constants.TIMER_STATE_WORKING:
+          let that = this;
+          this.timer = setTimeout(function() {
             setTimerSettings({
-              timerState: constants.TIMER_STATE_BREAK,
-              timerEnabled: true,
-              timeNow: Date.now(),
-              timeEnd: Date.now() + (breakTime * 60 * 1000),
-              timeDifference: (Date.now() + (breakTime * 60 * 1000)) - Date.now()
+              timeDifference: timeDifference - 1000
             });
-          } else {
-            this.setState({
-              minutes: moment.utc(timeDifference).format("mm"),
-              seconds: moment.utc(timeDifference).format("ss")
-            });
-            setTimeout(function() {
-              setTimerSettings({
-                timeDifference: timeEnd - Date.now()
-              });
-            }, 1000)
-          }
+          }, 1000)
           break;
-        case constants.TIMER_STATE_BREAK:
-          if (timeDifference <= 0) {
-            setTimerSettings({
-              timerState: constants.TIMER_STATE_ON,
-              timerEnabled: true,
-              timeNow: Date.now(),
-              timeEnd: Date.now() + (period * 60 * 1000),
-              timeDifference: (Date.now() + (period * 60 * 1000)) - Date.now()
-            });
-          } else {
-            this.setState({
-              minutes: moment.utc(timeDifference).format("mm"),
-              seconds: moment.utc(timeDifference).format("ss")
-            });
-            setTimeout(function() {
-              setTimerSettings({
-                timeDifference: timeEnd - Date.now()
-              });
-            }, 1000)
-          }
+        case constants.TIMER_STATE_PAUSE:
+          clearTimeout(this.timer);
+          break;
+      }
+    }
+
+    if (timeDifference < 0) {
+      clearTimeout(this.timer);
+      switch (mode) {
+        case constants.TIMER_MODE_POMODORO:
+          this.startNewTimer(constants.TIMER_MODE_BREAK, breakTime);
+          break;
+        case constants.TIMER_MODE_BREAK:
+          this.startNewTimer(constants.TIMER_MODE_POMODORO, period);
+          break;
+      }
+      
+    }
+
+    this.setState({
+      minutes: moment.utc(timeDifference).format("mm"),
+      seconds: moment.utc(timeDifference).format("ss")
+    });
+  }
+
+  setButtonClass = () => {
+    const { timerActivated, timerState } = this.props.timer
+    if (timerActivated) {
+      switch (timerState) {
+        case constants.TIMER_STATE_WORKING:
+          return style.pause;
+        case constants.TIMER_STATE_PAUSE:
+          return style.triangle;
+      }
+    } else {
+      return style.triangle
+    }
+  }
+
+  controlButtonOnClick = () => {
+    const { timerActivated, timerState, period } = this.props.timer
+    if (!timerActivated) {
+      this.startNewTimer(constants.TIMER_MODE_POMODORO, period);
+    } else {
+      switch (timerState) {
+        case constants.TIMER_STATE_WORKING:
+          setTimerSettings({
+            timerState: constants.TIMER_STATE_PAUSE
+          });
+          break;
+        case constants.TIMER_STATE_PAUSE:
+          setTimerSettings({
+            timerState: constants.TIMER_STATE_WORKING
+          })
           break;
       }
     }
   }
 
-  setControllButtonInner () {
-    const { timerState } = this.props.timer
-    switch (timerState) {
-      case constants.TIMER_STATE_OFF:
-        return (
-          <div className={style.triangle}></div>
-        )
-      case constants.TIMER_STATE_ON:
-        return (
-          <div className={style.pause}></div>
-        )
-      case constants.TIMER_STATE_BREAK:
-        return (
-          <div className={style.triangle}></div>
-        )
-    }
-  }
-
-  controlButtonOnClick = () => {
-    const { timerState, period } = this.props.timer
-    console.log(timerState)
-    switch (timerState) {
-      case constants.TIMER_STATE_OFF:
-        setTimerSettings({
-          timerState: constants.TIMER_STATE_ON,
-          timerEnabled: true,
-          timeNow: Date.now(),
-          timeEnd: Date.now() + (period * 60 * 1000),
-          timeDifference: (Date.now() + (period * 60 * 1000)) - Date.now()
-        });
-        break;
-      case constants.TIMER_STATE_ON:
-        setTimerSettings({
-          timerState: constants.TIMER_STATE_OFF
-        });
-        break;
-      case constants.TIMER_STATE_BREAK:
-        setTimerSettings({
-          timerState: constants.TIMER_STATE_ON
-        });
-        break;
-    }
+  startNewTimer = (timerMode, time) => {
+    const { period, breakTime, mode } = this.props.timer
+    // switch (mode) {
+    //   case constants.TIMER_MODE_POMODORO:
+    //     setTimerSettings({
+    //       mode: constants.TIMER_MODE_POMODORO,
+    //       timerState: constants.TIMER_STATE_WORKING,
+    //       timerActivated: true,
+    //       timeStart: Date.now(),
+    //       timeEnd: Date.now() + (period * 60 * 1000),
+    //       timeDifference: period * 60 * 1000
+    //     });
+    //     break;
+    //   case constants.TIMER_MODE_BREAK:
+    //     setTimerSettings({
+    //       mode: constants.TIMER_MODE_BREAK,
+    //       timerState: constants.TIMER_STATE_WORKING,
+    //       timerActivated: true,
+    //       timeStart: Date.now(),
+    //       timeEnd: Date.now() + (breakTime * 60 * 1000),
+    //       timeDifference: breakTime * 60 * 1000
+    //     });
+    //     break;
+    // }
+    setTimerSettings({
+      mode: timerMode,
+      timerState: constants.TIMER_STATE_WORKING,
+      timerActivated: true,
+      timeStart: Date.now(),
+      timeEnd: Date.now() + (time * 60 * 1000),
+      timeDifference: time * 60 * 1000
+    });
   }
 
   render() {
-    console.log(this.props)
     return (
       <div 
         className={style.container}
@@ -129,7 +151,7 @@ export default class Timer extends Component {
           className={style.controlButton}
           onClick={this.controlButtonOnClick}
         >
-          { this.setControllButtonInner() }
+          <div className={this.setButtonClass()}></div>
         </div>
         <div className={style.timer}>
           <div className={classnames(style.digit, style.minutes)}>
@@ -157,10 +179,10 @@ Timer.propTypes = {
   timer: PropTypes.shape({
     timerTime: PropTypes.digit,
     timerState: PropTypes.string, 
-    timerEnabled: PropTypes.bool,
+    timerActivated: PropTypes.bool,
     period: PropTypes.digit,
     break: PropTypes.digit, 
-    timeNow: PropTypes.digit,
+    timeStart: PropTypes.digit,
     timeEnd: PropTypes.digit,
     timeDifference: PropTypes.digit
   })
