@@ -1,5 +1,6 @@
 import * as constants from '@src/constants.js';
 import store from '@src/store.js';
+import * as Cookies from "js-cookie";
 
 export function setNotificationsPermission(val) {
   let permission = window.Notification.permission;
@@ -20,6 +21,7 @@ export function setNotificationsPermission(val) {
               notificationsPermission: window.Notification.permission
             }
           })
+          Cookies.set('notificationsEnabled', permissionValue);
         })
       break;
     case constants.NOTIFICATIONS_PERMISSION_DENIED:
@@ -32,6 +34,7 @@ export function setNotificationsPermission(val) {
           notificationsPermission: window.Notification.permission
         }
       })
+      Cookies.set('notificationsEnabled', permissionValue);
       break;
     case constants.NOTIFICATIONS_PERMISSION_GRANTED:
       permissionValue = !val;
@@ -42,6 +45,7 @@ export function setNotificationsPermission(val) {
           notificationsPermission: window.Notification.permission
         }
       })
+      Cookies.set('notificationsEnabled', permissionValue);
       break;
     default:
       permissionValue = false;
@@ -52,5 +56,13 @@ export function setNotificationsPermission(val) {
           notificationsPermission: window.Notification.permission
         }
       })
+      Cookies.set('notificationsEnabled', permissionValue);
   }
+}
+
+export function setTimerSettings(obj) {
+  store.dispatch({
+    type: constants.SET_TIMER_SETTINGS,
+    payload: obj
+  })
 }

@@ -1,9 +1,10 @@
 import * as constants from '@src/constants.js'
+import * as Cookies from "js-cookie";
 
 let startState = {
   notificationsSupport: window.Notification ? true : false,
   notificationsPermission: window.Notification.permission,
-  notificationsEnabled: false
+  notificationsEnabled: (Cookies.get('notificationsEnabled') === 'true') || false
 }
 
 export default function notifications(state = startState, action) {
