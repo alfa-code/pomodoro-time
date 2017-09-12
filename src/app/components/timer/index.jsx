@@ -31,11 +31,10 @@ export default class Timer extends Component {
 
   componentWillReceiveProps(props) {
     const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
-
     if (timerActivated) {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:
-          let that = this;
+          clearTimeout(this.timer);
           this.timer = setTimeout(function() {
             setTimerSettings({
               timeDifference: timeDifference - 1000
@@ -53,11 +52,15 @@ export default class Timer extends Component {
       switch (mode) {
         case constants.TIMER_MODE_POMODORO:
           this.startNewTimer(constants.TIMER_MODE_BREAK, breakTime);
-          sendNotification('Помидор окончен', 'notyfy-1', 'Передохни немного...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
+          if (this.props.notificationsEnabled) {
+            sendNotification('Помидор окончен', 'notyfy-1', 'Передохни немного...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
+          }
           break;
         case constants.TIMER_MODE_BREAK:
           this.startNewTimer(constants.TIMER_MODE_POMODORO, period);
-          sendNotification('Отдых окончен', 'notyfy-2', 'За работу...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
+          if (this.props.notificationsEnabled) {
+            sendNotification('Отдых окончен', 'notyfy-2', 'За работу...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
+          }
           break;
       }
       
@@ -148,6 +151,7 @@ export default class Timer extends Component {
 }
 
 Timer.propTypes = {
+  notificationsEnabled: PropTypes.bool,
   timer: PropTypes.shape({
     timerTime: PropTypes.digit,
     timerState: PropTypes.string,

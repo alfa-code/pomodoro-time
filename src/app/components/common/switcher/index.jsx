@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames'
 import style from './style.scss';
 import * as actions from '@src/actions/index.js';
+import * as Cookies from "js-cookie";
 
 export default class Switcher extends Component {
   constructor(props) {
@@ -20,6 +21,12 @@ export default class Switcher extends Component {
 
   toggleSwitcher = () => {
     actions.setNotificationsPermission(this.state.status)
+
+    if (!this.props.enabled) {
+      Cookies.set('notificationsEnabled', 'true');
+    } else {
+      Cookies.set('notificationsEnabled', 'false');
+    }
   }
 
   setTriggerClass = () => {
@@ -28,6 +35,7 @@ export default class Switcher extends Component {
 
   setTriggerClassDisabled = () => {
     if (this.props.permission === 'denied') {
+      Cookies.set('notificationsEnabled', 'false');
       return style.switcherDisabled
     }
   }
