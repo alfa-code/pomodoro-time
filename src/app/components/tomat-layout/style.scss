@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: -1;
+}
+
+.tomatImg {
+  position: absolute;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.tomatImgSmall {
+  width: 120px;
+  height: 130px;
+}
+
+.tomatImgMedium {
+  width: 160px;
+  height: 160px;
+}
+
+.tomatImgBig {
+  width: 250px;
+  height: 250px;
+}
+
+.tomatImgTop {
+  top: 80px;
+  animation: tomatAnimation 8s linear infinite;
+}
+
+.tomatImgMiddle {
+  top: 40%;
+  animation: tomatAnimation 10s linear infinite;
+}
+
+.tomatImgBottom {
+  filter: blur(5px);
+  bottom: -10%;
+  animation: tomatAnimation 15s linear infinite;
+}
+
+@keyframes tomatAnimation {
+  from {
+    left: 120%;
+  }
+  to {
+    left: -20%;
+  }
+}
