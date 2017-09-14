@@ -11,8 +11,16 @@ export default class Share extends Component {
   render() {
     return (
       <div className={style.container}>
-        <ShareButton text='Share' icon={iconFacebook} />
-        <ShareButton text='Tweet' icon={iconTwitter} />
+        <ShareButton
+          text='Share'
+          icon={iconFacebook}
+          link='https://www.facebook.com/sharer/sharer.php?u=pomodoro.com'
+        />
+        <ShareButton
+          text='Tweet'
+          icon={iconTwitter}
+          link='https://twitter.com/intent/tweet?url=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&text=12321'
+        />
       </div>
     )
   }
