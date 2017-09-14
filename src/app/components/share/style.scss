@@ -1,0 +1,33 @@
+.container {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.button {
+  padding: 3px 6px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 100;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  & + & {
+    margin-left: 10px;
+  }
+}
+
+.icon {
+  margin-right: 8px;
+}
