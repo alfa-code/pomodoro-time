@@ -8,26 +8,32 @@ import imageRight from '@src/static/media/tomat-right.png';
 
 export default class TomatLayout extends Component {
   render() {
-    const tomatTopStyle = classnames(style.tomatImg, style.tomatImgSmall, style.tomatImgTop);
-    const tomatMiddleStyle = classnames(style.tomatImg, style.tomatImgMedium, style.tomatImgMiddle);
-    const tomatBottomStyle = classnames(style.tomatImg, style.tomatImgBig, style.tomatImgBottom);
+    const tomatTopStyle = classnames(style.tomatImg, style.tomatImgSmall);
+    const tomatMiddleStyle = classnames(style.tomatImg, style.tomatImgMedium);
+    const tomatBottomStyle = classnames(style.tomatImg, style.tomatImgBig);
     return (
       <div className={style.container}>
-        <img
-          src={imageLeft}
-          alt="pomidoro"
-          className={tomatTopStyle}
-        />
-        <img
-          src={imageRight}
-          alt="pomidoro"
-          className={tomatMiddleStyle}
-        />
-        <img
-          src={imageLeft}
-          alt="pomidoro"
-          className={tomatBottomStyle}
-        />
+        <div className={style.tomatTopWrap}>
+          <img
+            src={imageLeft}
+            alt="pomidoro"
+            className={tomatTopStyle}
+          />
+        </div>
+        <div className={style.tomatMiddleWrap}>
+          <img
+            src={imageRight}
+            alt="pomidoro"
+            className={tomatMiddleStyle}
+          />
+        </div>
+        <div className={style.tomatBottomWrap}>
+          <img
+            src={imageLeft}
+            alt="pomidoro"
+            className={tomatBottomStyle}
+          />
+        </div>
       </div>
     )
   }

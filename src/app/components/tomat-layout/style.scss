@@ -10,6 +10,34 @@
   z-index: -1;
 }
 
+.tomatTopWrap {
+  width: 100%;
+  position: relative;
+  will-change: transform;
+  animation: tomatAnimation 12s linear infinite;
+  position: absolute;
+  top: 80px;
+}
+
+.tomatMiddleWrap {
+  width: 100%;
+  position: relative;
+  will-change: transform;
+  animation: tomatAnimation 14s linear infinite;
+  position: absolute;
+  top: 40%;
+}
+
+.tomatBottomWrap {
+  width: 100%;
+  position: relative;
+  will-change: transform;
+  animation: tomatAnimation 18s linear infinite;
+  position: absolute;
+  bottom: 30%;
+  filter: blur(5px);
+}
+
 .tomatImg {
   position: absolute;
   pointer-events: none;
@@ -31,27 +59,11 @@
   height: 250px;
 }
 
-.tomatImgTop {
-  top: 80px;
-  animation: tomatAnimation 8s linear infinite;
-}
-
-.tomatImgMiddle {
-  top: 40%;
-  animation: tomatAnimation 10s linear infinite;
-}
-
-.tomatImgBottom {
-  filter: blur(5px);
-  bottom: -10%;
-  animation: tomatAnimation 15s linear infinite;
-}
-
 @keyframes tomatAnimation {
   from {
-    left: 120%;
+    transform: translate(120%);
   }
   to {
-    left: -20%;
+    transform: translate(-20%);
   }
 }
