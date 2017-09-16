@@ -8,6 +8,8 @@ import moment from 'moment'
 import sendNotification from '@src/actions/sendNotification.js';
 import { setTimerSettings } from '@src/actions/index.js';
 
+import audioNotification from '@src/actions/audioNotification.js';
+
 import classnames from 'classnames';
 import style from './style.scss';
 
@@ -45,6 +47,10 @@ export default class Timer extends Component {
           clearTimeout(this.timer);
           break;
       }
+    }
+
+    if (timeDifference == 0) {
+      audioNotification();
     }
 
     if (timeDifference < 0) {
