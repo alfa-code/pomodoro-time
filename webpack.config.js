@@ -87,6 +87,13 @@ var dev = {
           name: 'fonts/[name].[ext]',
         },
       },
+      {
+        test: /\.(mp3|aac)$/,
+        loader: require.resolve('file-loader'),
+        options: {
+          name: 'sounds/[name].[ext]',
+        },
+      },
       //
     ]
   },

@@ -7,7 +7,7 @@ export default class Logo extends Component {
   render() {
     return (
       <a href="#" className={style.logo}>
-        Pomodoro
+        Pomodoro<span className={style.beta}>beta</span>
       </a>
     );
   }
