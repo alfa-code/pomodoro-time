@@ -36,7 +36,8 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --progress",
-    "build": "cross-env NODE_ENV=production webpack --progress"
+    "build-win": "cross-env NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
     "js-cookie": "^2.1.4",
