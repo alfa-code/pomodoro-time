@@ -27,7 +27,7 @@ export default class Share extends Component {
     let href = window.location.href;
 		let url  = 'http://vkontakte.ru/share.php?';
 		url += 'url='          + href;
-		url += '&title='       + 'Pomodoro';
+		url += '&title='       + 'Pomodoro-Time';
 		url += '&description=' + 'Time management service';
 		url += '&image='       + href + promoImg;
 		url += '&noparse=true';
