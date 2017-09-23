@@ -1,7 +1,9 @@
+const createAudioContext = require('ios-safe-audio-context');
+
 import testAudio from '@src/static/sounds/test.mp3'
 import testAudio2 from '@src/static/sounds/test.aac'
 
-var context = new window.AudioContext();;
+var context = createAudioContext();
 var buffer, source, destination; 
 var loadSoundFile = function(url) {
   var xhr = new XMLHttpRequest();

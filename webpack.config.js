@@ -3,6 +3,7 @@ const webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const autoprefixer = require('autoprefixer');
+const CnameWebpackPlugin = require('cname-webpack-plugin');
 require("babel-polyfill");
 
 var NODE_ENV = process.env.NODE_ENV;
@@ -242,7 +243,10 @@ var build = {
       inject: true,
       template: './template/index.html',
     }),
-    new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin("styles.css"),
+    new CnameWebpackPlugin({
+      domain: 'pomodoro-time.com',
+    }),
   ]
 };
 
