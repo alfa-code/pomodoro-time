@@ -1,7 +1,6 @@
 const createAudioContext = require('ios-safe-audio-context');
 
-import testAudio from '@src/static/sounds/test.mp3'
-import testAudio2 from '@src/static/sounds/test.aac'
+import testAudio from '@src/static/sounds/alert_2.mp3'
 
 var context = createAudioContext();
 var buffer, source, destination; 
