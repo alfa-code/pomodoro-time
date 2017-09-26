@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
 const CnameWebpackPlugin = require('cname-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 require("babel-polyfill");
 
 var NODE_ENV = process.env.NODE_ENV;
@@ -242,6 +243,21 @@ var build = {
     new HtmlWebpackPlugin({
       inject: true,
       template: './template/index.html',
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './static/images/favicon/tomat.png',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
     }),
     new ExtractTextPlugin("styles.css"),
     new CnameWebpackPlugin({
