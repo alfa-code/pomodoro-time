@@ -5,6 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
 const CnameWebpackPlugin = require('cname-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 require("babel-polyfill");
 
 var NODE_ENV = process.env.NODE_ENV;
@@ -246,23 +247,40 @@ var build = {
     }),
     new FaviconsWebpackPlugin({
       logo: './static/images/favicon/tomat.png',
+      emitStats: true,
+      statsFilename: 'iconstats-[hash].json',
+      persistentCache: true,
+      inject: true,
+      background: '#fff',
       icons: {
         android: true,
         appleIcon: true,
         appleStartup: true,
-        coast: false,
+        coast: true,
         favicons: true,
         firefox: true,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false
+        opengraph: true,
+        twitter: true,
+        yandex: true,
+        windows: true
       }
     }),
     new ExtractTextPlugin("styles.css"),
     new CnameWebpackPlugin({
       domain: 'pomodoro-time.com',
     }),
+    new ManifestPlugin({
+      fileName: 'manifest.json',
+      basePath: '/',
+      seed: {
+        name: 'Pomodoro Time',
+        short_name: "Pomodoro",
+        description: 'Pomodoro Time - Time management method',
+        display: "standalone",
+        background_color: "#fff",
+        prefer_related_applications: false,
+      }
+    })
   ]
 };
 
