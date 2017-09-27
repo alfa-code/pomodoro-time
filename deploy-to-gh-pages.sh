@@ -1,4 +1,12 @@
 #!/bin/bash
+set -e # Exit with nonzero exit code if anything fails
+
+if [ "$TRAVIS_BRANCH" != "master" ]
+then
+  echo "This commit was made against the $TRAVIS_BRANCH and not the master! No deploy!"
+  exit 0
+fi
+
 echo "Starting deployment"
 echo "Target: gh-pages branch"
 
