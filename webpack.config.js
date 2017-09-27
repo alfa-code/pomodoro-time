@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer');
 const CnameWebpackPlugin = require('cname-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 require("babel-polyfill");
 
 var NODE_ENV = process.env.NODE_ENV;
@@ -116,7 +117,7 @@ var dev = {
     new HtmlWebpackPlugin({
       inject: true,
       template: './template/index.html',
-    }),
+    })
   ]
 };
 
@@ -230,6 +231,7 @@ var build = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({ // <-- key to reducing React's size
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -280,7 +282,8 @@ var build = {
         background_color: "#fff",
         prefer_related_applications: false,
       }
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ]
 };
 

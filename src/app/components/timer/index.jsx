@@ -3,7 +3,8 @@ import * as constants from '@src/constants.js'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import moment from 'moment'
+import { utc } from 'moment'
+
 
 import sendNotification from '@src/actions/sendNotification.js';
 import { setTimerSettings } from '@src/actions/index.js';
@@ -26,8 +27,8 @@ export default class Timer extends Component {
   componentDidMount () {
     const { period } = this.props.timer
     this.setState({
-      minutes: moment.utc(period * 60 * 1000).format("mm"),
-      seconds: moment.utc(period * 60 * 1000).format("ss")
+      minutes: utc(period * 60 * 1000).format("mm"),
+      seconds: utc(period * 60 * 1000).format("ss")
     });
   }
 
@@ -73,8 +74,8 @@ export default class Timer extends Component {
     }
 
     this.setState({
-      minutes: moment.utc(timeDifference).format("mm"),
-      seconds: moment.utc(timeDifference).format("ss")
+      minutes: utc(timeDifference).format("mm"),
+      seconds: utc(timeDifference).format("ss")
     });
   }
 
