@@ -1,22 +1,19 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
+if [ "$TRAVIS_BRANCH" != "master" ]
+then
+  echo "This commit was made against the $TRAVIS_BRANCH and not the master! No deploy!"
+  exit 0
+fi
+
 echo "Starting deployment"
 echo "Target: gh-pages branch"
-
-SOURCE_BRANCH="master"
-TARGET_BRANCH="gh-pages"
 
 DIST_DIRECTORY="dist/"
 CURRENT_COMMIT=`git rev-parse HEAD`
 ORIGIN_URL=`git config --get remote.origin.url`
 ORIGIN_URL_WITH_CREDENTIALS=${ORIGIN_URL/\/\/github.com/\/\/$GITHUB_TOKEN@github.com}
-
-# Pull requests and commits to other branches shouldn't try to deploy
-if [ "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-    echo "Skipping deploy - Not master branch;"
-    exit 0
-fi
 
 cp .gitignore $DIST_DIRECTORY || exit 1
 
