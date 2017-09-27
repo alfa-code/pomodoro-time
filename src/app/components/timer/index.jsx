@@ -14,10 +14,13 @@ import audioNotification from '@src/actions/audioNotification.js';
 import classnames from 'classnames';
 import style from './style.scss';
 
+let timerWorker = require("worker-loader?inline!@src/app/workers/timer-worker.js");
+
 export default class Timer extends Component {
   constructor(props) {
     super(props)
     this.timer;
+    this.timerWorker = new timerWorker();
     this.state = {
       minutes: '00',
       seconds: '00'
@@ -29,6 +32,14 @@ export default class Timer extends Component {
     this.setState({
       minutes: utc(period * 60 * 1000).format("mm"),
       seconds: utc(period * 60 * 1000).format("ss")
+    });
+
+    this.timerWorker.addEventListener('message', function(e) {
+      console.log('Worker said: ', e.data);
+    }, false);
+
+    this.timerWorker.postMessage({
+      x: 9
     });
   }
 
