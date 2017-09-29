@@ -284,7 +284,7 @@ var build = {
         prefer_related_applications: false,
       }
     }),
-    new BundleAnalyzerPlugin()
+    //new BundleAnalyzerPlugin()
   ]
 };
 
