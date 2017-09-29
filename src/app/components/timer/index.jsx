@@ -39,12 +39,15 @@ export default class Timer extends Component {
     }, false);
 
     this.timerWorker.postMessage({
-      x: 9
+      
     });
+
   }
 
   componentWillReceiveProps(props) {
     const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
+    
+    
     if (timerActivated) {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:

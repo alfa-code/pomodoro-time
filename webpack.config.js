@@ -117,7 +117,8 @@ var dev = {
     new HtmlWebpackPlugin({
       inject: true,
       template: './template/index.html',
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ]
 };
 
