@@ -28,48 +28,73 @@ export default class Timer extends Component {
   }
 
   componentDidMount () {
-    const { period } = this.props.timer
+    const { period, timerActivated, timerState, timeDifference } = this.props.timer;
     this.setState({
       minutes: utc(period * 60 * 1000).format("mm"),
       seconds: utc(period * 60 * 1000).format("ss")
     });
 
     this.timerWorker.addEventListener('message', function(e) {
-      console.log('Worker said: ', e.data);
+      if (e.data.command === 'updateTimeDifference') {
+        //console.log('Worker said: ', e.data);
+        //console.log(e.data)
+        setTimerSettings({
+          timeDifference: e.data.newTimeDifference
+        });
+      }
     }, false);
 
+    let oldProps = this.props.timer
+    let newProps = this.props.timer
     this.timerWorker.postMessage({
-      
+      oldProps,
+      newProps
     });
 
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    //const { timerActivated, timerState, timeDifference } = this.props.timer;
+    //const { timerActivated, timerState, timeDifference } = nextProps.timer;
+
+    let oldProps = this.props.timer;
+    let newProps = nextProps.timer;
+
+    //console.log(newProps)
+
+    this.timerWorker.postMessage({
+      oldProps,
+      newProps
+    });
+
+    return true
   }
 
   componentWillReceiveProps(props) {
     const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
     
-    
-    if (timerActivated) {
-      switch (timerState) {
-        case constants.TIMER_STATE_WORKING:
-          clearTimeout(this.timer);
-          this.timer = setTimeout(function() {
-            setTimerSettings({
-              timeDifference: timeDifference - 1000
-            });
-          }, 1000)
-          break;
-        case constants.TIMER_STATE_PAUSE:
-          clearTimeout(this.timer);
-          break;
-      }
-    }
+    // if (timerActivated) {
+    //   switch (timerState) {
+    //     case constants.TIMER_STATE_WORKING:
+    //       clearTimeout(this.timer);
+    //       this.timer = setTimeout(function() {
+    //         setTimerSettings({
+    //           timeDifference: timeDifference - 1000
+    //         });
+    //       }, 1000)
+    //       break;
+    //     case constants.TIMER_STATE_PAUSE:
+    //       clearTimeout(this.timer);
+    //       break;
+    //   }
+    // }
 
     if (timeDifference == 0) {
       audioNotification();
     }
 
     if (timeDifference < 0) {
-      clearTimeout(this.timer);
+      //clearTimeout(this.timer);
       switch (mode) {
         case constants.TIMER_MODE_POMODORO:
           this.startNewTimer(constants.TIMER_MODE_BREAK, breakTime);
