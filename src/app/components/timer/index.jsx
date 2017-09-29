@@ -1,16 +1,10 @@
 import * as constants from '@src/constants.js'
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { utc } from 'moment'
-
-
 import sendNotification from '@src/actions/sendNotification.js';
 import { setTimerSettings } from '@src/actions/index.js';
-
 import audioNotification from '@src/actions/audioNotification.js';
-
 import classnames from 'classnames';
 import style from './style.scss';
 
@@ -35,66 +29,47 @@ export default class Timer extends Component {
     });
 
     this.timerWorker.addEventListener('message', function(e) {
-      if (e.data.command === 'updateTimeDifference') {
-        //console.log('Worker said: ', e.data);
-        //console.log(e.data)
-        setTimerSettings({
-          timeDifference: e.data.newTimeDifference
-        });
+      switch (e.data.command) {
+        case 'updateTimeDifference':
+          setTimerSettings({
+            timeDifference: e.data.newTimeDifference
+          });
+          break;
+        case 'playTimeoutSound':
+          audioNotification();
+          break;
       }
     }, false);
 
-    let oldProps = this.props.timer
-    let newProps = this.props.timer
-    this.timerWorker.postMessage({
-      oldProps,
-      newProps
-    });
+    this.checkTimer(this.props.timer, this.props.timer);
+  }
 
+  checkTimer = (oldProps, newProps) => {
+    let startNewTimer = (oldProps.timerActivated === false && newProps.timerActivated === true && newProps.timerState === constants.TIMER_STATE_WORKING);
+    let fromPauseToWarkTimer = (oldProps.timerState === constants.TIMER_STATE_PAUSE && newProps.timerState === constants.TIMER_STATE_WORKING && newProps.timerActivated === true);
+    let timerOnPause = (newProps.timerState !== constants.TIMER_STATE_WORKING);
+    let timerNotWork = (newProps.timerActivated === false);
+
+    let timeDifference = newProps.timeDifference;
+
+    this.timerWorker.postMessage({
+      startNewTimer,
+      fromPauseToWarkTimer,
+      timerOnPause,
+      timerNotWork,
+      timeDifference
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    //const { timerActivated, timerState, timeDifference } = this.props.timer;
-    //const { timerActivated, timerState, timeDifference } = nextProps.timer;
-
-    let oldProps = this.props.timer;
-    let newProps = nextProps.timer;
-
-    //console.log(newProps)
-
-    this.timerWorker.postMessage({
-      oldProps,
-      newProps
-    });
-
-    return true
+    this.checkTimer(this.props.timer, nextProps.timer);
+    return true;
   }
 
   componentWillReceiveProps(props) {
     const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
-    
-    // if (timerActivated) {
-    //   switch (timerState) {
-    //     case constants.TIMER_STATE_WORKING:
-    //       clearTimeout(this.timer);
-    //       this.timer = setTimeout(function() {
-    //         setTimerSettings({
-    //           timeDifference: timeDifference - 1000
-    //         });
-    //       }, 1000)
-    //       break;
-    //     case constants.TIMER_STATE_PAUSE:
-    //       clearTimeout(this.timer);
-    //       break;
-    //   }
-    // }
-
-    if (timeDifference == 0) {
-      audioNotification();
-    }
 
     if (timeDifference < 0) {
-      //clearTimeout(this.timer);
       switch (mode) {
         case constants.TIMER_MODE_POMODORO:
           this.startNewTimer(constants.TIMER_MODE_BREAK, breakTime);
@@ -109,7 +84,6 @@ export default class Timer extends Component {
           }
           break;
       }
-      
     }
 
     this.setState({
