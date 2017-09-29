@@ -86,10 +86,23 @@ export default class Timer extends Component {
       }
     }
 
+    let minutes = utc(timeDifference).format("mm"),
+        seconds = utc(timeDifference).format("ss");
+
     this.setState({
-      minutes: utc(timeDifference).format("mm"),
-      seconds: utc(timeDifference).format("ss")
+      minutes,
+      seconds
     });
+
+    this.setDocumentTitle(minutes, seconds);
+  }
+
+  setDocumentTitle = (minutes, seconds) => {
+    if (this.props.timer.timerState === constants.TIMER_STATE_WORKING) {
+      document.title = `(${minutes}:${seconds}) Pomodoro Time - time management method.`;
+    } else {
+      document.title = 'Pomodoro Time - time management method.';
+    }
   }
 
   setButtonClass = () => {
