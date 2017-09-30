@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.scss';
 
+import SvgIcon from '@src/app/components/common/svg-icon';
+
 export default class ShareButton extends Component {
   render() {
     return (
       <a href="#" className={style.button} href={this.props.link} target='_blank'>
-        <img
-          src={this.props.icon}
-          alt={this.props.text}
+        <SvgIcon
+          glyph={this.props.icon}
           className={style.icon}
         />
         <span>
@@ -20,7 +21,7 @@ export default class ShareButton extends Component {
 }
 
 ShareButton.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.object,
   text: PropTypes.string,
   link: PropTypes.string
 };

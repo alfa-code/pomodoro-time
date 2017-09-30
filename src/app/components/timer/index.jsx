@@ -8,6 +8,11 @@ import audioNotification from '@src/actions/audioNotification.js';
 import classnames from 'classnames';
 import style from './style.scss';
 
+import SvgIcon from '@src/app/components/common/svg-icon';
+import svgIconReload from '@src/static/svg/reset.svg';
+import svgIconPlay from '@src/static/svg/play.svg';
+import svgIconPause from '@src/static/svg/pause.svg';
+
 let timerWorker = require("worker-loader?inline!@src/app/workers/timer-worker.js");
 
 export default class Timer extends Component {
@@ -66,6 +71,18 @@ export default class Timer extends Component {
     return true;
   }
 
+  reloadTimer = () => {
+    const { period } = this.props.timer
+    setTimerSettings({
+      mode: constants.TIMER_MODE_POMODORO,
+      timerState: constants.TIMER_STATE_PAUSE,
+      timerActivated: true,
+      timeStart: Date.now(),
+      timeEnd: Date.now() + (period * 60 * 1000),
+      timeDifference: period * 60 * 1000
+    });
+  }
+
   componentWillReceiveProps(props) {
     const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
 
@@ -105,17 +122,32 @@ export default class Timer extends Component {
     }
   }
 
-  setButtonClass = () => {
+  setControlButton = () => {
     const { timerActivated, timerState } = this.props.timer
     if (timerActivated) {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:
-          return style.pause;
+          return (
+            <SvgIcon
+              glyph={svgIconPause}
+              className={style.controlsIcon}
+            />
+          )
         case constants.TIMER_STATE_PAUSE:
-          return style.triangle;
+          return (
+            <SvgIcon
+              glyph={svgIconPlay}
+              className={style.controlsIcon}
+            />
+          )
       }
     } else {
-      return style.triangle
+      return (
+        <SvgIcon
+          glyph={svgIconPlay}
+          className={style.controlsIcon}
+        />
+      )
     }
   }
 
@@ -159,7 +191,7 @@ export default class Timer extends Component {
           className={style.controlButton}
           onClick={this.controlButtonOnClick}
         >
-          <div className={this.setButtonClass()}></div>
+          {this.setControlButton()}
         </div>
         <div className={style.timer}>
           <div className={classnames(style.digit, style.minutes)}>
@@ -177,6 +209,15 @@ export default class Timer extends Component {
           <div className={classnames(style.label, style.secondsLabel)}>
             seconds
           </div>
+        </div>
+        <div 
+          className={style.resetButton}
+          onClick={this.reloadTimer}
+        >
+          <SvgIcon
+            glyph={svgIconReload}
+            className={style.controlsIcon}
+          />
         </div>
       </div>
     )

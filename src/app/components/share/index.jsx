@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import ShareButton from './share-button'
+
+import SvgIcon from '@src/app/components/common/svg-icon';
+import svgIconReload from '@src/static/svg/reset.svg';
+
 import iconFacebook from '@src/static/media/svg/facebook.svg';
 import iconTwitter from '@src/static/media/svg/twitter.svg';
 import iconVkontakte from '@src/static/media/svg/vkontakte.svg';
@@ -48,7 +52,7 @@ export default class Share extends Component {
           link={this.getTwitterLink()}
         />
         <ShareButton
-          text='Vk'
+          text='Share'
           icon={iconVkontakte}
           link={this.getVkLink()}
         />

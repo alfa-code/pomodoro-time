@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="53px" height="56px" viewBox="0 0 53 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Triangle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-743.000000, -515.000000)" fill="#FFFFFF">
+            <g id="Group-9" transform="translate(743.000000, 468.000000)">
+                <path d="M51.8923796,77.1905083 L2.90291637,101.976887 L2.90291637,101.976887 C1.91731754,102.475554 0.714082393,102.080818 0.215415449,101.095219 C0.0737925261,100.815306 -3.29651888e-15,100.506003 -2.22044605e-15,100.192302 L-1.0658141e-13,49 L-1.07913678e-13,49 C-1.10011058e-13,47.8954305 0.8954305,47 2,47 C2.33126725,47 2.65734709,47.0822845 2.94895126,47.2394627 L51.9384145,73.6453864 L51.9384145,73.6453864 C52.9107324,74.1694777 53.2740918,75.3825571 52.7500005,76.354875 C52.5561753,76.7144682 52.2568846,77.0060858 51.8923796,77.1905083 Z" id="Triangle"></path>
+            </g>
+        </g>
+    </g>
+</svg>

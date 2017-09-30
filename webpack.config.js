@@ -7,6 +7,7 @@ const CnameWebpackPlugin = require('cname-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 require("babel-polyfill");
 
 var NODE_ENV = process.env.NODE_ENV;
@@ -25,12 +26,22 @@ var dev = {
   module: {
     rules: [
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/, /\.svg$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/],
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]',
         },
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: { extract: true }
+          },
+          'svgo-loader'
+        ]
       },
       {
         test: /\.css$/,
@@ -114,6 +125,7 @@ var dev = {
     port: 9000
   },
   plugins: [
+    new SpriteLoaderPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: './template/index.html',
@@ -134,12 +146,22 @@ var build = {
   module: {
     rules: [
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/, /\.svg$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/],
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]',
         },
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: { extract: true }
+          },
+          'svgo-loader'
+        ]
       },
       {
         test: /\.css$/,
@@ -268,6 +290,7 @@ var build = {
         windows: true
       }
     }),
+    new SpriteLoaderPlugin(),
     new ExtractTextPlugin("styles.css"),
     new CnameWebpackPlugin({
       domain: 'pomodoro-time.com',

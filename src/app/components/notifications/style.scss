@@ -1,3 +1,5 @@
+@import 'media-mixins.scss';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,10 @@
   top: 40px;
   right: 30px;
   max-width: 220px;
+
+  @include media-small  {
+    display: none;
+  }
 }
 
 .headerBlock {
