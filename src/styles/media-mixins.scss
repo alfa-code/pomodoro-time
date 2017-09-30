@@ -1,0 +1,44 @@
+@mixin media-extra-small  {
+  @media (max-width: 544px) {
+    @content;
+  }
+}
+
+@mixin media-small  {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-medium   {
+  @media (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-large {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+
+@mixin media-extra-large {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin media-portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin media-landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+

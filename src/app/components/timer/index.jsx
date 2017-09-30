@@ -8,6 +8,9 @@ import audioNotification from '@src/actions/audioNotification.js';
 import classnames from 'classnames';
 import style from './style.scss';
 
+import SvgIcon from '@src/app/components/common/svg-icon';
+import svgIconReload from '@src/static/svg/reset.svg';
+
 let timerWorker = require("worker-loader?inline!@src/app/workers/timer-worker.js");
 
 export default class Timer extends Component {
@@ -177,6 +180,12 @@ export default class Timer extends Component {
           <div className={classnames(style.label, style.secondsLabel)}>
             seconds
           </div>
+        </div>
+        <div className={style.resetButton}>
+          <SvgIcon
+            glyph={svgIconReload}
+            className={style.resetIcon}
+          />
         </div>
       </div>
     )

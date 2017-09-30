@@ -1,3 +1,5 @@
+@import 'media-mixins.scss';
+
 .container {
   position: absolute;
   color: white;
@@ -7,17 +9,26 @@
   font-family: 'Roboto';
   transform: translate(-50%, -50%);
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-areas:
+  "control timer reset";
   justify-content: center;
   align-items: center;
 
   & > div {
     margin: 20px;
   }
+
+  @include media-portrait {
+    grid-template-areas:
+    "timer timer"
+    "control reset";
+  }
 }
 
 .timer {
   display: grid;
+  grid-area: timer;
   justify-content: center;
   align-content: center;
   grid-template-areas: 
@@ -56,8 +67,14 @@
 
 .controlButton {
   display: inline-flex;
+  grid-area: control;
   width: 50px;
   height: 50px;
+  cursor: pointer;
+}
+
+.resetButton {
+  grid-area: reset;
   cursor: pointer;
 }
 
@@ -122,4 +139,10 @@
   }
 
   
+}
+
+.resetIcon {
+  width: 50px;
+  height: 50px;
+  fill: #fff;
 }
