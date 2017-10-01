@@ -8,7 +8,7 @@ export default class SvgIcon extends Component {
     const className = classnames(style.container, this.props.className);
     const { glyph } = this.props;
     return (
-      <div className={className}>
+      <div className={className} onClick={this.props.onClick}>
         <svg>
           <use xlinkHref={glyph} />
         </svg>

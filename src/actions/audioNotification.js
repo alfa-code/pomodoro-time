@@ -1,6 +1,18 @@
+import * as Cookies from "js-cookie";
+import * as constants from '@src/constants.js'
+
+var ringtone = Cookies.get('ringtone');
+if (!ringtone) {
+  Cookies.set('ringtone', constants.RINGTONE_1);
+}
+
 const createAudioContext = require('ios-safe-audio-context');
 
-import testAudio from '@src/static/sounds/alert_2.mp3'
+import testAudio_1 from '@src/static/sounds/alert_1.mp3';
+import testAudio_2 from '@src/static/sounds/alert_2.mp3';
+import testAudio_3 from '@src/static/sounds/alert_3.mp3';
+import testAudio_4 from '@src/static/sounds/alert_4.mp3';
+import testAudio_5 from '@src/static/sounds/alert_5.mp3';
 
 var context = createAudioContext();
 var buffer, source, destination; 
@@ -13,6 +25,7 @@ var loadSoundFile = function(url) {
     function(decodedArrayBuffer) {
       buffer = decodedArrayBuffer;
       console.log('Sound notification...')
+      play();
     }, function(e) {
       console.log('Error decoding file', e);
     });
@@ -32,8 +45,25 @@ var stop = function(){
   source.stop(0);
 }
 
-loadSoundFile(testAudio);
+let choiseSound = (name) => {
+  switch (name) {
+    case constants.RINGTONE_1:
+      return testAudio_1;
+    case constants.RINGTONE_2:
+      return testAudio_2;
+    case constants.RINGTONE_3:
+      return testAudio_3;
+    case constants.RINGTONE_4:
+      return testAudio_4;
+    case constants.RINGTONE_5:
+      return testAudio_5;
+    default:
+      return testAudio_1;
+  }
+}
 
 export default function audioNotification () {
-  play();
+  let ringtoneName = Cookies.get('ringtone');
+  let ringtoneUrl = choiseSound(ringtoneName);
+  loadSoundFile(ringtoneUrl);
 }
