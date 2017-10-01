@@ -66,3 +66,10 @@ export function setTimerSettings(obj) {
     payload: obj
   })
 }
+
+export function setPopupSettings(obj) {
+  store.dispatch({
+    type: constants.SET_POPUP_SETTINGS,
+    payload: obj
+  })
+}

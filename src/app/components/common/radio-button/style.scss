@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.radio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  border: 3px solid #a51d19;
+}
+
+.dot {
+  display: flex;
+  height: 0px;
+  width: 0px;
+  background-color: #a51d19;
+  border-radius: 50%;
+  //transition: all .3s;
+
+  .radio:hover & {
+    width: 3px;
+    height: 3px;
+  }
+
+  .radio.active & {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+.label {
+  margin-left: 10px;
+}

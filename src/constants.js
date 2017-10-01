@@ -14,3 +14,13 @@ export const TIMER_STATE_PAUSE = 'pause';
 
 export const TIMER_MODE_POMODORO = 'pomodoro';
 export const TIMER_MODE_BREAK = 'break';
+
+export const SET_POPUP_SETTINGS = 'set_popup_settings';
+export const POPUP_SETTINGS = 'popup_settings';
+
+// audio
+export const RINGTONE_1 = 'ringtone_1';
+export const RINGTONE_2 = 'ringtone_2';
+export const RINGTONE_3 = 'ringtone_3';
+export const RINGTONE_4 = 'ringtone_4';
+export const RINGTONE_5 = 'ringtone_5';

@@ -1,0 +1,24 @@
+@import 'media-mixins.scss';
+
+.container {
+  width: 600px;
+
+  @include media-small {
+    width: 100%;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-top: 0;
+}
+
+.ringtoneContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.marginBottom20 {
+  margin-bottom: 20px;
+}
