@@ -10,8 +10,6 @@ import Notifications from '@src/app/containers/notifications';
 import Timer from '@src/app/containers/timer';
 import Popup from '@src/app/containers/popup';
 
-import { YMInitializer } from 'react-yandex-metrika';
-
 import style from './style.scss'
 
 export default class MainContainer extends Component {
@@ -25,7 +23,6 @@ export default class MainContainer extends Component {
         <Share/>
         <Popup/>
         <SettingsButton />
-        <YMInitializer accounts={[46177308]} />
       </div>
     );
   }
