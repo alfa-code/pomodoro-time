@@ -26,7 +26,7 @@ export function setNotificationsPermission(val) {
       break;
     case constants.NOTIFICATIONS_PERMISSION_DENIED:
       permissionValue = false;
-      alert('Вы запретили уведомления!')
+      alert('You have disabled notifications!')
       store.dispatch({
         type: constants.SET_NOTIFICATIONS_PERMISSION,
         payload: {

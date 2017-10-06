@@ -13,6 +13,8 @@ import svgIconReload from '@src/static/svg/reset.svg';
 import svgIconPlay from '@src/static/svg/play.svg';
 import svgIconPause from '@src/static/svg/pause.svg';
 
+import pomodoroImage from '@src/static/images/notify/notify.png';
+
 let timerWorker = require("worker-loader?inline!@src/app/workers/timer-worker.js");
 
 export default class Timer extends Component {
@@ -91,13 +93,13 @@ export default class Timer extends Component {
         case constants.TIMER_MODE_POMODORO:
           this.startNewTimer(constants.TIMER_MODE_BREAK, breakTime);
           if (this.props.notificationsEnabled) {
-            sendNotification('Помидор окончен', 'notyfy-1', 'Передохни немного...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
+            sendNotification('Time is over', 'notyfy', 'Postpone the business and rest', pomodoroImage);
           }
           break;
         case constants.TIMER_MODE_BREAK:
           this.startNewTimer(constants.TIMER_MODE_POMODORO, period);
           if (this.props.notificationsEnabled) {
-            sendNotification('Отдых окончен', 'notyfy-2', 'За работу...', 'http://www.ayzdorov.ru/images/Travi/pomidor.jpg');
+            sendNotification('Time for work', 'notyfy', 'Do not be distracted by anything', pomodoroImage);
           }
           break;
       }
