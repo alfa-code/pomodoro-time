@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.scss'
 
-import SettingsContent from '@src/app/components/settings/settings-content';
+import SettingsContent from '@src/app/containers/settings/settings-content';
 
 import SvgIcon from '@src/app/components/common/svg-icon';
 import iconClose from '@src/static/svg/error.svg';
