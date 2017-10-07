@@ -36,7 +36,7 @@ export default class SettingsContent extends Component {
   
   renderRingtoneButtons = () => {
     return this.state.ringtones.map((item, i) => {
-      const active = (this.state.activeRingtone === i) ? true : false;
+      const active = (this.state.activeRingtone === item) ? true : false;
       return (
         <RadioButton
           label={'Ringtone ' + (i+1)}
