@@ -22,3 +22,20 @@
 .marginBottom20 {
   margin-bottom: 20px;
 }
+
+.customTimeContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.customTimeCell {
+  &:first-child {
+    margin-right: 20px;
+  }
+}
+
+.customTimeCellInput {
+  padding: 5px;
+  border: 2px solid #a51d19;
+}
