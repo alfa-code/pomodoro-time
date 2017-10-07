@@ -41,7 +41,7 @@ export default class SettingsContent extends Component {
         <RadioButton
           label={'Ringtone ' + (i+1)}
           onClick={
-            () => {this.setRingtoneCookie(i)}
+            () => {this.setRingtoneCookie(item)}
           }
           key={item}
           active={active}
