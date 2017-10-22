@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import style from './style.scss'
 
 import SettingsContent from '@src/app/containers/settings/settings-content';
+import InfoContent from '@src/app/components/info/info-content';
 
 import SvgIcon from '@src/app/components/common/svg-icon';
 import iconClose from '@src/static/svg/error.svg';
@@ -24,6 +25,8 @@ export default class Popup extends Component {
     switch (content) {
       case constants.POPUP_SETTINGS:
         return <SettingsContent/>;
+      case constants.POPUP_INFO:
+        return <InfoContent/>;
       default:
         return null;
     }

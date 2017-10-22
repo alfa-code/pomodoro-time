@@ -1,0 +1,20 @@
+.container {
+  width: 500px;
+  height: auto;
+}
+
+.row {
+  display: block;
+
+  & + & {
+    margin-top: 10px;
+  }
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}

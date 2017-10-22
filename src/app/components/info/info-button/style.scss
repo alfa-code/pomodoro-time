@@ -1,0 +1,29 @@
+@import 'media-mixins.scss';
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  position: absolute;
+  bottom: 20px;
+  right: 60px;
+  cursor: pointer;
+
+  &:hover {
+    animation: rotation 3s infinite linear;
+  }
+
+  @include media-small {
+    bottom: 34px;
+    right: 20px;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

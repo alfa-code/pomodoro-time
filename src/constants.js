@@ -16,7 +16,9 @@ export const TIMER_MODE_POMODORO = 'pomodoro';
 export const TIMER_MODE_BREAK = 'break';
 
 export const SET_POPUP_SETTINGS = 'set_popup_settings';
+
 export const POPUP_SETTINGS = 'popup_settings';
+export const POPUP_INFO = 'popup_info';
 
 // audio
 export const RINGTONE_1 = 'ringtone_1';

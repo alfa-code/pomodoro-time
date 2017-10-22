@@ -4,23 +4,23 @@ import style from './style.scss'
 import * as constants from '@src/constants.js'
 
 import SvgIcon from '@src/app/components/common/svg-icon';
-import iconSettings from '@src/static/svg/settings.svg';
+import iconInfo from '@src/static/svg/info.svg';
 
 // actions
 import { setPopupSettings } from '@src/actions/index.js';
 
-export default class SettingsButton extends Component {
+export default class InfoButton extends Component {
   showPopup () {
     setPopupSettings({
       openState: true,
-      content: constants.POPUP_SETTINGS
+      content: constants.POPUP_INFO
     })
   }
 
   render() {
     return (
       <SvgIcon
-        glyph={iconSettings}
+        glyph={iconInfo}
         className={style.icon}
         onClick={this.showPopup}
       />
