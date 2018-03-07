@@ -9,6 +9,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 require("babel-polyfill");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 var NODE_ENV = process.env.NODE_ENV;
 
@@ -134,181 +135,177 @@ var dev = {
   ]
 };
 
-var build = {
-  context: path.resolve(__dirname, './src'),
-  entry: {
-    app: './index.jsx',
-  },
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: '[name].bundle.js',
-  },
-  module: {
-    rules: [
-      {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/],
-        loader: require.resolve('url-loader'),
-        options: {
-          limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-sprite-loader',
-            options: { extract: true }
-          },
-          'svgo-loader'
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: { modules: false },
-          },
-        ],
-      },
-      // prod
-      {
-        test: /\.(js|jsx)$/,
-        exclude:path.resolve(__dirname, "node_modules"),
-        use: 'babel-loader'
-      },
-      // prod
-      {
-        test: [/\.scss$/],
-        use: ExtractTextPlugin.extract({
-          fallback: require.resolve('style-loader'),
-          use: [
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-                minimize: true,
-                sourceMap: false,
-              },
-            },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                plugins: () => [
-                  require('postcss-flexbugs-fixes'),
-                  autoprefixer({
-                    browsers: [
-                      '>1%',
-                      'last 4 versions',
-                      'Firefox ESR',
-                      'not ie < 9', // React doesn't support IE8 anyway
-                    ],
-                    flexbox: 'no-2009',
-                  }),
-                ],
-              },
-            },
-            {
-              loader: require.resolve('sass-loader'),
-              options: {
-                includePaths: ['./src/styles']
-              },
-            },
-          ]
-        })
-      },
-      {
-        test: /\.(ttf|eot|woff|woff2)$/,
-        loader: require.resolve('file-loader'),
-        options: {
-          name: 'fonts/[name].[ext]',
-        },
-      },
-      {
-        test: /\.(mp3|aac)$/,
-        loader: require.resolve('file-loader'),
-        options: {
-          name: 'sounds/[name].[ext]',
-        },
-      },
-      //
-    ]
-  },
-  resolve: {
-    extensions: ['.js', '.json', '.jsx'],
-    alias: {
-      '@src': path.resolve(__dirname, 'src'),
-    },
-  },
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    historyApiFallback: true,
-    compress: true,
-    port: 9000,
-    bonjour: true,
-    host: "192.168.0.24"
-  },
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new webpack.DefinePlugin({ // <-- key to reducing React's size
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress:{
-        warnings: false
-      }
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: './template/index.html',
-    }),
-    new FaviconsWebpackPlugin({
-      logo: './static/images/favicon/tomat.png',
-      emitStats: true,
-      statsFilename: 'iconstats-[hash].json',
-      persistentCache: true,
-      inject: true,
-      background: '#fff',
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: true,
-        favicons: true,
-        firefox: true,
-        opengraph: true,
-        twitter: true,
-        yandex: true,
-        windows: true
-      }
-    }),
-    new SpriteLoaderPlugin(),
-    new ExtractTextPlugin("styles.css"),
-    new CnameWebpackPlugin({
-      domain: 'pomodoro-time.com',
-    }),
-    new ManifestPlugin({
-      fileName: 'manifest.json',
-      basePath: '/',
-      seed: {
-        name: 'Pomodoro Time',
-        short_name: "Pomodoro",
-        description: 'Pomodoro Time - Time management method',
-        display: "standalone",
-        background_color: "#fff",
-        prefer_related_applications: false,
-      }
-    }),
-    //new BundleAnalyzerPlugin()
-  ]
-};
+// var build = {
+//   context: path.resolve(__dirname, './src'),
+//   entry: {
+//     app: './index.jsx',
+//   },
+//   output: {
+//     path: path.resolve(__dirname, './dist'),
+//     filename: '[name].bundle.js',
+//   },
+//   module: {
+//     rules: [
+//       {
+//         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/],
+//         loader: require.resolve('url-loader'),
+//         options: {
+//           limit: 10000,
+//           name: 'static/media/[name].[hash:8].[ext]',
+//         },
+//       },
+//       {
+//         test: /\.svg$/,
+//         use: [
+//           {
+//             loader: 'svg-sprite-loader',
+//             options: { extract: true }
+//           },
+//           'svgo-loader'
+//         ]
+//       },
+//       {
+//         test: /\.css$/,
+//         use: [
+//           'style-loader',
+//           {
+//             loader: 'css-loader',
+//             options: { modules: false },
+//           },
+//         ],
+//       },
+//       // prod
+//       {
+//         test: /\.(js|jsx)$/,
+//         exclude:path.resolve(__dirname, "node_modules"),
+//         use: 'babel-loader'
+//       },
+//       // prod
+//       {
+//         test: [/\.scss$/],
+//         use: ExtractTextPlugin.extract({
+//           fallback: require.resolve('style-loader'),
+//           use: [
+//             {
+//               loader: require.resolve('css-loader'),
+//               options: {
+//                 modules: true,
+//                 localIdentName: '[name]__[local]___[hash:base64:5]',
+//                 minimize: true,
+//                 sourceMap: false,
+//               },
+//             },
+//             {
+//               loader: require.resolve('postcss-loader'),
+//               options: {
+//                 ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+//                 plugins: () => [
+//                   require('postcss-flexbugs-fixes'),
+//                   autoprefixer({
+//                     browsers: [
+//                       '>1%',
+//                       'last 4 versions',
+//                       'Firefox ESR',
+//                       'not ie < 9', // React doesn't support IE8 anyway
+//                     ],
+//                     flexbox: 'no-2009',
+//                   }),
+//                 ],
+//               },
+//             },
+//             {
+//               loader: require.resolve('sass-loader'),
+//               options: {
+//                 includePaths: ['./src/styles']
+//               },
+//             },
+//           ]
+//         })
+//       },
+//       {
+//         test: /\.(ttf|eot|woff|woff2)$/,
+//         loader: require.resolve('file-loader'),
+//         options: {
+//           name: 'fonts/[name].[ext]',
+//         },
+//       },
+//       {
+//         test: /\.(mp3|aac)$/,
+//         loader: require.resolve('file-loader'),
+//         options: {
+//           name: 'sounds/[name].[ext]',
+//         },
+//       },
+//       //
+//     ]
+//   },
+//   resolve: {
+//     extensions: ['.js', '.json', '.jsx'],
+//     alias: {
+//       '@src': path.resolve(__dirname, 'src'),
+//     },
+//   },
+//   devServer: {
+//     contentBase: path.join(__dirname, "dist"),
+//     historyApiFallback: true,
+//     compress: true,
+//     port: 9000,
+//     bonjour: true,
+//     host: "192.168.0.24"
+//   },
+//   plugins: [
+//     new webpack.NoEmitOnErrorsPlugin(),
+//     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+//     new webpack.DefinePlugin({ // <-- key to reducing React's size
+//       'process.env': {
+//         'NODE_ENV': JSON.stringify('production')
+//       }
+//     }),
+//     new UglifyJsPlugin(),
+//     new webpack.optimize.OccurrenceOrderPlugin(),
+//     new HtmlWebpackPlugin({
+//       inject: true,
+//       template: './template/index.html',
+//     }),
+//     new FaviconsWebpackPlugin({
+//       logo: './static/images/favicon/tomat.png',
+//       emitStats: true,
+//       statsFilename: 'iconstats-[hash].json',
+//       persistentCache: true,
+//       inject: true,
+//       background: '#fff',
+//       icons: {
+//         android: true,
+//         appleIcon: true,
+//         appleStartup: true,
+//         coast: true,
+//         favicons: true,
+//         firefox: true,
+//         opengraph: true,
+//         twitter: true,
+//         yandex: true,
+//         windows: true
+//       }
+//     }),
+//     new SpriteLoaderPlugin(),
+//     new ExtractTextPlugin("styles.css"),
+//     new CnameWebpackPlugin({
+//       domain: 'pomodoro-time.com',
+//     }),
+//     new ManifestPlugin({
+//       fileName: 'manifest.json',
+//       basePath: '/',
+//       seed: {
+//         name: 'Pomodoro Time',
+//         short_name: "Pomodoro",
+//         description: 'Pomodoro Time - Time management method',
+//         display: "standalone",
+//         background_color: "#fff",
+//         prefer_related_applications: false,
+//       }
+//     }),
+//     //new BundleAnalyzerPlugin()
+//   ]
+// };
 
-module.exports = (process.env.NODE_ENV === 'development') ? dev : build
+module.exports = (process.env.NODE_ENV === 'development') ? dev : build;
