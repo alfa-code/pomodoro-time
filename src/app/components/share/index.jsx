@@ -3,7 +3,6 @@ import ShareButton from './share-button'
 
 import SvgIcon from '@src/app/components/common/svg-icon';
 
-import svgIconReload from '@src/static/svg/reset.svg?file-loader';
 import iconFacebook from '@src/static/media/svg/facebook.svg?file-loader';
 import iconTwitter from '@src/static/media/svg/twitter.svg?file-loader';
 import iconVkontakte from '@src/static/media/svg/vkontakte.svg?file-loader';

@@ -220,10 +220,11 @@ export default class Timer extends Component {
           className={style.resetButton}
           onClick={this.reloadTimer}
         >
-          <SvgIcon
+          {/* <SvgIcon
             glyph={svgIconReload}
             className={style.controlsIcon}
-          />
+          /> */}
+          <img src={svgIconReload} className={style.controlsIcon}/>
         </div>
       </div>
     )
