@@ -9,9 +9,10 @@ import classnames from 'classnames';
 import style from './style.scss';
 
 import SvgIcon from '@src/app/components/common/svg-icon';
-import svgIconReload from '@src/static/svg/reset.svg';
-import svgIconPlay from '@src/static/svg/play.svg';
-import svgIconPause from '@src/static/svg/pause.svg';
+
+import svgIconReload from '@src/static/svg/reset.svg?file-loader';
+import svgIconPlay from '@src/static/svg/play.svg?file-loader';
+import svgIconPause from '@src/static/svg/pause.svg?file-loader';
 
 import pomodoroImage from '@src/static/images/notify/notify.png';
 
@@ -130,25 +131,28 @@ export default class Timer extends Component {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:
           return (
-            <SvgIcon
-              glyph={svgIconPause}
-              className={style.controlsIcon}
-            />
+            // <SvgIcon
+            //   glyph={svgIconPause}
+            //   className={style.controlsIcon}
+            // />
+            <img src={svgIconPause} className={style.controlsIcon} />
           )
         case constants.TIMER_STATE_PAUSE:
           return (
-            <SvgIcon
-              glyph={svgIconPlay}
-              className={style.controlsIcon}
-            />
+            // <SvgIcon
+            //   glyph={svgIconPlay}
+            //   className={style.controlsIcon}
+            // />
+            <img src={svgIconPlay} className={style.controlsIcon} />
           )
       }
     } else {
       return (
-        <SvgIcon
-          glyph={svgIconPlay}
-          className={style.controlsIcon}
-        />
+        // <SvgIcon
+        //   glyph={svgIconPlay}
+        //   className={style.controlsIcon}
+        // />
+        <img src={svgIconPlay} className={style.controlsIcon} />
       )
     }
   }

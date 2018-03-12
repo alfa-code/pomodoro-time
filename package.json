@@ -55,8 +55,8 @@
     "redux": "^3.7.2"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --progress",
-    "build-win": "cross-env NODE_ENV=production webpack --progress",
-    "build": "NODE_ENV=production webpack"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --progress --config configs/webpack.config.dev.js --mode development",
+    "build-win": "cross-env NODE_ENV=production webpack --progress --mode production",
+    "build": "NODE_ENV=production webpack --mode production"
   }
 }

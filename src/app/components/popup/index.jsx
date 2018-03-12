@@ -7,7 +7,7 @@ import SettingsContent from '@src/app/containers/settings/settings-content';
 import InfoContent from '@src/app/components/info/info-content';
 
 import SvgIcon from '@src/app/components/common/svg-icon';
-import iconClose from '@src/static/svg/error.svg';
+import iconClose from '@src/static/svg/error.svg?file-loader';
 
 // actions
 import { setPopupSettings } from '@src/actions/index.js';
@@ -41,11 +41,12 @@ export default class Popup extends Component {
             {/* Content */}
             { this.renderContent() }
             {/* CloseButton */}
-            <SvgIcon
+            {/* <SvgIcon
               glyph={iconClose}
               className={style.closeButton}
               onClick={this.closePopup}
-            />
+            /> */}
+            <img src={iconClose} className={style.closeButton} alt={'close Button'} onClick={this.closePopup}/>
           </div>
         </div>
       );
