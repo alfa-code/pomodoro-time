@@ -11,8 +11,6 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 require("babel-polyfill");
 //const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-console.log(__dirname)
-
 var devConfig = {
   context: path.resolve(__dirname, '../src'),
   entry: {
