@@ -8,10 +8,11 @@ export default class ShareButton extends Component {
   render() {
     return (
       <a href="#" className={style.button} href={this.props.link} target='_blank'>
-        <SvgIcon
+        {/* <SvgIcon
           glyph={this.props.icon}
           className={style.icon}
-        />
+        /> */}
+        <img src={this.props.icon} className={style.icon} alt={'Share'}/>
         <span>
           {this.props.text}
         </span>
