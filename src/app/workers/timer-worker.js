@@ -1,16 +1,25 @@
 // for closure
-let timeDifference,
-    interval;
+let timeDifference;
+let interval;
 
-self.addEventListener('message', function(e) {
-  timeDifference = e.data.timeDifference;
-  timerInterval(e.data, timeDifference)
-}, false);
+function minusSecond() {
+  const newTimeDifference = timeDifference - 1000;
 
-function timerInterval (data, timeDifference) {
+  const workerMessage = {
+    command: 'updateTimeDifference',
+    newTimeDifference,
+  };
 
+  self.postMessage(workerMessage);
+
+  if (newTimeDifference === 0) {
+    self.postMessage({ command: 'playTimeoutSound' });
+  }
+}
+
+function timerInterval(data) {
   if (data.startNewTimer || data.fromPauseToWarkTimer) {
-    interval = setInterval( () => {
+    interval = setInterval(() => {
       minusSecond();
     }, 1000);
   } else if (data.timerOnPause || data.timerNotWork) {
@@ -18,17 +27,7 @@ function timerInterval (data, timeDifference) {
   }
 }
 
-function minusSecond () {
-  let newTimeDifference = timeDifference - 1000;
-
-  let workerMessage = {
-    command: 'updateTimeDifference',
-    newTimeDifference: newTimeDifference
-  }
-  
-  self.postMessage(workerMessage);
-
-  if (newTimeDifference === 0) {
-    self.postMessage({command: 'playTimeoutSound'});
-  }
-}
+self.addEventListener('message', function (e) {
+  timeDifference = e.data.timeDifference;
+  timerInterval(e.data);
+}, false);
