@@ -6,7 +6,7 @@ import MainContainer from '@src/app/components/main-container';
 
 // r/r
 import { Provider } from 'react-redux';
-import store from '@src/store.js';
+import store from '@src/store';
 
 // global styles
 import 'normalize.css/normalize.css';
