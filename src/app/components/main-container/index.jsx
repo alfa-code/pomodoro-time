@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '@src/app/components/header';
 import Logo from '@src/app/components/logo';
 import Share from '@src/app/components/share';
 import TomatLayout from '@src/app/components/tomat-layout';

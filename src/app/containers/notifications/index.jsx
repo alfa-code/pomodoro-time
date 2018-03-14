@@ -1,5 +1,5 @@
 import Notifications from '@src/app/components/notifications';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
   return {

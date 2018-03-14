@@ -1,12 +1,6 @@
 {
-  "presets": ["es2015", "env"],
+  "presets": ["env", "react"],
   "plugins": [
-    ["transform-react-jsx"],
-    ["syntax-dynamic-import"],
-    ["transform-class-properties"],
-    ["import-inspector", {
-      "serverSideRequirePath": true,
-      "webpackRequireWeakId": true
-    }]
+    ["transform-class-properties"]
   ]
 }

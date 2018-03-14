@@ -1,19 +1,26 @@
-import * as constants from '@src/constants.js'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// constants
+import * as constants from '@src/constants.js';
+
+// actions
 import { utc } from 'moment'
 import sendNotification from '@src/actions/sendNotification.js';
 import { setTimerSettings } from '@src/actions/index.js';
 import audioNotification from '@src/actions/audioNotification.js';
+
+// style
 import classnames from 'classnames';
 import style from './style.scss';
 
+// svg icons
 import SvgIcon from '@src/app/components/common/svg-icon';
-
 import svgIconReload from '@src/static/svg/reset.svg?file-loader';
 import svgIconPlay from '@src/static/svg/play.svg?file-loader';
 import svgIconPause from '@src/static/svg/pause.svg?file-loader';
 
+// image
 import pomodoroImage from '@src/static/images/notify/notify.png';
 
 let timerWorker = require("worker-loader?inline!@src/app/workers/timer-worker.js");
@@ -57,7 +64,6 @@ export default class Timer extends Component {
     let fromPauseToWarkTimer = (oldProps.timerState === constants.TIMER_STATE_PAUSE && newProps.timerState === constants.TIMER_STATE_WORKING && newProps.timerActivated === true);
     let timerOnPause = (newProps.timerState !== constants.TIMER_STATE_WORKING);
     let timerNotWork = (newProps.timerActivated === false);
-
     let timeDifference = newProps.timeDifference;
 
     this.timerWorker.postMessage({
@@ -75,7 +81,7 @@ export default class Timer extends Component {
   }
 
   reloadTimer = () => {
-    const { period } = this.props.timer
+    const { period } = this.props.timer;
     setTimerSettings({
       mode: constants.TIMER_MODE_POMODORO,
       timerState: constants.TIMER_STATE_PAUSE,
@@ -87,7 +93,7 @@ export default class Timer extends Component {
   }
 
   componentWillReceiveProps(props) {
-    const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer
+    const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer;
 
     if (timeDifference < 0) {
       switch (mode) {
@@ -135,7 +141,10 @@ export default class Timer extends Component {
             //   glyph={svgIconPause}
             //   className={style.controlsIcon}
             // />
-            <img src={svgIconPause} className={style.controlsIcon} />
+            <img
+              src={svgIconPause}
+              className={style.controlsIcon}
+            />
           )
         case constants.TIMER_STATE_PAUSE:
           return (
@@ -143,7 +152,10 @@ export default class Timer extends Component {
             //   glyph={svgIconPlay}
             //   className={style.controlsIcon}
             // />
-            <img src={svgIconPlay} className={style.controlsIcon} />
+            <img
+              src={svgIconPlay}
+              className={style.controlsIcon}
+            />
           )
       }
     } else {
@@ -152,7 +164,10 @@ export default class Timer extends Component {
         //   glyph={svgIconPlay}
         //   className={style.controlsIcon}
         // />
-        <img src={svgIconPlay} className={style.controlsIcon} />
+        <img
+          src={svgIconPlay}
+          className={style.controlsIcon}
+        />
       )
     }
   }
@@ -224,7 +239,10 @@ export default class Timer extends Component {
             glyph={svgIconReload}
             className={style.controlsIcon}
           /> */}
-          <img src={svgIconReload} className={style.controlsIcon}/>
+          <img
+            src={svgIconReload}
+            className={style.controlsIcon}
+          />
         </div>
       </div>
     )

@@ -1,11 +1,16 @@
-import * as constants from '@src/constants.js'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// constants
+import * as constants from '@src/constants.js';
+
+// style
 import style from './style.scss'
 
 import SettingsContent from '@src/app/containers/settings/settings-content';
 import InfoContent from '@src/app/components/info/info-content';
 
+// svg icons
 import SvgIcon from '@src/app/components/common/svg-icon';
 import iconClose from '@src/static/svg/error.svg?file-loader';
 
@@ -46,7 +51,12 @@ export default class Popup extends Component {
               className={style.closeButton}
               onClick={this.closePopup}
             /> */}
-            <img src={iconClose} className={style.closeButton} alt={'close Button'} onClick={this.closePopup}/>
+            <img 
+              src={iconClose}
+              className={style.closeButton}
+              alt={'close Button'}
+              onClick={this.closePopup}
+            />
           </div>
         </div>
       );

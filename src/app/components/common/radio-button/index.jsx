@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// styles
 import classnames from 'classnames';
 import style from './style.scss';
 
 export default class RadioButton extends Component {
   renderLabel () {
-    const label = this.props.label
+    const { label } = this.props;
     if (label) {
       return (
         <span className={style.label}>
@@ -20,13 +22,16 @@ export default class RadioButton extends Component {
   render() {
     const radioStyle = classnames(style.radio, {
       [style.active]: this.props.active
-    })
+    });
+    const containerStyle = classnames(style.container, this.props.className);
+
     return (
-      <div className={
-        classnames(style.container, this.props.className)
-      }>
-        <div className={radioStyle} onClick={this.props.onClick}>
-          <div className={style.dot}></div>
+      <div className={containerStyle}>
+        <div
+          className={radioStyle}
+          onClick={this.props.onClick}
+        >
+          <div className={style.dot} />
         </div>
         {this.renderLabel()}
       </div>

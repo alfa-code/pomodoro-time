@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import style from './style.scss'
 
+// constants
 import * as constants from '@src/constants.js'
 
+// svg icons
 import SvgIcon from '@src/app/components/common/svg-icon';
-
 import iconSettings from '@src/static/svg/settings.svg?file-loader';
 
 // actions
 import { setPopupSettings } from '@src/actions/index.js';
+
+// style
+import style from './style.scss';
 
 export default class SettingsButton extends Component {
   showPopup () {
@@ -27,7 +30,12 @@ export default class SettingsButton extends Component {
     //   />
     // );
     return (
-      <img src={iconSettings} className={style.icon} alt={'Settings'} onClick={this.showPopup} />
+      <img
+        src={iconSettings}
+        className={style.icon}
+        alt={'Settings'}
+        onClick={this.showPopup}
+      />
     );
   }
 }

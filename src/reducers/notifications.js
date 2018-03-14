@@ -1,4 +1,4 @@
-import * as constants from '@src/constants.js'
+import * as constants from '@src/constants.js';
 import * as Cookies from "js-cookie";
 
 let startState;

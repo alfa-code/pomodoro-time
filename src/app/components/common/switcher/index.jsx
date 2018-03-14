@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames'
-import style from './style.scss';
+
+// actions
 import * as actions from '@src/actions/index.js';
 import * as Cookies from "js-cookie";
+
+// styles
+import classnames from 'classnames';
+import style from './style.scss';
 
 export default class Switcher extends Component {
   constructor(props) {
