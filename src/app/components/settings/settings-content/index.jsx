@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import style from './style.scss';
-import * as Cookies from "js-cookie";
-import * as constants from '@src/constants.js'
-import { setTimerSettings } from '@src/actions/index.js';
 
+// constants
+import * as constants from '@src/constants.js';
+
+// components
 import RadioButton from '@src/app/components/common/radio-button';
-import audioNotification from '@src/actions/audioNotification.js';
+
+// actions
+import audioNotification from '@src/actions/audioNotification';
+import { setTimerSettings } from '@src/actions/index.js';
+import * as Cookies from "js-cookie";
+
+// style
+import style from './style.scss';
 
 const regexp = /^\d+$|^$/;
 
@@ -123,15 +130,23 @@ export default class SettingsContent extends Component {
   render() {
     return (
       <div className={style.container}>
-        <h2 className={style.title}>Settings</h2>
-        <h3>Ringtone</h3>
+        <h2 className={style.title}>
+          Settings
+        </h2>
+        <h3>
+          Ringtone
+        </h3>
         <div className={style.ringtoneContainer}>
           {this.renderRingtoneButtons()}
         </div>
-        <h3>Set Custom Times</h3>
+        <h3>
+          Set Custom Times
+        </h3>
         <div className={style.customTimeContainer}>
           <div className={style.customTimeCell}>
-            <p>Pomodoro</p>
+            <p>
+              Pomodoro
+            </p>
             <input 
               type="text"
               className={style.customTimeCellInput}
@@ -140,7 +155,9 @@ export default class SettingsContent extends Component {
             />
           </div>
           <div className={style.customTimeCell}>
-            <p>Break</p>
+            <p>
+              Break
+            </p>
             <input 
               type="text"
               className={style.customTimeCellInput}

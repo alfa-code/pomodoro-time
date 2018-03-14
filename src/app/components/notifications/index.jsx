@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Switcher from '@src/app/components/common/switcher'
+
+// components
+import Switcher from '@src/app/components/common/switcher';
+
+// styles
 import style from './style.scss';
 
 export default class Notifications extends Component {

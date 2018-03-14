@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+
+// constants
+import * as constants from '@src/constants.js';
+
+// styles
 import style from './style.scss'
 
-import * as constants from '@src/constants.js'
-
+// svg icons
 import SvgIcon from '@src/app/components/common/svg-icon';
 import iconInfo from '@src/static/svg/info.svg?file-loader';
 

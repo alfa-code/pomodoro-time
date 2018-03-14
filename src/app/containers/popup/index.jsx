@@ -1,5 +1,5 @@
 import Popup from '@src/app/components/popup';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
   return {

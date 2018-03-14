@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// styles
 import style from './style.scss';
 
 export default class InfoContent extends Component {

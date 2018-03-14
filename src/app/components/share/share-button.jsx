@@ -22,7 +22,7 @@ export default class ShareButton extends Component {
 }
 
 ShareButton.propTypes = {
-  icon: PropTypes.object,
+  icon: PropTypes.string,
   text: PropTypes.string,
   link: PropTypes.string
 };

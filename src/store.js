@@ -1,10 +1,8 @@
-import { createStore } from 'redux'
-import rootReducer from '@src/reducers/index.js'
+import { createStore } from 'redux';
+import rootReducer from '@src/reducers/index.js';
 
-var initialStoreState = {}
+const store = createStore(rootReducer, {});
 
-const store = createStore(rootReducer, initialStoreState)
+window.store = store;
 
-window.store = store
-
-export default store
+export default store;
