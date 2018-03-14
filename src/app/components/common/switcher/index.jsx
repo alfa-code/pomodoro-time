@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // actions
-import * as actions from '@src/actions/index.js';
+import * as actions from 'src/actions/index.js';
 import * as Cookies from "js-cookie";
 
 // styles

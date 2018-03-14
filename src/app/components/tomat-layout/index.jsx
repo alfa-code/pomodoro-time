@@ -6,8 +6,8 @@ import classnames from 'classnames';
 import style from './style.scss';
 
 // images
-import imageLeft from '@src/static/media/tomat-left.png';
-import imageRight from '@src/static/media/tomat-right.png';
+import imageLeft from 'src/static/media/tomat-left.png';
+import imageRight from 'src/static/media/tomat-right.png';
 
 export default class TomatLayout extends Component {
   render() {

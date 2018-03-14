@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // constants
-import * as constants from '@src/constants.js';
+import * as constants from 'src/constants';
 
 // actions
 import { utc } from 'moment'
-import sendNotification from '@src/actions/sendNotification.js';
-import { setTimerSettings } from '@src/actions/index.js';
-import audioNotification from '@src/actions/audioNotification.js';
+import sendNotification from 'src/actions/sendNotification';
+import { setTimerSettings } from 'src/actions/index';
+import audioNotification from 'src/actions/audioNotification';
 
 // style
 import classnames from 'classnames';
 import style from './style.scss';
 
 // svg icons
-import SvgIcon from '@src/app/components/common/svg-icon';
-import svgIconReload from '@src/static/svg/reset.svg?file-loader';
-import svgIconPlay from '@src/static/svg/play.svg?file-loader';
-import svgIconPause from '@src/static/svg/pause.svg?file-loader';
+import SvgIcon from 'src/app/components/common/svg-icon';
+import svgIconReload from 'src/static/svg/reset.svg?file-loader';
+import svgIconPlay from 'src/static/svg/play.svg?file-loader';
+import svgIconPause from 'src/static/svg/pause.svg?file-loader';
 
 // image
-import pomodoroImage from '@src/static/images/notify/notify.png';
+import pomodoroImage from 'src/static/images/notify/notify.png';
 
-let timerWorker = require("worker-loader?inline!@src/app/workers/timer-worker.js");
+let timerWorker = require("worker-loader?inline!src/app/workers/timer-worker");
 
 export default class Timer extends Component {
   constructor(props) {

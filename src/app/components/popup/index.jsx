@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // constants
-import * as constants from '@src/constants.js';
+import * as constants from 'src/constants';
 
 // style
 import style from './style.scss'
 
-import SettingsContent from '@src/app/containers/settings/settings-content';
-import InfoContent from '@src/app/components/info/info-content';
+import SettingsContent from 'src/app/containers/settings/settings-content';
+import InfoContent from 'src/app/components/info/info-content';
 
 // svg icons
-import SvgIcon from '@src/app/components/common/svg-icon';
-import iconClose from '@src/static/svg/error.svg?file-loader';
+import SvgIcon from 'src/app/components/common/svg-icon';
+import iconClose from 'src/static/svg/error.svg?file-loader';
 
 // actions
-import { setPopupSettings } from '@src/actions/index.js';
+import { setPopupSettings } from 'src/actions/index';
 
 export default class Popup extends Component {
   closePopup () {

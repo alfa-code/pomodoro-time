@@ -1,5 +1,5 @@
 import * as Cookies from "js-cookie";
-import * as constants from '@src/constants.js'
+import * as constants from 'src/constants'
 
 var ringtone = Cookies.get('ringtone');
 if (!ringtone) {
@@ -8,11 +8,11 @@ if (!ringtone) {
 
 const createAudioContext = require('ios-safe-audio-context');
 
-import testAudio_1 from '@src/static/sounds/alert_1.mp3';
-import testAudio_2 from '@src/static/sounds/alert_2.mp3';
-import testAudio_3 from '@src/static/sounds/alert_3.mp3';
-import testAudio_4 from '@src/static/sounds/alert_4.mp3';
-import testAudio_5 from '@src/static/sounds/alert_5.mp3';
+import testAudio_1 from 'src/static/sounds/alert_1.mp3';
+import testAudio_2 from 'src/static/sounds/alert_2.mp3';
+import testAudio_3 from 'src/static/sounds/alert_3.mp3';
+import testAudio_4 from 'src/static/sounds/alert_4.mp3';
+import testAudio_5 from 'src/static/sounds/alert_5.mp3';
 
 var context = createAudioContext();
 var buffer, source, destination; 

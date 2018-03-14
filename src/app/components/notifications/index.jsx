@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import Switcher from '@src/app/components/common/switcher';
+import Switcher from 'src/app/components/common/switcher';
 
 // styles
 import style from './style.scss';

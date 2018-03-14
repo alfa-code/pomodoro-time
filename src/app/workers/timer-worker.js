@@ -18,7 +18,6 @@ function timerInterval (data, timeDifference) {
   }
 }
 
-
 function minusSecond () {
   let newTimeDifference = timeDifference - 1000;
 

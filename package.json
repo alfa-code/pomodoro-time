@@ -25,6 +25,7 @@
     "css-loader": "^0.28.10",
     "eslint": "^4.18.2",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
@@ -62,6 +63,6 @@
   "scripts": {
     "dev": "webpack-dev-server --open --progress --config configs/webpack.config.dev.js --mode development",
     "build": "webpack --progress --config configs/webpack.config.prod.js --mode production",
-    "eslint": "eslint ./src/index.jsx"
+    "eslint": "eslint ./src"
   }
 }

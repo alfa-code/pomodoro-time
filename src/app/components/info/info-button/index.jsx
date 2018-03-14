@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 // constants
-import * as constants from '@src/constants.js';
+import * as constants from 'src/constants';
 
 // styles
 import style from './style.scss'
 
 // svg icons
-import SvgIcon from '@src/app/components/common/svg-icon';
-import iconInfo from '@src/static/svg/info.svg?file-loader';
+import SvgIcon from 'src/app/components/common/svg-icon';
+import iconInfo from 'src/static/svg/info.svg?file-loader';
 
 // actions
-import { setPopupSettings } from '@src/actions/index.js';
+import { setPopupSettings } from 'src/actions/index';
 
 export default class InfoButton extends Component {
   showPopup () {
@@ -30,7 +30,12 @@ export default class InfoButton extends Component {
     //   />
     // );
     return (
-      <img src={iconInfo}  className={style.icon} alt={'Info'} onClick={this.showPopup}/>
+      <img
+        src={iconInfo}
+        className={style.icon}
+        alt={'Info'}
+        onClick={this.showPopup}
+      />
     )
   }
 }

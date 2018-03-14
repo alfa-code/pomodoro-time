@@ -1,9 +1,9 @@
-import * as constants from '@src/constants.js';
+import * as constants from 'src/constants';
 
-let initState = {
+const initState = {
   openState: false,
-  content: null
-}
+  content: null,
+};
 
 export default function popup(state = initState, action) {
   switch (action.type) {
@@ -11,6 +11,6 @@ export default function popup(state = initState, action) {
       state = Object.assign({}, state, action.payload);
       return state;
     default:
-      return state
+      return state;
   }
 }

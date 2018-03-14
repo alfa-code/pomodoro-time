@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 // constants
-import * as constants from '@src/constants.js';
+import * as constants from 'src/constants';
 
 // components
-import RadioButton from '@src/app/components/common/radio-button';
+import RadioButton from 'src/app/components/common/radio-button';
 
 // actions
-import audioNotification from '@src/actions/audioNotification';
-import { setTimerSettings } from '@src/actions/index.js';
+import audioNotification from 'src/actions/audioNotification';
+import { setTimerSettings } from 'src/actions/index';
 import * as Cookies from "js-cookie";
 
 // style

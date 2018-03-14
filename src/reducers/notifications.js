@@ -1,27 +1,25 @@
-import * as constants from '@src/constants.js';
-import * as Cookies from "js-cookie";
+import * as constants from 'src/constants';
+import * as Cookies from 'js-cookie';
 
-let startState;
-
-if (window.Notification ? true : false) {
-  startState = {
-    notificationsSupport: window.Notification ? true : false,
-    notificationsPermission: window.Notification.permission,
-    notificationsEnabled: (Cookies.get('notificationsEnabled') === 'true') || false
+function getStartState() {
+  if (window.Notification) {
+    return {
+      notificationsSupport: true,
+      notificationsPermission: window.Notification.permission,
+      notificationsEnabled: (Cookies.get('notificationsEnabled') === 'true') || false,
+    };
   }
-} else {
-  startState = {
-    notificationsSupport: window.Notification ? true : false
-  }
+  return {
+    notificationsSupport: false,
+  };
 }
 
-
-export default function notifications(state = startState, action) {
+export default function notifications(state = getStartState(), action) {
   switch (action.type) {
     case constants.SET_NOTIFICATIONS_PERMISSION:
       state = Object.assign({}, state, action.payload);
       return state;
     default:
-      return state
+      return state;
   }
 }

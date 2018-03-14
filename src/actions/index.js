@@ -1,5 +1,5 @@
-import * as constants from '@src/constants.js';
-import store from '@src/store.js';
+import * as constants from 'src/constants';
+import store from 'src/store';
 import * as Cookies from "js-cookie";
 
 export function setNotificationsPermission(val) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.scss';
 
-import SvgIcon from '@src/app/components/common/svg-icon';
+import SvgIcon from 'src/app/components/common/svg-icon';
 
 export default class ShareButton extends Component {
   render() {

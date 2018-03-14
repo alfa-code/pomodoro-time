@@ -1,4 +1,4 @@
-import Timer from '@src/app/components/timer';
+import Timer from 'src/app/components/timer';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {

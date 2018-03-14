@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 // constants
-import * as constants from '@src/constants.js'
+import * as constants from 'src/constants'
 
 // svg icons
-import SvgIcon from '@src/app/components/common/svg-icon';
-import iconSettings from '@src/static/svg/settings.svg?file-loader';
+import SvgIcon from 'src/app/components/common/svg-icon';
+import iconSettings from 'src/static/svg/settings.svg?file-loader';
 
 // actions
-import { setPopupSettings } from '@src/actions/index.js';
+import { setPopupSettings } from 'src/actions/index';
 
 // style
 import style from './style.scss';
