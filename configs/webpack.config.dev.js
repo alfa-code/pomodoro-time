@@ -61,7 +61,11 @@ var devConfig = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' }
+      },
+      {
+        test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
         exclude:path.resolve(__dirname, "node_modules"),
         use: 'babel-loader'
       },

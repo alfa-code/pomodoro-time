@@ -21,38 +21,45 @@ import pomodoroImage from 'src/static/images/notify/notify.png';
 import classnames from 'classnames';
 import { utc } from 'moment';
 
+// const TimerWorker = require('worker-loader!src/app/workers/timer.worker');
+
+import TimerWorker from 'src/app/workers/timer.worker';
+
 // style
 import style from './style.scss';
 
-let timerWorker = require("worker-loader?inline!src/app/workers/timer-worker");
-
 class Timer extends Component {
   constructor(props) {
-    super(props)
-    this.timer;
-    this.timerWorker = new timerWorker();
+    super(props);
+    this.timer = '';
+    this.timerWorker = new TimerWorker();
     this.state = {
       minutes: '00',
-      seconds: '00'
-    }
+      seconds: '00',
+    };
   }
 
-  componentDidMount () {
-    const { period, timerActivated, timerState, timeDifference } = this.props.timer;
+  componentWillMount() {
+    const {
+      period,
+    } = this.props.timer;
+
     this.setState({
-      minutes: utc(period * 60 * 1000).format("mm"),
-      seconds: utc(period * 60 * 1000).format("ss")
+      minutes: utc(period * 60 * 1000).format('mm'),
+      seconds: utc(period * 60 * 1000).format('ss'),
     });
 
-    this.timerWorker.addEventListener('message', function(e) {
+    this.timerWorker.addEventListener('message', (e) => {
       switch (e.data.command) {
         case 'updateTimeDifference':
           setTimerSettings({
-            timeDifference: e.data.newTimeDifference
+            timeDifference: e.data.newTimeDifference,
           });
           break;
         case 'playTimeoutSound':
           audioNotification();
+          break;
+        default:
           break;
       }
     }, false);
@@ -60,41 +67,47 @@ class Timer extends Component {
     this.checkTimer(this.props.timer, this.props.timer);
   }
 
-  checkTimer = (oldProps, newProps) => {
-    let startNewTimer = (oldProps.timerActivated === false && newProps.timerActivated === true && newProps.timerState === constants.TIMER_STATE_WORKING);
-    let fromPauseToWarkTimer = (oldProps.timerState === constants.TIMER_STATE_PAUSE && newProps.timerState === constants.TIMER_STATE_WORKING && newProps.timerActivated === true);
-    let timerOnPause = (newProps.timerState !== constants.TIMER_STATE_WORKING);
-    let timerNotWork = (newProps.timerActivated === false);
-    let timeDifference = newProps.timeDifference;
+  // componentDidMount() {
+  //   const {
+  //     period,
+  //     // timerActivated,
+  //     // timerState,
+  //     // timeDifference,
+  //   } = this.props.timer;
 
-    this.timerWorker.postMessage({
-      startNewTimer,
-      fromPauseToWarkTimer,
-      timerOnPause,
-      timerNotWork,
-      timeDifference
-    });
-  }
+  //   this.setState({
+  //     minutes: utc(period * 60 * 1000).format('mm'),
+  //     seconds: utc(period * 60 * 1000).format('ss'),
+  //   });
 
-  shouldComponentUpdate(nextProps, nextState) {
-    this.checkTimer(this.props.timer, nextProps.timer);
-    return true;
-  }
+  //   this.timerWorker.addEventListener('message', (e) => {
+  //     switch (e.data.command) {
+  //       case 'updateTimeDifference':
+  //         setTimerSettings({
+  //           timeDifference: e.data.newTimeDifference,
+  //         });
+  //         break;
+  //       case 'playTimeoutSound':
+  //         audioNotification();
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   }, false);
 
-  reloadTimer = () => {
-    const { period } = this.props.timer;
-    setTimerSettings({
-      mode: constants.TIMER_MODE_POMODORO,
-      timerState: constants.TIMER_STATE_PAUSE,
-      timerActivated: true,
-      timeStart: Date.now(),
-      timeEnd: Date.now() + (period * 60 * 1000),
-      timeDifference: period * 60 * 1000
-    });
-  }
+  //   this.checkTimer(this.props.timer, this.props.timer);
+  // }
 
   componentWillReceiveProps(props) {
-    const { timerActivated, timerState, timeDifference, timeEnd, period, mode, breakTime } = props.timer;
+    const {
+      // timerActivated,
+      // timerState,
+      timeDifference,
+      // timeEnd,
+      period,
+      mode,
+      breakTime,
+    } = props.timer;
 
     if (timeDifference < 0) {
       switch (mode) {
@@ -110,18 +123,25 @@ class Timer extends Component {
             sendNotification('Time for work', 'notyfy', 'Do not be distracted by anything', pomodoroImage);
           }
           break;
+        default:
+          break;
       }
     }
 
-    let minutes = utc(timeDifference).format("mm"),
-        seconds = utc(timeDifference).format("ss");
+    const minutes = utc(timeDifference).format('mm');
+    const seconds = utc(timeDifference).format('ss');
 
     this.setState({
       minutes,
-      seconds
+      seconds,
     });
 
     this.setDocumentTitle(minutes, seconds);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    this.checkTimer(this.props.timer, nextProps.timer);
+    return true;
   }
 
   setDocumentTitle = (minutes, seconds) => {
@@ -133,7 +153,7 @@ class Timer extends Component {
   }
 
   setControlButton = () => {
-    const { timerActivated, timerState } = this.props.timer
+    const { timerActivated, timerState } = this.props.timer;
     if (timerActivated) {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:
@@ -145,8 +165,9 @@ class Timer extends Component {
             <img
               src={svgIconPause}
               className={style.controlsIcon}
+              alt="Pause Icon"
             />
-          )
+          );
         case constants.TIMER_STATE_PAUSE:
           return (
             // <SvgIcon
@@ -156,38 +177,91 @@ class Timer extends Component {
             <img
               src={svgIconPlay}
               className={style.controlsIcon}
+              alt="Play Icon"
             />
-          )
+          );
+        default:
+          return (
+            <img
+              src={svgIconPlay}
+              className={style.controlsIcon}
+              alt="Play Icon"
+            />
+          );
       }
-    } else {
-      return (
-        // <SvgIcon
-        //   glyph={svgIconPlay}
-        //   className={style.controlsIcon}
-        // />
-        <img
-          src={svgIconPlay}
-          className={style.controlsIcon}
-        />
-      )
     }
+    return (
+      // <SvgIcon
+      //   glyph={svgIconPlay}
+      //   className={style.controlsIcon}
+      // />
+      <img
+        src={svgIconPlay}
+        className={style.controlsIcon}
+        alt="Play Icon"
+      />
+    );
+  }
+
+  reloadTimer = () => {
+    const { period } = this.props.timer;
+    setTimerSettings({
+      mode: constants.TIMER_MODE_POMODORO,
+      timerState: constants.TIMER_STATE_PAUSE,
+      timerActivated: true,
+      timeStart: Date.now(),
+      timeEnd: Date.now() + (period * 60 * 1000),
+      timeDifference: period * 60 * 1000,
+    });
+  }
+
+  checkTimer = (oldProps, newProps) => {
+    const startNewTimer = (
+      oldProps.timerActivated === false
+      && newProps.timerActivated === true
+      && newProps.timerState === constants.TIMER_STATE_WORKING
+    );
+
+    const fromPauseToWarkTimer = (
+      oldProps.timerState === constants.TIMER_STATE_PAUSE
+      && newProps.timerState === constants.TIMER_STATE_WORKING
+      && newProps.timerActivated === true
+    );
+    const timerOnPause = (newProps.timerState !== constants.TIMER_STATE_WORKING);
+    const timerNotWork = (newProps.timerActivated === false);
+    const { timeDifference } = newProps;
+
+    this.timerWorker.postMessage({
+      startNewTimer,
+      fromPauseToWarkTimer,
+      timerOnPause,
+      timerNotWork,
+      timeDifference,
+    });
   }
 
   controlButtonOnClick = () => {
-    const { timerActivated, timerState, period } = this.props.timer
+    const {
+      timerActivated,
+      timerState,
+      period,
+    } = this.props.timer;
+
     if (!timerActivated) {
       this.startNewTimer(constants.TIMER_MODE_POMODORO, period);
     } else {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:
           setTimerSettings({
-            timerState: constants.TIMER_STATE_PAUSE
+            timerState: constants.TIMER_STATE_PAUSE,
           });
           break;
         case constants.TIMER_STATE_PAUSE:
           setTimerSettings({
-            timerState: constants.TIMER_STATE_WORKING
-          })
+            timerState: constants.TIMER_STATE_WORKING,
+          });
+          break;
+        default:
           break;
       }
     }
@@ -200,24 +274,29 @@ class Timer extends Component {
       timerActivated: true,
       timeStart: Date.now(),
       timeEnd: Date.now() + (timerPeriod * 60 * 1000),
-      timeDifference: timerPeriod * 60 * 1000
+      timeDifference: timerPeriod * 60 * 1000,
     });
   }
 
-  checkEnterKeyPress = (e, callback) => {
-    if(e.key == 'Enter' || e.key === ' '){
+  checkKeyPress = (e, callback) => {
+    if (e.key === 'Enter' || e.key === ' ') {
       callback();
     }
   }
 
   render() {
     return (
-      <div 
+      <div
         className={style.container}
       >
-        <div 
+        <div
           className={style.controlButton}
           onClick={this.controlButtonOnClick}
+          onKeyPress={(e) => {
+            this.checkKeyPress(e, this.controlButtonOnClick);
+          }}
+          role="button"
+          tabIndex={0}
         >
           {this.setControlButton()}
         </div>
@@ -242,7 +321,7 @@ class Timer extends Component {
           className={style.resetButton}
           onClick={this.reloadTimer}
           onKeyPress={(e) => {
-            this.checkEnterKeyPress(e, this.reloadTimer)
+            this.checkKeyPress(e, this.reloadTimer);
           }}
           role="button"
           tabIndex={0}
@@ -275,6 +354,11 @@ Timer.propTypes = {
     timeEnd: PropTypes.number,
     timeDifference: PropTypes.number,
   }),
+};
+
+Timer.defaultProps = {
+  notificationsEnabled: false,
+  timer: {},
 };
 
 export default Timer;

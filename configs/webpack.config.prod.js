@@ -33,13 +33,29 @@ var prodConfig = {
       },
       {
         test: /\.svg$/,
+        // oneOf: [
+        //   {
+        //     use: [
+        //       {
+        //         resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
+        //         use: 'svg-sprite-loader'
+        //       },
+        //       {
+        //         loader: 'file-loader',
+        //         options: {
+        //           name: 'static/svg/[name].[hash:8].[ext]',
+        //         }
+        //       }
+        //     ],
+        //   },
+        // ],
         oneOf: [
           {
-            use: [
-              {
-                resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
-                use: 'svg-sprite-loader'
-              },
+            resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
+            use: 'svg-sprite-loader'
+          },
+          {
+            use:  [
               {
                 loader: 'file-loader',
                 options: {
@@ -69,7 +85,12 @@ var prodConfig = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' },
+        exclude:path.resolve(__dirname, "../node_modules"),
+      },
+      {
+        test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
         exclude:path.resolve(__dirname, "../node_modules"),
         use: 'babel-loader'
       },

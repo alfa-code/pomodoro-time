@@ -5,12 +5,16 @@ let period = Cookies.get('timerPeriod');
 if (!period) {
   Cookies.set('timerPeriod', 25);
   period = 25;
+} else {
+  period = Number.parseInt(period);
 }
 
 let breakTime = Cookies.get('timerBreak');
 if (!breakTime) {
   Cookies.set('timerBreak', 5);
   breakTime = 5;
+} else {
+  breakTime = Number.parseInt(breakTime);
 }
 
 const startState = {

@@ -64,7 +64,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --open --progress --config configs/webpack.config.dev.js --mode development",
-    "build": "webpack --progress --config configs/webpack.config.prod.js --mode production",
+    "build": "webpack --progress --config configs/webpack.config.prod.js --mode development",
     "eslint": "eslint ./src/** --ext js,jsx"
   }
 }

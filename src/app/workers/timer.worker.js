@@ -1,4 +1,7 @@
 // for closure
+
+console.log('Timer Worker loaded!');
+
 let timeDifferenceGlobal;
 let interval;
 
