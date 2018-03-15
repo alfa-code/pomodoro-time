@@ -1,9 +1,9 @@
 // for closure
-let timeDifference;
+let timeDifferenceGlobal;
 let interval;
 
 function minusSecond() {
-  const newTimeDifference = timeDifference - 1000;
+  const newTimeDifference = timeDifferenceGlobal - 1000;
 
   const workerMessage = {
     command: 'updateTimeDifference',
@@ -27,7 +27,7 @@ function timerInterval(data) {
   }
 }
 
-self.addEventListener('message', function (e) {
-  timeDifference = e.data.timeDifference;
+self.addEventListener('message', (e) => {
+  timeDifferenceGlobal = e.data.timeDifference;
   timerInterval(e.data);
 }, false);

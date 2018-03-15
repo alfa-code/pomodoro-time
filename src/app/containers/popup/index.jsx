@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 function mapStateToProps(state) {
   return {
     popup: state.popup,
-  }
+  };
 }
 
 export default connect(mapStateToProps)(Popup);

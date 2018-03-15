@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 // constants
 import * as constants from 'src/constants';
 
-// styles
-import style from './style.scss'
-
 // svg icons
 import SvgIcon from 'src/app/components/common/svg-icon';
-import iconInfo from 'src/static/svg/info.svg?file-loader';
+import iconInfo from 'src/static/svg/info.svg';
 
 // actions
 import { setPopupSettings } from 'src/actions/index';
+
+// styles
+import style from './style.scss';
 
 export default class InfoButton extends Component {
   showPopup () {

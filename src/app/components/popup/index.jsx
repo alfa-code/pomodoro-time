@@ -12,7 +12,7 @@ import InfoContent from 'src/app/components/info/info-content';
 
 // svg icons
 import SvgIcon from 'src/app/components/common/svg-icon';
-import iconClose from 'src/static/svg/error.svg?file-loader';
+import iconClose from 'src/static/svg/error.svg';
 
 // actions
 import { setPopupSettings } from 'src/actions/index';

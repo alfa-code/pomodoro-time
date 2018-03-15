@@ -5,9 +5,9 @@ import ShareButton from './share-button';
 
 // svg icons
 import SvgIcon from 'src/app/components/common/svg-icon';
-import iconFacebook from 'src/static/media/svg/facebook.svg?file-loader';
-import iconTwitter from 'src/static/media/svg/twitter.svg?file-loader';
-import iconVkontakte from 'src/static/media/svg/vkontakte.svg?file-loader';
+import iconFacebook from 'src/static/media/svg/facebook.svg';
+import iconTwitter from 'src/static/media/svg/twitter.svg';
+import iconVkontakte from 'src/static/media/svg/vkontakte.svg';
 
 // image
 import promoImg from 'src/static/media/img/promo/promo.jpg';

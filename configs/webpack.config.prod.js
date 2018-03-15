@@ -10,6 +10,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 //const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 require("babel-polyfill");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 var prodConfig = {
   context: path.resolve(__dirname, '../src'),
@@ -34,8 +35,11 @@ var prodConfig = {
         test: /\.svg$/,
         oneOf: [
           {
-            resourceQuery: /file-loader/, // foo.bar?file-loader
             use: [
+              {
+                resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
+                use: 'svg-sprite-loader'
+              },
               {
                 loader: 'file-loader',
                 options: {
@@ -44,9 +48,6 @@ var prodConfig = {
               }
             ],
           },
-          {
-            use: 'svg-sprite-loader'
-          }
         ],
         // use: [
         //   {
@@ -130,7 +131,7 @@ var prodConfig = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', 'svg'],
     alias: {
       'src': path.resolve(__dirname, '../src'),
     }
@@ -182,6 +183,7 @@ var prodConfig = {
         prefer_related_applications: false,
       }
     }),
+    new WebpackClearConsole()
     //new BundleAnalyzerPlugin()
   ]
 };

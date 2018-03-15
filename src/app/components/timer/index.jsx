@@ -5,27 +5,28 @@ import PropTypes from 'prop-types';
 import * as constants from 'src/constants';
 
 // actions
-import { utc } from 'moment'
 import sendNotification from 'src/actions/sendNotification';
 import { setTimerSettings } from 'src/actions/index';
 import audioNotification from 'src/actions/audioNotification';
 
-// style
-import classnames from 'classnames';
-import style from './style.scss';
-
 // svg icons
-import SvgIcon from 'src/app/components/common/svg-icon';
-import svgIconReload from 'src/static/svg/reset.svg?file-loader';
-import svgIconPlay from 'src/static/svg/play.svg?file-loader';
-import svgIconPause from 'src/static/svg/pause.svg?file-loader';
+// import SvgIcon from 'src/app/components/common/svg-icon';
+import svgIconReload from 'src/static/svg/reset.svg';
+import svgIconPlay from 'src/static/svg/play.svg';
+import svgIconPause from 'src/static/svg/pause.svg';
 
 // image
 import pomodoroImage from 'src/static/images/notify/notify.png';
 
+import classnames from 'classnames';
+import { utc } from 'moment';
+
+// style
+import style from './style.scss';
+
 let timerWorker = require("worker-loader?inline!src/app/workers/timer-worker");
 
-export default class Timer extends Component {
+class Timer extends Component {
   constructor(props) {
     super(props)
     this.timer;
@@ -203,6 +204,12 @@ export default class Timer extends Component {
     });
   }
 
+  checkEnterKeyPress = (e, callback) => {
+    if(e.key == 'Enter' || e.key === ' '){
+      callback();
+    }
+  }
+
   render() {
     return (
       <div 
@@ -231,9 +238,14 @@ export default class Timer extends Component {
             seconds
           </div>
         </div>
-        <div 
+        <div
           className={style.resetButton}
           onClick={this.reloadTimer}
+          onKeyPress={(e) => {
+            this.checkEnterKeyPress(e, this.reloadTimer)
+          }}
+          role="button"
+          tabIndex={0}
         >
           {/* <SvgIcon
             glyph={svgIconReload}
@@ -242,24 +254,27 @@ export default class Timer extends Component {
           <img
             src={svgIconReload}
             className={style.controlsIcon}
+            alt="controls icon"
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
 Timer.propTypes = {
   notificationsEnabled: PropTypes.bool,
   timer: PropTypes.shape({
-    timerTime: PropTypes.digit,
+    timerTime: PropTypes.number,
     timerState: PropTypes.string,
     mode: PropTypes.string,
     timerActivated: PropTypes.bool,
-    period: PropTypes.digit,
-    breakTime: PropTypes.digit, 
-    timeStart: PropTypes.digit,
-    timeEnd: PropTypes.digit,
-    timeDifference: PropTypes.digit
-  })
+    period: PropTypes.number,
+    breakTime: PropTypes.number,
+    timeStart: PropTypes.number,
+    timeEnd: PropTypes.number,
+    timeDifference: PropTypes.number,
+  }),
 };
+
+export default Timer;

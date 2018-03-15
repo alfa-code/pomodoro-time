@@ -1,69 +1,76 @@
-import * as Cookies from "js-cookie";
-import * as constants from 'src/constants'
+import * as Cookies from 'js-cookie';
+import * as constants from 'src/constants';
 
-var ringtone = Cookies.get('ringtone');
+import testAudio1 from 'src/static/sounds/alert_1.mp3';
+import testAudio2 from 'src/static/sounds/alert_2.mp3';
+import testAudio3 from 'src/static/sounds/alert_3.mp3';
+import testAudio4 from 'src/static/sounds/alert_4.mp3';
+import testAudio5 from 'src/static/sounds/alert_5.mp3';
+
+const ringtone = Cookies.get('ringtone');
+
 if (!ringtone) {
   Cookies.set('ringtone', constants.RINGTONE_1);
 }
 
 const createAudioContext = require('ios-safe-audio-context');
 
-import testAudio_1 from 'src/static/sounds/alert_1.mp3';
-import testAudio_2 from 'src/static/sounds/alert_2.mp3';
-import testAudio_3 from 'src/static/sounds/alert_3.mp3';
-import testAudio_4 from 'src/static/sounds/alert_4.mp3';
-import testAudio_5 from 'src/static/sounds/alert_5.mp3';
+const context = createAudioContext();
 
-var context = createAudioContext();
-var buffer, source, destination; 
-var loadSoundFile = function(url) {
-  var xhr = new XMLHttpRequest();
+let buffer;
+let source;
+let destinationGlobal;
+
+const play = () => {
+  source = context.createBufferSource();
+  source.buffer = buffer;
+  destinationGlobal = context.destination;
+  source.connect(destinationGlobal);
+  source.start(0);
+};
+
+const loadSoundFile = (url) => {
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.responseType = 'arraybuffer';
-  xhr.onload = function(e) {
-    context.decodeAudioData(this.response,
-    function(decodedArrayBuffer) {
-      buffer = decodedArrayBuffer;
-      console.log('Sound notification...')
-      play();
-    }, function(e) {
-      console.log('Error decoding file', e);
-    });
+  xhr.onload = function onloadCallback() {
+    context.decodeAudioData(
+      this.response,
+      (decodedArrayBuffer) => {
+        buffer = decodedArrayBuffer;
+        console.log('Sound notification...');
+        play();
+      }, (e) => {
+        console.log('Error decoding file', e);
+      },
+    );
   };
   xhr.send();
-}
+};
 
-var play = function(){
-  source = context.createBufferSource();
-  source.buffer = buffer; 
-  destination = context.destination;
-  source.connect(destination);
-  source.start(0);
-}
+// var stop = () => {
+//   source.stop(0);
+// };
 
-var stop = function(){
-  source.stop(0);
-}
-
-let choiseSound = (name) => {
+const choiseSound = (name) => {
   switch (name) {
     case constants.RINGTONE_1:
-      return testAudio_1;
+      return testAudio1;
     case constants.RINGTONE_2:
-      return testAudio_2;
+      return testAudio2;
     case constants.RINGTONE_3:
-      return testAudio_3;
+      return testAudio3;
     case constants.RINGTONE_4:
-      return testAudio_4;
+      return testAudio4;
     case constants.RINGTONE_5:
-      return testAudio_5;
+      return testAudio5;
     default:
-      return testAudio_1;
+      return testAudio1;
   }
-}
+};
 
-export default function audioNotification () {
-  let ringtoneName = Cookies.get('ringtone');
-  let ringtoneUrl = choiseSound(ringtoneName);
+export default function audioNotification() {
+  const ringtoneName = Cookies.get('ringtone');
+  const ringtoneUrl = choiseSound(ringtoneName);
   loadSoundFile(ringtoneUrl);
 }

@@ -34,12 +34,12 @@ var devConfig = {
         test: /\.svg$/,
         oneOf: [
           {
-            resourceQuery: /file-loader/, // foo.bar?file-loader
-            use: 'file-loader',
+            resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
+            use: 'svg-sprite-loader'
           },
           {
-            use: 'svg-sprite-loader'
-          }
+            use: 'file-loader',
+          },
         ],
         // use: [
         //   {
@@ -119,7 +119,7 @@ var devConfig = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', 'svg'],
     alias: {
       'src': path.resolve(__dirname, '../src'),
     }
