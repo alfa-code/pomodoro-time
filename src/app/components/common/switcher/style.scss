@@ -8,7 +8,9 @@
   cursor: pointer;
 
   &:focus {
-    outline: 1px solid blue;
+    outline-color:rgb(59, 153, 252);
+    outline-style: auto;
+    outline-width: 5px;
   }
 }
 

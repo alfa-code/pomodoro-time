@@ -35,7 +35,7 @@ export default class Popup extends Component {
       case constants.POPUP_INFO:
         return <InfoContent />;
       default:
-        return null;
+        return <SettingsContent />;
     }
   }
 
@@ -67,6 +67,7 @@ Popup.propTypes = {
     content: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.func,
+      PropTypes.string,
     ]),
   }),
 };
@@ -74,6 +75,6 @@ Popup.propTypes = {
 Popup.defaultProps = {
   popup: {
     openState: false,
-    content: null,
+    content: 'popup_settings',
   },
 };

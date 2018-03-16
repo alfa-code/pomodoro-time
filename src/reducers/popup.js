@@ -2,7 +2,7 @@ import * as constants from 'src/constants';
 
 const initState = {
   openState: false,
-  content: null,
+  content: 'popup_settings',
 };
 
 export default function popup(state = initState, action) {
