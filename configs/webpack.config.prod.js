@@ -5,12 +5,12 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
 const CnameWebpackPlugin = require('cname-webpack-plugin');
 //const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 //const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 require("babel-polyfill");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
+//const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 var prodConfig = {
   context: path.resolve(__dirname, '../src'),
@@ -21,6 +21,7 @@ var prodConfig = {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
   },
+  mode: 'production',
   module: {
     rules: [
       {
@@ -204,9 +205,8 @@ var prodConfig = {
         prefer_related_applications: false,
       }
     }),
-    new WebpackClearConsole()
     //new BundleAnalyzerPlugin()
-  ]
+  ],
 };
 
 module.exports = prodConfig;
