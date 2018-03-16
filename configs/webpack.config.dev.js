@@ -67,7 +67,7 @@ var devConfig = {
       {
         test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
         exclude:path.resolve(__dirname, "node_modules"),
-        use: 'babel-loader'
+        use: ['babel-loader', 'eslint-loader',]
       },
       {
         test: [/\.scss$/],

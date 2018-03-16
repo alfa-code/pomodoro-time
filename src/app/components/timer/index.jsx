@@ -10,7 +10,6 @@ import { setTimerSettings } from 'src/actions/index';
 import audioNotification from 'src/actions/audioNotification';
 
 // svg icons
-// import SvgIcon from 'src/app/components/common/svg-icon';
 import svgIconReload from 'src/static/svg/reset.svg';
 import svgIconPlay from 'src/static/svg/play.svg';
 import svgIconPause from 'src/static/svg/pause.svg';
@@ -67,43 +66,9 @@ class Timer extends Component {
     this.checkTimer(this.props.timer, this.props.timer);
   }
 
-  // componentDidMount() {
-  //   const {
-  //     period,
-  //     // timerActivated,
-  //     // timerState,
-  //     // timeDifference,
-  //   } = this.props.timer;
-
-  //   this.setState({
-  //     minutes: utc(period * 60 * 1000).format('mm'),
-  //     seconds: utc(period * 60 * 1000).format('ss'),
-  //   });
-
-  //   this.timerWorker.addEventListener('message', (e) => {
-  //     switch (e.data.command) {
-  //       case 'updateTimeDifference':
-  //         setTimerSettings({
-  //           timeDifference: e.data.newTimeDifference,
-  //         });
-  //         break;
-  //       case 'playTimeoutSound':
-  //         audioNotification();
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   }, false);
-
-  //   this.checkTimer(this.props.timer, this.props.timer);
-  // }
-
   componentWillReceiveProps(props) {
     const {
-      // timerActivated,
-      // timerState,
       timeDifference,
-      // timeEnd,
       period,
       mode,
       breakTime,
@@ -158,10 +123,6 @@ class Timer extends Component {
       switch (timerState) {
         case constants.TIMER_STATE_WORKING:
           return (
-            // <SvgIcon
-            //   glyph={svgIconPause}
-            //   className={style.controlsIcon}
-            // />
             <img
               src={svgIconPause}
               className={style.controlsIcon}
@@ -170,10 +131,6 @@ class Timer extends Component {
           );
         case constants.TIMER_STATE_PAUSE:
           return (
-            // <SvgIcon
-            //   glyph={svgIconPlay}
-            //   className={style.controlsIcon}
-            // />
             <img
               src={svgIconPlay}
               className={style.controlsIcon}
@@ -191,10 +148,6 @@ class Timer extends Component {
       }
     }
     return (
-      // <SvgIcon
-      //   glyph={svgIconPlay}
-      //   className={style.controlsIcon}
-      // />
       <img
         src={svgIconPlay}
         className={style.controlsIcon}
@@ -326,10 +279,6 @@ class Timer extends Component {
           role="button"
           tabIndex={0}
         >
-          {/* <SvgIcon
-            glyph={svgIconReload}
-            className={style.controlsIcon}
-          /> */}
           <img
             src={svgIconReload}
             className={style.controlsIcon}
