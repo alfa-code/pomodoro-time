@@ -6,6 +6,12 @@
   background-color: #a51d19;
   position: relative;
   cursor: pointer;
+
+  &:focus {
+    outline-color:rgb(59, 153, 252);
+    outline-style: auto;
+    outline-width: 5px;
+  }
 }
 
 .switcherDisabled {

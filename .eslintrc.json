@@ -1,0 +1,22 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true
+    },
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "./configs/webpack.config.dev.js"
+            }
+        }
+    },
+    "rules": {
+        "no-param-reassign": 0,
+        "no-restricted-globals": ["error", "event", "fdescribe"],
+        "no-console": ["warn", { "allow": ["warn", "error", "log", "info"] }],
+        "no-new": 0,
+        "import/no-named-as-default": 0,
+        "import/no-named-as-default-member": 0
+    }
+}

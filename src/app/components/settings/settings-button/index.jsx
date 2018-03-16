@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
 
 // constants
-import * as constants from '@src/constants.js'
-
-// svg icons
-import SvgIcon from '@src/app/components/common/svg-icon';
-import iconSettings from '@src/static/svg/settings.svg?file-loader';
+import * as constants from 'src/constants';
 
 // actions
-import { setPopupSettings } from '@src/actions/index.js';
+import { setPopupSettings } from 'src/actions/index';
 
 // style
 import style from './style.scss';
 
 export default class SettingsButton extends Component {
-  showPopup () {
+  showPopup = () => {
     setPopupSettings({
       openState: true,
-      content: constants.POPUP_SETTINGS
-    })
+      content: constants.POPUP_SETTINGS,
+    });
+  }
+
+  checkKeyPress = (e, callback) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      callback();
+    }
   }
 
   render() {
-    // return (
-    //   <SvgIcon
-    //     glyph={iconSettings}
-    //     className={style.icon}
-    //     onClick={this.showPopup}
-    //   />
-    // );
     return (
-      <img
-        src={iconSettings}
+      <button
         className={style.icon}
-        alt={'Settings'}
         onClick={this.showPopup}
+        onKeyPress={(e) => {
+          this.checkKeyPress(e, this.showPopup);
+        }}
       />
     );
   }
 }
+

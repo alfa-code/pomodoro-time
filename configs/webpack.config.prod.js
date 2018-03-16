@@ -10,6 +10,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 //const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 require("babel-polyfill");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 var prodConfig = {
   context: path.resolve(__dirname, '../src'),
@@ -32,10 +33,29 @@ var prodConfig = {
       },
       {
         test: /\.svg$/,
+        // oneOf: [
+        //   {
+        //     use: [
+        //       {
+        //         resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
+        //         use: 'svg-sprite-loader'
+        //       },
+        //       {
+        //         loader: 'file-loader',
+        //         options: {
+        //           name: 'static/svg/[name].[hash:8].[ext]',
+        //         }
+        //       }
+        //     ],
+        //   },
+        // ],
         oneOf: [
           {
-            resourceQuery: /file-loader/, // foo.bar?file-loader
-            use: [
+            resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
+            use: 'svg-sprite-loader'
+          },
+          {
+            use:  [
               {
                 loader: 'file-loader',
                 options: {
@@ -44,9 +64,6 @@ var prodConfig = {
               }
             ],
           },
-          {
-            use: 'svg-sprite-loader'
-          }
         ],
         // use: [
         //   {
@@ -68,7 +85,12 @@ var prodConfig = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' },
+        exclude:path.resolve(__dirname, "../node_modules"),
+      },
+      {
+        test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
         exclude:path.resolve(__dirname, "../node_modules"),
         use: 'babel-loader'
       },
@@ -130,9 +152,9 @@ var prodConfig = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', 'svg'],
     alias: {
-      '@src': path.resolve(__dirname, '../src'),
+      'src': path.resolve(__dirname, '../src'),
     }
   },
   plugins: [
@@ -182,6 +204,7 @@ var prodConfig = {
         prefer_related_applications: false,
       }
     }),
+    new WebpackClearConsole()
     //new BundleAnalyzerPlugin()
   ]
 };

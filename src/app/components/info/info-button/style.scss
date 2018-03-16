@@ -8,6 +8,10 @@
   bottom: 20px;
   right: 60px;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
+  background-image: url('src/static/svg/info.svg');
+  background-size: contain;
 
   &:hover {
     animation: rotation 3s infinite linear;

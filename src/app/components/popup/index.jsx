@@ -2,38 +2,40 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // constants
-import * as constants from '@src/constants.js';
+import * as constants from 'src/constants';
 
-// style
-import style from './style.scss'
-
-import SettingsContent from '@src/app/containers/settings/settings-content';
-import InfoContent from '@src/app/components/info/info-content';
-
-// svg icons
-import SvgIcon from '@src/app/components/common/svg-icon';
-import iconClose from '@src/static/svg/error.svg?file-loader';
+import SettingsContent from 'src/app/containers/settings/settings-content';
+import InfoContent from 'src/app/components/info/info-content';
 
 // actions
-import { setPopupSettings } from '@src/actions/index.js';
+import { setPopupSettings } from 'src/actions/index';
+
+// style
+import style from './style.scss';
 
 export default class Popup extends Component {
-  closePopup () {
+  closePopup = () => {
     setPopupSettings({
       openState: false,
-      content: null
-    })
+      content: null,
+    });
   }
 
-  renderContent () {
-    const { content } = this.props.popup
+  checkKeyPress = (e, callback) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      callback();
+    }
+  }
+
+  renderContent = () => {
+    const { content } = this.props.popup;
     switch (content) {
       case constants.POPUP_SETTINGS:
-        return <SettingsContent/>;
+        return <SettingsContent />;
       case constants.POPUP_INFO:
-        return <InfoContent/>;
+        return <InfoContent />;
       default:
-        return null;
+        return <SettingsContent />;
     }
   }
 
@@ -43,30 +45,36 @@ export default class Popup extends Component {
       return (
         <div className={style.wrapper}>
           <div className={style.popupContent}>
-            {/* Content */}
             { this.renderContent() }
-            {/* CloseButton */}
-            {/* <SvgIcon
-              glyph={iconClose}
+            <button
               className={style.closeButton}
               onClick={this.closePopup}
-            /> */}
-            <img 
-              src={iconClose}
-              className={style.closeButton}
-              alt={'close Button'}
-              onClick={this.closePopup}
+              onKeyPress={(e) => {
+                this.checkKeyPress(e, this.closePopup);
+              }}
             />
           </div>
         </div>
       );
-    } else {
-      return null;
     }
+    return null;
   }
 }
 
 Popup.propTypes = {
-  popup: PropTypes.object,
-  content: PropTypes.any
+  popup: PropTypes.shape({
+    openState: PropTypes.bool,
+    content: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.func,
+      PropTypes.string,
+    ]),
+  }),
+};
+
+Popup.defaultProps = {
+  popup: {
+    openState: false,
+    content: 'popup_settings',
+  },
 };
