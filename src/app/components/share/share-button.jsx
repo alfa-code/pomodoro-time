@@ -1,28 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+
+// style
 import style from './style.scss';
 
-import SvgIcon from 'src/app/components/common/svg-icon';
-
-export default class ShareButton extends Component {
-  render() {
-    return (
-      <a href="#" className={style.button} href={this.props.link} target='_blank'>
-        {/* <SvgIcon
-          glyph={this.props.icon}
-          className={style.icon}
-        /> */}
-        <img src={this.props.icon} className={style.icon} alt={'Share'}/>
-        <span>
-          {this.props.text}
-        </span>
-      </a>
-    )
-  }
+export default function ShareButton(props) {
+  return (
+    <a
+      className={style.button}
+      href={props.link}
+      target="_blank"
+    >
+      <img
+        src={props.icon}
+        className={style.icon}
+        alt="Share"
+      />
+      <span>
+        {props.text}
+      </span>
+    </a>
+  );
 }
 
 ShareButton.propTypes = {
   icon: PropTypes.string,
   text: PropTypes.string,
-  link: PropTypes.string
+  link: PropTypes.string,
+};
+
+ShareButton.defaultProps = {
+  icon: 'icon',
+  text: 'text',
+  link: '#',
 };

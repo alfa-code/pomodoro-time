@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
   return {
-    timer: state.timer,
+    period: state.timer.period,
+    breakTime: state.timer.breakTime,
   };
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // constants
 import * as constants from 'src/constants';
@@ -9,63 +10,46 @@ import RadioButton from 'src/app/components/common/radio-button';
 // actions
 import audioNotification from 'src/actions/audioNotification';
 import { setTimerSettings } from 'src/actions/index';
-import * as Cookies from "js-cookie";
+import * as Cookies from 'js-cookie';
 
 // style
 import style from './style.scss';
 
 const regexp = /^\d+$|^$/;
 
-export default class SettingsContent extends Component {
+class SettingsContent extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       activeRingtone: Cookies.get('ringtone'),
-      timerPeriod: props.timer.period,
-      timerBreak: props.timer.breakTime,
+      timerPeriod: props.period,
+      timerBreak: props.breakTime,
       ringtones: [
         constants.RINGTONE_1,
         constants.RINGTONE_2,
         constants.RINGTONE_3,
         constants.RINGTONE_4,
-        constants.RINGTONE_5
-      ]
-    }
+        constants.RINGTONE_5,
+      ],
+    };
   }
 
   setRingtoneCookie = (name) => {
     Cookies.set('ringtone', name);
     this.setState({
-      activeRingtone: name
+      activeRingtone: name,
     });
     audioNotification();
-  }
-  
-  renderRingtoneButtons = () => {
-    return this.state.ringtones.map((item, i) => {
-      const active = (this.state.activeRingtone === item) ? true : false;
-      return (
-        <RadioButton
-          label={'Ringtone ' + (i+1)}
-          onClick={
-            () => {this.setRingtoneCookie(item)}
-          }
-          key={item}
-          active={active}
-          className={style.marginBottom20}
-        />
-      )
-    })
   }
 
   setNewPeriodValue = (e) => {
     e.preventDefault();
 
-    let value = e.target.value;
+    let { value } = e.target;
     const test = regexp.test(value);
 
-    value = parseInt(e.target.value);
-    
+    value = parseInt(e.target.value, 10);
+
     if (test) {
       if (isNaN(value)) {
         Cookies.set('timerPeriod', 25);
@@ -89,11 +73,11 @@ export default class SettingsContent extends Component {
   setNewBreakValue = (e) => {
     e.preventDefault();
 
-    let value = e.target.value;
+    let { value } = e.target;
     const test = regexp.test(value);
 
-    value = parseInt(e.target.value);
-    
+    value = parseInt(e.target.value, 10);
+
     if (test) {
       if (isNaN(value)) {
         Cookies.set('timerBreak', 5);
@@ -123,9 +107,26 @@ export default class SettingsContent extends Component {
       timeEnd: Date.now() + (timerPeriod * 60 * 1000),
       timeDifference: timerPeriod * 60 * 1000,
       period: timerPeriod,
-      breakTime: timerBreak
+      breakTime: timerBreak,
     });
   }
+
+  renderRingtoneButtons = () => (
+    this.state.ringtones.map((item, i) => {
+      const active = (this.state.activeRingtone === item);
+      return (
+        <RadioButton
+          label={`Ringtone ${i + 1}`}
+          onClick={
+            () => { this.setRingtoneCookie(item); }
+          }
+          key={item}
+          active={active}
+          className={style.marginBottom20}
+        />
+      );
+    })
+  )
 
   render() {
     return (
@@ -147,7 +148,7 @@ export default class SettingsContent extends Component {
             <p>
               Pomodoro
             </p>
-            <input 
+            <input
               type="text"
               className={style.customTimeCellInput}
               value={this.state.timerPeriod}
@@ -158,7 +159,7 @@ export default class SettingsContent extends Component {
             <p>
               Break
             </p>
-            <input 
+            <input
               type="text"
               className={style.customTimeCellInput}
               value={this.state.timerBreak}
@@ -167,6 +168,18 @@ export default class SettingsContent extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
+
+SettingsContent.propTypes = {
+  period: PropTypes.number,
+  breakTime: PropTypes.number,
+};
+
+SettingsContent.defaultProps = {
+  period: 0,
+  breakTime: 0,
+};
+
+export default SettingsContent;
