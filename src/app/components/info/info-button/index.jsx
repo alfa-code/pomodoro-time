@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 // constants
 import * as constants from 'src/constants';
 
-// svg icons
-import SvgIcon from 'src/app/components/common/svg-icon';
-import iconInfo from 'src/static/svg/info.svg';
-
 // actions
 import { setPopupSettings } from 'src/actions/index';
 
@@ -14,28 +10,28 @@ import { setPopupSettings } from 'src/actions/index';
 import style from './style.scss';
 
 export default class InfoButton extends Component {
-  showPopup () {
+  checkKeyPress = (e, callback) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      callback();
+    }
+  }
+
+  showPopup = () => {
     setPopupSettings({
       openState: true,
-      content: constants.POPUP_INFO
-    })
+      content: constants.POPUP_INFO,
+    });
   }
 
   render() {
-    // return (
-    //   <SvgIcon
-    //     glyph={iconInfo}
-    //     className={style.icon}
-    //     onClick={this.showPopup}
-    //   />
-    // );
     return (
-      <img
-        src={iconInfo}
+      <button
         className={style.icon}
-        alt={'Info'}
         onClick={this.showPopup}
+        onKeyPress={(e) => {
+          this.checkKeyPress(e, this.showPopup);
+        }}
       />
-    )
+    );
   }
 }

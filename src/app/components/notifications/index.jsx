@@ -19,25 +19,24 @@ export default class Notifications extends Component {
             You can change the solution in the browser settings.
           </p>
         </div>
-      )
-    } else {
-      return (
-        <div>
-          <p>
-            You can change the audio tone and volume via Settings
-          </p>
-          <p>
-            Desktop Notifications are currently supported in Chrome, Firefox and Safari
-          </p>
-        </div>
-      )
+      );
     }
+    return (
+      <div>
+        <p>
+          You can change the audio tone and volume via Settings
+        </p>
+        <p>
+          Desktop Notifications are currently supported in Chrome, Firefox and Safari
+        </p>
+      </div>
+    );
   }
 
   render() {
-    const notificationsSupport = this.props.notifications.notificationsSupport;
-    const notificationsEnabled = this.props.notifications.notificationsEnabled;
-    const notificationsPermission = this.props.notifications.notificationsPermission;
+    const { notificationsSupport } = this.props.notifications;
+    const { notificationsEnabled } = this.props.notifications;
+    const { notificationsPermission } = this.props.notifications;
     if (notificationsSupport) {
       return (
         <div className={style.container}>
@@ -51,10 +50,9 @@ export default class Notifications extends Component {
             {this.setText()}
           </div>
         </div>
-      )
-    } else {
-      return null
+      );
     }
+    return null;
   }
 }
 
@@ -62,6 +60,14 @@ Notifications.propTypes = {
   notifications: PropTypes.shape({
     notificationsEnabled: PropTypes.bool,
     notificationsPermission: PropTypes.string,
-    notificationsSupport: PropTypes.bool
-  })
+    notificationsSupport: PropTypes.bool,
+  }),
+};
+
+Notifications.defaultProps = {
+  notifications: {
+    notificationsEnabled: false,
+    notificationsPermission: 'default',
+    notificationsSupport: false,
+  },
 };

@@ -45,6 +45,11 @@
   fill: #fff;
   cursor: pointer;
 
+  border: none;
+  background-color: transparent;
+  background-image: url('src/static/svg/error.svg');
+  background-size: contain;
+
   &:hover {
     animation: rotation 3s infinite linear;
   }
