@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
 const CnameWebpackPlugin = require('cname-webpack-plugin');
-//const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -13,6 +13,7 @@ require("babel-polyfill");
 //const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 var prodConfig = {
+  mode: "development",
   context: path.resolve(__dirname, '../src'),
   entry: {
     app: './index.jsx',
@@ -34,22 +35,6 @@ var prodConfig = {
       },
       {
         test: /\.svg$/,
-        // oneOf: [
-        //   {
-        //     use: [
-        //       {
-        //         resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
-        //         use: 'svg-sprite-loader'
-        //       },
-        //       {
-        //         loader: 'file-loader',
-        //         options: {
-        //           name: 'static/svg/[name].[hash:8].[ext]',
-        //         }
-        //       }
-        //     ],
-        //   },
-        // ],
         oneOf: [
           {
             resourceQuery: /svg-sprite-loader/, // foo.bar?svg-sprite-loader
@@ -66,13 +51,6 @@ var prodConfig = {
             ],
           },
         ],
-        // use: [
-        //   {
-        //     loader: 'svg-sprite-loader',
-        //     options: { extract: true }
-        //   },
-        //   'svgo-loader'
-        // ],
         exclude: /node_modules/,
       },
       {
@@ -159,11 +137,7 @@ var prodConfig = {
     }
   },
   plugins: [
-    //new webpack.NoEmitOnErrorsPlugin(),
-    //new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     //new SpriteLoaderPlugin(),
-    //new UglifyJsPlugin(),
-    //new webpack.optimize.OccurrenceOrderPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: './template/index.html',
