@@ -8,8 +8,16 @@
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome",
-      "url": "http://localhost:8080",
-      "file": "${workspaceFolder}/dist/index.html",
-    }
+      "url": "http://localhost:9000",
+      "webRoot": "${workspaceFolder}/src",
+    },
+    {
+      "name": "Attach",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9000,
+      "url": "http://localhost/",
+      "webRoot": "${workspaceFolder}"
+    },
   ]
 }
