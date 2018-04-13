@@ -17,6 +17,7 @@
         "no-console": ["warn", { "allow": ["warn", "error", "log", "info"] }],
         "no-new": 0,
         "import/no-named-as-default": 0,
-        "import/no-named-as-default-member": 0
+        "import/no-named-as-default-member": 0,
+        "no-debugger": 0
     }
 }

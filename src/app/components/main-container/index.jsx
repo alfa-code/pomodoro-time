@@ -1,7 +1,8 @@
 import React from 'react';
 import Logo from 'src/app/components/logo';
 import Share from 'src/app/components/share';
-import TomatLayout from 'src/app/components/tomat-layout';
+// import TomatLayout from 'src/app/components/tomat-layout';
+import TomatCanvas from 'src/app/components/tomat-canvas';
 import SettingsButton from 'src/app/components/settings/settings-button';
 import InfoButton from 'src/app/components/info/info-button';
 
@@ -18,7 +19,7 @@ export default function MainContainer() {
       <Logo />
       <Notifications />
       <Timer />
-      <TomatLayout />
+      <TomatCanvas />
       <Share />
       <Popup />
       <InfoButton />
