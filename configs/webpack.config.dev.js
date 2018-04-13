@@ -12,6 +12,7 @@ require("babel-polyfill");
 //const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var devConfig = {
+  mode: 'development',
   context: path.resolve(__dirname, '../src'),
   entry: {
     app: './index.jsx',
@@ -62,7 +63,12 @@ var devConfig = {
       },
       {
         test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' }
+        use: { 
+          loader: 'worker-loader',
+          options: { 
+            name: '[name].js'
+          }
+        }
       },
       {
         test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
@@ -132,7 +138,7 @@ var devConfig = {
     contentBase: path.join(__dirname, "../dist"),
     historyApiFallback: true,
     compress: true,
-    port: 9001
+    port: 9000
   },
   plugins: [
     //new SpriteLoaderPlugin(),
@@ -140,6 +146,9 @@ var devConfig = {
       inject: true,
       template: './template/index.html',
     }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map',
+    })
     //new BundleAnalyzerPlugin()
   ]
 };

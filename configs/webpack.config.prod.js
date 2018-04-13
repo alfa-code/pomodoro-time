@@ -65,7 +65,12 @@ var prodConfig = {
       },
       {
         test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' },
+        use: { 
+          loader: 'worker-loader',
+          options: { 
+            name: '[name].js'
+          }
+        },
         exclude:path.resolve(__dirname, "../node_modules"),
       },
       {
