@@ -3,7 +3,12 @@ import React from 'react';
 // styles
 import style from './style.scss';
 
-const googleHref = 'https://docs.google.com/forms/d/e/1FAIpQLSdISNZniiUSVbYPMgvGfJCl-SWyqDhnKvwRpfW_ikKgocCT0A/viewform?usp=sf_link';
+const email = 'hydrochk@yandex.ru';
+const text = [
+  'Hello! My name is Alex or Hydrock (Github).',
+  'If you have any comments or suggestions, you can send them to the address',
+  'You can also send proposals directly to the project on the ',
+];
 
 export default function InfoContent() {
   return (
@@ -14,17 +19,22 @@ export default function InfoContent() {
           alt="avatar"
           className={style.avatar}
         />
-        Hello! My name is Alexey Vechkanov or Hydrock (Github).
-        I will be very happy if you leave your comment in google forms below.
-      </div>
-      <div className={style.row}>
-        <a
-          href={googleHref}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Leave your wish (Google Forms)
-        </a>
+        <div className={style.row}>
+          {text[0]}
+        </div>
+        <div className={style.row}>
+          {text[1]} <a href={`mailto:${email}`}>hydrochk@yandex.ru</a>
+        </div>
+        <div className={style.row}>
+          {text[2]}
+          <a
+            href="https://github.com/Hydrock/pomodoro"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -21,8 +21,8 @@ export default function MainContainer() {
       <TomatLayout />
       <Share />
       <Popup />
-      <SettingsButton />
       <InfoButton />
+      <SettingsButton />
     </div>
   );
 }

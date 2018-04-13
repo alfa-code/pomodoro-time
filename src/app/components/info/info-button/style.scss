@@ -13,7 +13,7 @@
   background-image: url('src/static/svg/info.svg');
   background-size: contain;
 
-  &:hover {
+  &:hover, &:focus {
     animation: rotation 3s infinite linear;
   }
 

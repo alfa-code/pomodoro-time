@@ -12,6 +12,7 @@ require("babel-polyfill");
 //const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var devConfig = {
+  mode: 'development',
   context: path.resolve(__dirname, '../src'),
   entry: {
     app: './index.jsx',
