@@ -13,7 +13,7 @@ require("babel-polyfill");
 //const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 var prodConfig = {
-  mode: "development",
+  mode: "production",
   context: path.resolve(__dirname, '../src'),
   entry: {
     app: './index.jsx',
@@ -22,7 +22,6 @@ var prodConfig = {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
   },
-  mode: 'production',
   module: {
     rules: [
       {
