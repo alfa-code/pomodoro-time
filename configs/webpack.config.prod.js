@@ -75,7 +75,8 @@ var prodConfig = {
       {
         test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
         exclude:path.resolve(__dirname, "../node_modules"),
-        use: 'babel-loader'
+        use: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: [/\.scss$/],

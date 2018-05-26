@@ -67,9 +67,35 @@ export function setTimerSettings(obj) {
   });
 }
 
-export function setPopupSettings(obj) {
-  store.dispatch({
+// update popup settings
+
+export function setPopupSettingsOpenInfo() {
+  return {
     type: constants.SET_POPUP_SETTINGS,
-    payload: obj,
-  });
+    payload: {
+      openState: true,
+      content: constants.POPUP_INFO,
+    },
+  };
+}
+
+export function setPopupSettingsOpenSettings() {
+  return {
+    type: constants.SET_POPUP_SETTINGS,
+    payload: {
+      openState: true,
+      content: constants.POPUP_SETTINGS,
+    },
+  };
+}
+
+
+export function setPopupSettingsCloseClear() {
+  return {
+    type: constants.SET_POPUP_SETTINGS,
+    payload: {
+      openState: false,
+      content: null,
+    }
+  };
 }

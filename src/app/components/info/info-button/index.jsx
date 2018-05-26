@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // constants
 import * as constants from 'src/constants';
 
 // actions
-import { setPopupSettings } from 'src/actions/index';
+import { setPopupSettingsOpenInfo } from 'src/actions/index';
 
 // styles
 import style from './style.scss';
 
-export default class InfoButton extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    setPopupSettingsOpenInfo: () => {
+      dispatch(setPopupSettingsOpenInfo())
+    }
+  }
+}
+
+class InfoButton extends Component {
   checkKeyPress = (e, callback) => {
     if (e.key === 'Enter' || e.key === ' ') {
       callback();
@@ -17,10 +26,8 @@ export default class InfoButton extends Component {
   }
 
   showPopup = () => {
-    setPopupSettings({
-      openState: true,
-      content: constants.POPUP_INFO,
-    });
+    const { setPopupSettingsOpenInfo } = this.props;
+    setPopupSettingsOpenInfo();
   }
 
   render() {
@@ -35,3 +42,8 @@ export default class InfoButton extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(InfoButton);
