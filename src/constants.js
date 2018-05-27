@@ -18,3 +18,10 @@ export const RINGTONE_2 = 'ringtone_2';
 export const RINGTONE_3 = 'ringtone_3';
 export const RINGTONE_4 = 'ringtone_4';
 export const RINGTONE_5 = 'ringtone_5';
+
+export const PLAY_AUDIO = 'PLAY_AUDIO';
+export const AUDIO_FETCH_SUCCEEDED = 'AUDIO_FETCH_SUCCEEDED';
+export const AUDIO_FETCH_FAILED = 'AUDIO_FETCH_FAILED';
+export const PLAY_AUDIO_START = 'PLAY_AUDIO_START';
+export const PLAY_AUDIO_SUCCEEDED = 'PLAY_AUDIO_SUCCEEDED';
+export const PLAY_AUDIO_FAILED = 'PLAY_AUDIO_FAILED';

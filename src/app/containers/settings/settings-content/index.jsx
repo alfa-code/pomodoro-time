@@ -1,6 +1,8 @@
 import SettingsContent from 'src/app/components/settings/settings-content';
 import { connect } from 'react-redux';
 
+import { playAudioNotification } from 'src/actions/index';
+
 function mapStateToProps(state) {
   return {
     period: state.timer.period,
@@ -8,4 +10,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SettingsContent);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    playAudioNotification: () => {
+      dispatch(playAudioNotification())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsContent);

@@ -7,21 +7,16 @@ import * as constants from 'src/constants';
 // actions
 import sendNotification from 'src/actions/sendNotification';
 import { setTimerSettings } from 'src/actions/index';
-import audioNotification from 'src/actions/audioNotification';
 
 // svg icons
 import svgIconReload from 'src/static/svg/reset.svg';
 import svgIconPlay from 'src/static/svg/play.svg';
 import svgIconPause from 'src/static/svg/pause.svg';
-
 // image
 import pomodoroImage from 'src/static/images/notify/notify.png';
 
 import classnames from 'classnames';
 import { utc } from 'moment';
-
-// const TimerWorker = require('worker-loader!src/app/workers/timer.worker');
-
 import TimerWorker from 'src/app/workers/timer.worker';
 
 // style
@@ -39,9 +34,8 @@ class Timer extends Component {
   }
 
   componentWillMount() {
-    const {
-      period,
-    } = this.props.timer;
+    const { playAudioNotification } = this.props;
+    const { period } = this.props.timer;
 
     this.setState({
       minutes: utc(period * 60 * 1000).format('mm'),
@@ -56,7 +50,7 @@ class Timer extends Component {
           });
           break;
         case 'playTimeoutSound':
-          audioNotification();
+          playAudioNotification();
           break;
         default:
           break;
@@ -303,6 +297,7 @@ Timer.propTypes = {
     timeEnd: PropTypes.number,
     timeDifference: PropTypes.number,
   }),
+  playAudioNotification: PropTypes.func
 };
 
 Timer.defaultProps = {

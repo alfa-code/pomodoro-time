@@ -101,3 +101,12 @@ export function setPopupSettingsCloseClear() {
     }
   };
 }
+
+// play audio notification
+
+export function playAudioNotification() {
+  return {
+    type: constants.PLAY_AUDIO,
+    payload: {}
+  }
+}

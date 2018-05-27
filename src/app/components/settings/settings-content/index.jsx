@@ -8,7 +8,6 @@ import * as constants from 'src/constants';
 import RadioButton from 'src/app/components/common/radio-button';
 
 // actions
-import audioNotification from 'src/actions/audioNotification';
 import { setTimerSettings } from 'src/actions/index';
 import * as Cookies from 'js-cookie';
 
@@ -35,11 +34,12 @@ class SettingsContent extends Component {
   }
 
   setRingtoneCookie = (name) => {
+    const { playAudioNotification } = this.props;
     Cookies.set('ringtone', name);
     this.setState({
       activeRingtone: name,
     });
-    audioNotification();
+    playAudioNotification();
   }
 
   setNewPeriodValue = (e) => {
@@ -175,6 +175,7 @@ class SettingsContent extends Component {
 SettingsContent.propTypes = {
   period: PropTypes.number,
   breakTime: PropTypes.number,
+  playAudioNotification: PropTypes.func
 };
 
 SettingsContent.defaultProps = {
