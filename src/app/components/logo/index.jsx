@@ -9,12 +9,7 @@ export default function Logo() {
       href="/"
       className={style.logo}
     >
-      <span>
-        Pomodoro Time
-      </span>
-      <span className={style.beta}>
-        beta
-      </span>
+      Pomodoro Time
     </a>
   );
 }

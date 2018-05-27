@@ -1,6 +1,12 @@
+@import 'media-mixins.scss';
+
 .container {
   width: 500px;
   height: auto;
+
+  @include media-small {
+    width: auto;
+  }
 }
 
 .row {
@@ -8,6 +14,12 @@
 
   & + & {
     margin-top: 10px;
+  }
+
+  @include media-small {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
   }
 }
 
@@ -17,4 +29,8 @@
   border-radius: 50%;
   float: left;
   margin-right: 20px;
+
+  @include media-small {
+    margin-bottom: 20px;
+  }
 }

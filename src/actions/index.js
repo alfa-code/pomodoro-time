@@ -60,6 +60,8 @@ export function setNotificationsPermission(val) {
   }
 }
 
+/* action creators */
+
 export function setTimerSettings(obj) {
   store.dispatch({
     type: constants.SET_TIMER_SETTINGS,
@@ -67,9 +69,44 @@ export function setTimerSettings(obj) {
   });
 }
 
-export function setPopupSettings(obj) {
-  store.dispatch({
+// update popup settings
+
+export function setPopupSettingsOpenInfo() {
+  return {
     type: constants.SET_POPUP_SETTINGS,
-    payload: obj,
-  });
+    payload: {
+      openState: true,
+      content: constants.POPUP_INFO,
+    },
+  };
+}
+
+export function setPopupSettingsOpenSettings() {
+  return {
+    type: constants.SET_POPUP_SETTINGS,
+    payload: {
+      openState: true,
+      content: constants.POPUP_SETTINGS,
+    },
+  };
+}
+
+
+export function setPopupSettingsCloseClear() {
+  return {
+    type: constants.SET_POPUP_SETTINGS,
+    payload: {
+      openState: false,
+      content: null,
+    }
+  };
+}
+
+// play audio notification
+
+export function playAudioNotification() {
+  return {
+    type: constants.PLAY_AUDIO,
+    payload: {}
+  }
 }

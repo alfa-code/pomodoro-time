@@ -7,18 +7,13 @@ import * as constants from 'src/constants';
 import SettingsContent from 'src/app/containers/settings/settings-content';
 import InfoContent from 'src/app/components/info/info-content';
 
-// actions
-import { setPopupSettings } from 'src/actions/index';
-
 // style
 import style from './style.scss';
 
 export default class Popup extends Component {
   closePopup = () => {
-    setPopupSettings({
-      openState: false,
-      content: null,
-    });
+    const { setPopupSettingsCloseClear } = this.props;
+    setPopupSettingsCloseClear();
   }
 
   checkKeyPress = (e, callback) => {
@@ -43,16 +38,20 @@ export default class Popup extends Component {
     const { popup } = this.props;
     if (popup.openState) {
       return (
-        <div className={style.wrapper}>
+        <div
+          className={style.wrapper}
+        >
           <div className={style.popupContent}>
-            { this.renderContent() }
-            <button
-              className={style.closeButton}
-              onClick={this.closePopup}
-              onKeyPress={(e) => {
-                this.checkKeyPress(e, this.closePopup);
-              }}
-            />
+            <div className={style.popupContentInner}>
+              { this.renderContent() }
+              <button
+                className={style.closeButton}
+                onClick={this.closePopup}
+                onKeyPress={(e) => {
+                  this.checkKeyPress(e, this.closePopup);
+                }}
+              />
+            </div>
           </div>
         </div>
       );

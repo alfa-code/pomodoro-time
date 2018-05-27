@@ -74,7 +74,8 @@ var devConfig = {
         test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
         exclude:path.resolve(__dirname, "node_modules"),
         // use: ['babel-loader', 'eslint-loader',]
-        use: ['babel-loader',]
+        use: ['babel-loader'],
+        exclude: /node_modules/
       },
       {
         test: [/\.scss$/],
@@ -139,7 +140,7 @@ var devConfig = {
     contentBase: path.join(__dirname, "../dist"),
     historyApiFallback: true,
     compress: true,
-    port: 9000
+    port: 9001
   },
   plugins: [
     //new SpriteLoaderPlugin(),

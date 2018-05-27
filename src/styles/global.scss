@@ -1,43 +1,61 @@
 @font-face {
-  font-family: 'Bangers';
-  src: url('../static/fonts/Bangers/Bangers.woff2') format('woff2'),
-      url('../static/fonts/Bangers/Bangers.woff') format('woff');
+  font-family: "Bangers";
+  src: url("../static/fonts/Bangers/Bangers.woff2") format("woff2"),
+    url("../static/fonts/Bangers/Bangers.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('../static/fonts/Roboto/Roboto-Thin/Roboto-Thin.woff2') format('woff2'),
-      url('../static/fonts/Roboto/Roboto-Thin/Roboto-Thin.woff') format('woff');
+  font-family: "Roboto";
+  src: url("../static/fonts/Roboto/Roboto-Thin/Roboto-Thin.woff2")
+      format("woff2"),
+    url("../static/fonts/Roboto/Roboto-Thin/Roboto-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff2') format('woff2'),
-      url('../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff') format('woff');
+  font-family: "Roboto";
+  src: url("../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff2")
+      format("woff2"),
+    url("../static/fonts/Roboto/Roboto-Regular/Roboto-Regular.woff")
+      format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('../static/fonts/Roboto/Roboto-Bold/Roboto-Bold.woff2') format('woff2'),
-      url('../static/fonts/Roboto/Roboto-Bold/Roboto-Bold.woff') format('woff');
+  font-family: "Roboto";
+  src: url("../static/fonts/Roboto/Roboto-Bold/Roboto-Bold.woff2")
+      format("woff2"),
+    url("../static/fonts/Roboto/Roboto-Bold/Roboto-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 
 :global {
   body {
-    font-family: 'Roboto';
+    font-family: "Roboto";
     background-image: radial-gradient(circle at 51% 45%, #e5350e, #cd0000);
     height: 100vh;
+    max-height: 100vh;
   }
   #app {
     height: 100%;
   }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
-  
