@@ -60,6 +60,8 @@ export function setNotificationsPermission(val) {
   }
 }
 
+/* action creators */
+
 export function setTimerSettings(obj) {
   store.dispatch({
     type: constants.SET_TIMER_SETTINGS,

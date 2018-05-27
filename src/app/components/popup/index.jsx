@@ -38,16 +38,20 @@ export default class Popup extends Component {
     const { popup } = this.props;
     if (popup.openState) {
       return (
-        <div className={style.wrapper}>
+        <div
+          className={style.wrapper}
+        >
           <div className={style.popupContent}>
-            { this.renderContent() }
-            <button
-              className={style.closeButton}
-              onClick={this.closePopup}
-              onKeyPress={(e) => {
-                this.checkKeyPress(e, this.closePopup);
-              }}
-            />
+            <div className={style.popupContentInner}>
+              { this.renderContent() }
+              <button
+                className={style.closeButton}
+                onClick={this.closePopup}
+                onKeyPress={(e) => {
+                  this.checkKeyPress(e, this.closePopup);
+                }}
+              />
+            </div>
           </div>
         </div>
       );

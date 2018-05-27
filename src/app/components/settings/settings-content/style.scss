@@ -17,6 +17,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+
+  @include media-small {
+    flex-direction: column;
+  }
 }
 
 .marginBottom20 {
