@@ -1,7 +1,4 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
-  "plugins": [
-    ["transform-class-properties"],
-    ["transform-runtime"]
-  ]
+  "presets": ["@babel/env", "@babel/preset-react"],
+  "plugins": ["babel-plugin-transform-class-properties"]
 }
