@@ -16,9 +16,17 @@ import 'src/styles';
 const App = function App() {
   return (
     <Provider store={store}>
-      <MainContainer />
+      <Test />
     </Provider>
   );
 };
+
+function Test() {
+  return (
+    <div>
+      111
+    </div>
+  )
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));
