@@ -6,9 +6,9 @@ import style from "./style.scss";
 const email = "hydrock@yandex.ru";
 const text = [
   "Hey there! I’m Alex, a full-time web-developer who is passionate about creating efficient user-friendly websites and apps.",
-  "If you have any comments or suggestions just drop me an email to (",
-  ") or contact me on Github (",
-  ")."
+  "If you have any comments or suggestions just drop me an email to ",
+  " or contact me on Github ",
+  "."
 ];
 
 export default function InfoContent() {
