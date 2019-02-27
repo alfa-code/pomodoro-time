@@ -38,4 +38,8 @@
 .info {
     display: flex;
     padding-right: 30px;
+
+    @include media-small {
+      flex-direction: column;
+    }
 }
