@@ -1,4 +1,3 @@
-import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -14,19 +13,11 @@ import 'normalize.css/normalize.css';
 import 'src/styles';
 
 const App = function App() {
-  return (
-    <Provider store={store}>
-      <Test />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <MainContainer />
+        </Provider>
+    );
 };
-
-function Test() {
-  return (
-    <div>
-      111
-    </div>
-  )
-}
 
 ReactDOM.render(<App />, document.getElementById('app'));
