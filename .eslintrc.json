@@ -18,6 +18,9 @@
         "no-new": 0,
         "import/no-named-as-default": 0,
         "import/no-named-as-default-member": 0,
-        "no-debugger": 0
+        "no-debugger": 0,
+        "indent": ["error", 4],
+        "react/jsx-indent" : ["error", 4, { "props": 4 }],
+        "comma-dangle": ["error", "never"]
     }
 }
