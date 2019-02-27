@@ -22,7 +22,7 @@ const logger = createLogger({
 // compose middleware
 const myMiddlewares = compose(
     applyMiddleware(ReduxThunk, sagaMiddleware, logger),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 /* eslint no-underscore-dangle: 0 */

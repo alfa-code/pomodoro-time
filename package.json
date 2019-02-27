@@ -9,7 +9,7 @@
     "release-patch": "npm version patch -m 'chore(*): patch version'",
     "release-minor": "npm version minor -m 'chore(*): minor version'",
     "release-major": "npm version major -m 'chore(*): major version'",
-    "dev": "webpack-dev-server --config configs/webpack.config.dev.js",
+    "dev": "webpack-dev-server --port 3000 --config configs/webpack.config.dev.js",
     "build": "webpack --progress --config configs/webpack.config.prod.js",
     "lint": "eslint ./src/** --ext js,jsx",
     "build-server-test": "npx http-server ./dist/",
