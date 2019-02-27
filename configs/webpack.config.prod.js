@@ -8,16 +8,13 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-//const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 //const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 const prodConfig = {
     mode: 'production',
     context: path.resolve(__dirname, '../src'),
-    entry: {
-        app: './index.jsx'
-    },
+    entry: ['babel-polyfill', './index.jsx'],
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].bundle.js'
@@ -64,30 +61,29 @@ const prodConfig = {
                 fallback: require.resolve('style-loader'),
                 use: [{
                     loader: require.resolve('css-loader'),
-                    // options: {
-                    //     modules: true,
-                    //     localIdentName: '[name]__[local]___[hash:base64:5]',
-                    //     minimize: true,
-                    //     sourceMap: false
-                    // }
+                    options: {
+                        modules: true,
+                        localIdentName: '[name]__[local]___[hash:base64:5]',
+                        sourceMap: false
+                    }
                 },
-                // {
-                //     loader: require.resolve('postcss-loader'),
-                //     options: {
-                //         ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                //         plugins: () => [
-                //             autoprefixer({
-                //                 browsers: [
-                //                     '>1%',
-                //                     'last 4 versions',
-                //                     'Firefox ESR',
-                //                     'not ie < 9' // React doesn't support IE8 anyway
-                //                 ],
-                //                 flexbox: 'no-2009'
-                //             })
-                //         ]
-                //     }
-                // },
+                {
+                    loader: require.resolve('postcss-loader'),
+                    options: {
+                        ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                        plugins: () => [
+                            autoprefixer({
+                                browsers: [
+                                    '>1%',
+                                    'last 4 versions',
+                                    'Firefox ESR',
+                                    'not ie < 9' // React doesn't support IE8 anyway
+                                ],
+                                flexbox: 'no-2009'
+                            })
+                        ]
+                    }
+                },
                 {
                     loader: require.resolve('sass-loader'),
                     options: {
@@ -122,27 +118,26 @@ const prodConfig = {
             inject: true,
             template: './template/index.html',
         }),
-        // new FaviconsWebpackPlugin({
-        //   logo: './static/images/favicon/tomat.png',
-        //   emitStats: true,
-        //   statsFilename: 'iconstats-[hash].json',
-        //   persistentCache: true,
-        //   inject: true,
-        //   background: '#fff',
-        //   icons: {
-        //     android: true,
-        //     appleIcon: true,
-        //     appleStartup: true,
-        //     coast: true,
-        //     favicons: true,
-        //     firefox: true,
-        //     opengraph: true,
-        //     twitter: true,
-        //     yandex: true,
-        //     windows: true
-        //   }
-        // }),
-        //new SpriteLoaderPlugin(),
+        new FaviconsWebpackPlugin({
+          logo: './static/images/favicon/tomat.png',
+          emitStats: true,
+          statsFilename: 'iconstats-[hash].json',
+          persistentCache: true,
+          inject: true,
+          background: '#fff',
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            coast: true,
+            favicons: true,
+            firefox: true,
+            opengraph: true,
+            twitter: true,
+            yandex: true,
+            windows: true
+          }
+        }),
         new ExtractTextPlugin('styles.css'),
         new CnameWebpackPlugin({
             domain: 'pomodoro-time.com',
