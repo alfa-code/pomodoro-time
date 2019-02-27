@@ -1,10 +1,28 @@
 {
   "name": "pomodoro",
+<<<<<<< Updated upstream
   "version": "1.3.0",
+=======
+  "version": "1.3.6",
+>>>>>>> Stashed changes
   "main": "index.js",
   "repository": "git@github.com:Hydrock/pomodoro.git",
   "author": "Aleksey <Hydrock74@gmail.com>",
   "license": "MIT",
+<<<<<<< Updated upstream
+=======
+  "scripts": {
+    "release-patch": "npm version patch -m 'chore(*): patch version'",
+    "release-minor": "npm version minor -m 'chore(*): minor version'",
+    "release-major": "npm version major -m 'chore(*): major version'",
+    "dev": "webpack-dev-server --config configs/webpack.config.dev.js",
+    "build": "webpack --progress --config configs/webpack.config.prod.js",
+    "lint": "eslint ./src/** --ext js,jsx",
+    "build-server-test": "npx http-server ./dist/",
+    "deploy": "npm run build && git add --all && git commit -m 'new build' && git push",
+    "getName": "echo $npm_package_name"
+  },
+>>>>>>> Stashed changes
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
