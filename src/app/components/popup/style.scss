@@ -60,7 +60,7 @@
   border: none;
   background-color: transparent;
   background-size: contain;
-  background-image: url('src/static/svg/error-black.svg');
+  background-image: url('../../../static/svg/error-black.svg');
 
   &:hover {
     animation: rotation 3s infinite linear;

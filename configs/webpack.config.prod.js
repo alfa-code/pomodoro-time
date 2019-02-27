@@ -25,7 +25,7 @@ var prodConfig = {
   module: {
     rules: [
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/, /\.svg$/],
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
