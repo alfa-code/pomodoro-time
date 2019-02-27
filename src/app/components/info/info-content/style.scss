@@ -27,10 +27,15 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  float: left;
   margin-right: 20px;
+  flex-shrink: 0;
 
   @include media-small {
     margin-bottom: 20px;
   }
+}
+
+.info {
+    display: flex;
+    padding-right: 30px;
 }
