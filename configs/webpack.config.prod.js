@@ -1,15 +1,15 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const CnameWebpackPlugin = require('cname-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-//const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
+// const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
 const prodConfig = {
     mode: 'production',
@@ -96,8 +96,8 @@ const prodConfig = {
             test: /\.(ttf|eot|woff|woff2)$/,
             loader: require.resolve('file-loader'),
             options: {
-                name: 'static/fonts/[name].[ext]',
-            },
+                name: 'static/fonts/[name].[ext]'
+            }
         },
         {
             test: /\.(mp3|aac)$/,
@@ -117,30 +117,31 @@ const prodConfig = {
         new HtmlWebpackPlugin({
             inject: true,
             template: './template/index.html',
+            title: 'Pomodoro Time - time management method.'
         }),
         new FaviconsWebpackPlugin({
-          logo: './static/images/favicon/tomat.png',
-          emitStats: true,
-          statsFilename: 'iconstats-[hash].json',
-          persistentCache: true,
-          inject: true,
-          background: '#fff',
-          icons: {
-            android: true,
-            appleIcon: true,
-            appleStartup: true,
-            coast: true,
-            favicons: true,
-            firefox: true,
-            opengraph: true,
-            twitter: true,
-            yandex: true,
-            windows: true
-          }
+            logo: './static/images/favicon/tomat.png',
+            emitStats: true,
+            statsFilename: 'iconstats-[hash].json',
+            persistentCache: true,
+            inject: true,
+            background: '#fff',
+            icons: {
+                android: true,
+                appleIcon: true,
+                appleStartup: true,
+                coast: true,
+                favicons: true,
+                firefox: true,
+                opengraph: true,
+                twitter: true,
+                yandex: true,
+                windows: true
+            }
         }),
         new ExtractTextPlugin('styles.css'),
         new CnameWebpackPlugin({
-            domain: 'pomodoro-time.com',
+            domain: 'pomodoro-time.com'
         }),
         new ManifestPlugin({
             fileName: 'manifest.json',
@@ -151,11 +152,11 @@ const prodConfig = {
                 description: 'Pomodoro Time - Time management method',
                 display: 'standalone',
                 background_color: '#fff',
-                prefer_related_applications: false,
+                prefer_related_applications: false
             }
-        }),
-        //new BundleAnalyzerPlugin()
-    ],
+        })
+        // new BundleAnalyzerPlugin()
+    ]
 };
 
 module.exports = prodConfig;

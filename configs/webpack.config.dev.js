@@ -97,7 +97,8 @@ const devConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             inject: true,
-            template: './template/index.html'
+            template: './template/index.html',
+            title: 'Pomodoro Time - time management method.'
         }),
         new webpack.SourceMapDevToolPlugin({
             filename: '[name].js.map'
