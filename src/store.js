@@ -19,9 +19,13 @@ const logger = createLogger({
     collapsed: true
 });
 
+const middlewares = [ReduxThunk, sagaMiddleware];
+if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger);
+}
 // compose middleware
 const myMiddlewares = compose(
-    applyMiddleware(ReduxThunk, sagaMiddleware, logger),
+    applyMiddleware(...middlewares),
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

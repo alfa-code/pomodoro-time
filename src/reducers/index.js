@@ -6,9 +6,9 @@ import timer from 'src/reducers/timer';
 import popup from 'src/reducers/popup';
 
 const rootReducer = combineReducers({
-  notifications,
-  timer,
-  popup,
+    notifications,
+    timer,
+    popup
 });
 
 export default rootReducer;

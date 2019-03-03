@@ -10,7 +10,7 @@
     "release-minor": "npm version minor -m 'minor upgrade to %s'",
     "release-major": "npm version major -m 'major upgrade to %s'",
     "dev": "webpack-dev-server --port 3000 --config configs/webpack.config.dev.js",
-    "build": "webpack --progress --config configs/webpack.config.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --config configs/webpack.config.prod.js",
     "lint": "eslint ./src/** --ext js,jsx",
     "build-server-test": "npx http-server ./dist/",
     "deploy": "npm run build && git add --all && git commit -m 'new build' && git push",
