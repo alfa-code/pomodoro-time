@@ -5,6 +5,7 @@ install:
   - npm install
 script:
   - npm run build
+before_deploy: "echo 'Ready?'"
 deploy:
   provider: pages
   skip_cleanup: true
@@ -13,3 +14,4 @@ deploy:
   on:
     branch: master
     tags: true
+after_deploy: "echo 'Deploy done!'"
