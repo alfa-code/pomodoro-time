@@ -12,14 +12,18 @@
   background-color: transparent;
   background-image: url('../../../../static/svg/info.svg');
   background-size: contain;
+  background-repeat: no-repeat;
 
   &:hover, &:focus {
     animation: rotation 3s infinite linear;
   }
 
   @include media-small {
-    bottom: 34px;
-    right: 60px;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    bottom: 20px;
+    right: 70px;
   }
 }
 
