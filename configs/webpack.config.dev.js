@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const gitVersion = require('git-tag-version');
 
 const devConfig = {
     mode: 'development',
@@ -56,7 +57,7 @@ const devConfig = {
                     loader: require.resolve('css-loader'),
                     options: {
                         modules: true,
-                        localIdentName: '[name]__[local]___[hash:base64:5]',
+                        localIdentName: '[name]__[local]___[hash:base64:5]'
                     }
                 },
                 {
@@ -98,7 +99,8 @@ const devConfig = {
         new HtmlWebpackPlugin({
             inject: true,
             template: './template/index.html',
-            title: 'Pomodoro Time - time management method.'
+            title: 'Pomodoro Time - time management method.',
+            gitVersion: gitVersion()
         }),
         new webpack.SourceMapDevToolPlugin({
             filename: '[name].js.map'

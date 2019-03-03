@@ -11,6 +11,8 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 // const WebpackClearConsole = require("webpack-clear-console").WebpackClearConsole;
 
+const gitVersion = require('git-tag-version');
+
 const prodConfig = {
     mode: 'production',
     context: path.resolve(__dirname, '../src'),
@@ -117,7 +119,8 @@ const prodConfig = {
         new HtmlWebpackPlugin({
             inject: true,
             template: './template/index.html',
-            title: 'Pomodoro Time - time management method.'
+            title: 'Pomodoro Time - time management method.',
+            gitVersion: gitVersion()
         }),
         new FaviconsWebpackPlugin({
             logo: './static/images/favicon/tomat.png',
