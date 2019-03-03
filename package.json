@@ -6,9 +6,9 @@
   "author": "Aleksey Vechkanov <Hydrock74@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "release-patch": "npm version patch -m 'Upgrade to %s'",
-    "release-minor": "npm version minor -m 'chore(*): minor version'",
-    "release-major": "npm version major -m 'chore(*): major version'",
+    "release-patch": "npm version patch -m 'Patch upgrade to %s'",
+    "release-minor": "npm version minor -m 'minor upgrade to %s'",
+    "release-major": "npm version major -m 'major upgrade to %s'",
     "dev": "webpack-dev-server --port 3000 --config configs/webpack.config.dev.js",
     "build": "webpack --progress --config configs/webpack.config.prod.js",
     "lint": "eslint ./src/** --ext js,jsx",
