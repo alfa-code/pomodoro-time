@@ -11,19 +11,24 @@ import Notifications from 'src/app/containers/notifications';
 import Timer from 'src/app/containers/timer';
 import Popup from 'src/app/containers/popup';
 
+import {
+  Link
+} from 'react-router-dom';
+
 import style from './style.scss';
 
 export default function MainContainer() {
-  return (
-    <div className={style.container}>
-      <Logo />
-      <Notifications />
-      <Timer />
-      <TomatCanvas />
-      <Share />
-      <Popup />
-      <InfoButton />
-      <SettingsButton />
-    </div>
-  );
+    return (
+        <div className={style.container}>
+            <Logo />
+            <Notifications />
+            <Timer />
+            <TomatCanvas />
+            <Share />
+            <Popup />
+            <InfoButton />
+            <SettingsButton />
+            <Link to="/secret">Secret</Link>
+        </div>
+    );
 }
