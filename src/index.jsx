@@ -17,6 +17,7 @@ import store from 'src/store';
 import 'normalize.css/normalize.css';
 import 'src/styles';
 
+
 const App = function App() {
     return (
         <Router>
