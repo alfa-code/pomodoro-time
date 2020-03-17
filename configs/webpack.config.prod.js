@@ -64,8 +64,9 @@ const prodConfig = {
                 use: [{
                     loader: require.resolve('css-loader'),
                     options: {
-                        modules: true,
-                        localIdentName: '[name]__[local]___[hash:base64:5]',
+                        modules: {
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        },
                         sourceMap: false
                     }
                 },
@@ -74,22 +75,16 @@ const prodConfig = {
                     options: {
                         ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
                         plugins: () => [
-                            autoprefixer({
-                                browsers: [
-                                    '>1%',
-                                    'last 4 versions',
-                                    'Firefox ESR',
-                                    'not ie < 9' // React doesn't support IE8 anyway
-                                ],
-                                flexbox: 'no-2009'
-                            })
+                            autoprefixer()
                         ]
                     }
                 },
                 {
                     loader: require.resolve('sass-loader'),
                     options: {
-                        includePaths: ['./src/styles']
+                        sassOptions: {
+                            includePaths: ['./src/styles']
+                        }
                     }
                 }]
             })

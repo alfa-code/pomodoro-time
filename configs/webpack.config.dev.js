@@ -56,14 +56,17 @@ const devConfig = {
                 {
                     loader: require.resolve('css-loader'),
                     options: {
-                        modules: true,
-                        localIdentName: '[name]__[local]___[hash:base64:5]'
+                        modules: {
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
                     }
                 },
                 {
                     loader: require.resolve('sass-loader'),
                     options: {
-                        includePaths: ['./src/styles']
+                        sassOptions: {
+                            includePaths: ['./src/styles']
+                        }
                     }
                 }
             ]
