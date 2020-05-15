@@ -28,7 +28,6 @@ export default function MainContainer() {
             <Popup />
             <InfoButton />
             <SettingsButton />
-            <Link to="/secret">Secret</Link>
         </div>
     );
 }
