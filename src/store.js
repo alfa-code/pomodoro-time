@@ -19,16 +19,19 @@ const logger = createLogger({
     collapsed: true
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 // compose middleware
-const myMiddlewares = compose(
+const middlewares = composeEnhancers(
     applyMiddleware(ReduxThunk, sagaMiddleware, logger),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+console.log('window.__REDUX_DEVTOOLS_EXTENSION__', window.__REDUX_DEVTOOLS_EXTENSION__)
 
 /* eslint no-underscore-dangle: 0 */
 const store = createStore(
     rootReducer,
-    myMiddlewares
+    middlewares
 );
 
 // then run the saga
