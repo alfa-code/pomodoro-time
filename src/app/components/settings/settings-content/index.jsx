@@ -55,8 +55,8 @@ class SettingsContent extends Component {
         Cookies.set('timerPeriod', 25);
         this.startNewTimer(25, this.state.timerBreak);
         this.setState({ timerPeriod: '' });
-      } else if (value >= 60) {
-        value = 59;
+      } else if (value >= 999) {
+        value = 999;
         Cookies.set('timerPeriod', value);
         this.setState({ timerPeriod: value });
         this.startNewTimer(value, this.state.timerBreak);
