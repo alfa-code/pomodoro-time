@@ -28,6 +28,7 @@ class Timer extends Component {
     this.timer = '';
     this.timerWorker = new TimerWorker();
     this.state = {
+      hours: '00',
       minutes: '00',
       seconds: '00',
     };
@@ -38,6 +39,9 @@ class Timer extends Component {
     const { period } = this.props.timer;
 
     this.setState({
+      // hours: utc(period * 60 * 1000).format('h'),
+      // (366000 / 1000 / 60 / 60).toFixed()
+      hours: parseInt(period / 60),
       minutes: utc(period * 60 * 1000).format('mm'),
       seconds: utc(period * 60 * 1000).format('ss'),
     });
@@ -87,15 +91,20 @@ class Timer extends Component {
       }
     }
 
+    const hours = parseInt(timeDifference / 1000 / 60 / 60);
     const minutes = utc(timeDifference).format('mm');
     const seconds = utc(timeDifference).format('ss');
 
+    console.log('hours', hours)
+    console.log('timeDifference', timeDifference)
+
     this.setState({
+      hours,
       minutes,
       seconds,
     });
 
-    this.setDocumentTitle(minutes, seconds);
+    this.setDocumentTitle(hours, minutes, seconds);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -103,9 +112,9 @@ class Timer extends Component {
     return true;
   }
 
-  setDocumentTitle = (minutes, seconds) => {
+  setDocumentTitle = (hours, minutes, seconds) => {
     if (this.props.timer.timerState === constants.TIMER_STATE_WORKING) {
-      document.title = `(${minutes}:${seconds}) Pomodoro Time - time management method.`;
+      document.title = `(${hours}:${minutes}:${seconds}) Pomodoro Time - time management method.`;
     } else {
       document.title = 'Pomodoro Time - time management method.';
     }
@@ -232,6 +241,7 @@ class Timer extends Component {
   }
 
   render() {
+    console.log('this.state.hours', this.state.hours)
     return (
       <div
         className={style.container}
@@ -248,14 +258,23 @@ class Timer extends Component {
           {this.setControlButton()}
         </div>
         <div className={style.timer}>
+          <div className={classnames(style.digit, style.hours, { [style.hidden]: (this.state.hours < 1) })}>
+            {this.state.hours }
+          </div>
+          <div className={classnames(style.digit, style.colon1, { [style.hidden]: (this.state.hours < 1) })}>
+            :
+          </div>
           <div className={classnames(style.digit, style.minutes)}>
             {this.state.minutes }
           </div>
-          <div className={classnames(style.digit, style.colon)}>
+          <div className={classnames(style.digit, style.colon2)}>
             :
           </div>
           <div className={classnames(style.digit, style.seconds)}>
             {this.state.seconds }
+          </div>
+          <div className={classnames(style.label, style.hoursLabel, { [style.hidden]: (this.state.hours < 1) })}>
+            hours
           </div>
           <div className={classnames(style.label, style.minutesLabel)}>
             minutes

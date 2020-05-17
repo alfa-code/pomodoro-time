@@ -3,8 +3,8 @@ import * as Cookies from 'js-cookie';
 
 let period = Cookies.get('timerPeriod');
 if (!period) {
-  Cookies.set('timerPeriod', 25);
-  period = 25;
+  Cookies.set('timerPeriod', 999);
+  period = 999;
 } else {
   period = Number.parseInt(period, 10);
 }
