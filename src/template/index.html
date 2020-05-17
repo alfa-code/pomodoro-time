@@ -36,19 +36,5 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/46177308" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <!-- Application Info -->
-    <script type="text/javascript" >
-        document.application = {
-            version: '<%= htmlWebpackPlugin.options.gitVersion %>',
-            get info() {
-                console.table({
-                    version: this.version
-                });
-            }
-        }
-
-        console.log('App Version: ' + document.application.version);
-    </script>
-    <noscript>App Version: <%= htmlWebpackPlugin.options.gitVersion %></noscript>
 </body>
 </html>

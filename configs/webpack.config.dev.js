@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const gitVersion = require('git-tag-version');
 
 const devConfig = {
     mode: 'development',
@@ -102,8 +101,7 @@ const devConfig = {
         new HtmlWebpackPlugin({
             inject: true,
             template: './template/index.html',
-            title: 'Pomodoro Time - time management method.',
-            gitVersion: gitVersion()
+            title: 'Pomodoro Time - time management method.'
         }),
         new webpack.SourceMapDevToolPlugin({
             filename: '[name].js.map'
