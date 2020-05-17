@@ -6,11 +6,12 @@ install:
 script:
   - npm run build
 before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "YOUR GIT USER NAME"
-  - git config --local user.email "YOUR GIT USER EMAIL"
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
+  if ! [[ $TRAVIS_TAG ]]; then
+    export TRAVIS_TAG="1.$TRAVIS_BUILD_NUMBER" &&
+    git config --local user.name "$USER_NAME" &&
+    git config --local user.email "$USER_EMAIL" &&
+    git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT";
+  fi
 deploy:
   provider: pages
   skip_cleanup: true
