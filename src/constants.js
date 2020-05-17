@@ -27,5 +27,6 @@ export const PLAY_AUDIO_SUCCEEDED = 'PLAY_AUDIO_SUCCEEDED';
 export const PLAY_AUDIO_FAILED = 'PLAY_AUDIO_FAILED';
 
 export const TIMER_V2 = {
-    set_settings: 'set_settings'
+    set_settings: 'set_settings',
+    set_timer_options: 'set_timer_options',
 }

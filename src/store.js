@@ -5,7 +5,7 @@ import {
 } from 'redux';
 import rootReducer from 'src/reducers/index';
 import createSagaMiddleware from 'redux-saga';
-import sagaWatcher from 'src/sagas/sagas';
+import { rootSaga } from 'src/sagas/rootSaga';
 import {
     createLogger
 } from 'redux-logger';
@@ -26,8 +26,6 @@ const middlewares = composeEnhancers(
     applyMiddleware(ReduxThunk, sagaMiddleware, logger),
 );
 
-console.log('window.__REDUX_DEVTOOLS_EXTENSION__', window.__REDUX_DEVTOOLS_EXTENSION__)
-
 /* eslint no-underscore-dangle: 0 */
 const store = createStore(
     rootReducer,
@@ -35,6 +33,6 @@ const store = createStore(
 );
 
 // then run the saga
-sagaMiddleware.run(sagaWatcher);
+sagaMiddleware.run(rootSaga);
 
 export default store;
