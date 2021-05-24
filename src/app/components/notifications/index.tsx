@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Switcher from 'Src/app/components/common/switcher';
 
 // styles
-import style from './style.scss';
+import style from './style.module.scss';
 
 export default class Notifications extends Component {
   setText() {
@@ -54,11 +54,3 @@ export default class Notifications extends Component {
     return null;
   }
 }
-
-Notifications.defaultProps = {
-  notifications: {
-    notificationsEnabled: false,
-    notificationsPermission: 'default',
-    notificationsSupport: false,
-  },
-};

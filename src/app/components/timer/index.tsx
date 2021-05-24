@@ -19,7 +19,7 @@ import { utc } from 'moment';
 import TimerWorker from 'Src/app/workers/timer.worker';
 
 // style
-import style from './style.scss';
+import style from './style.module.scss';
 
 class Timer extends Component {
   constructor(props) {
@@ -301,10 +301,5 @@ class Timer extends Component {
     );
   }
 }
-
-Timer.defaultProps = {
-  notificationsEnabled: false,
-  timer: {},
-};
 
 export default Timer;

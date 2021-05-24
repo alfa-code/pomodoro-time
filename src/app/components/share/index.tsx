@@ -12,7 +12,7 @@ import promoImg from 'Src/static/media/img/promo/promo.jpg';
 import ShareButton from './share-button';
 
 // style
-import style from './style.scss';
+import style from './style.module.scss';
 
 export default class Share extends Component {
   getFacebooLink = () => {

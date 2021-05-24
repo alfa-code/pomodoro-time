@@ -8,7 +8,7 @@ import * as constants from 'Src/constants';
 import { setPopupSettingsOpenSettings } from 'Src/actions/index';
 
 // style
-import style from './style.scss';
+import style from './style.module.scss';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

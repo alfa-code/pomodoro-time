@@ -6,7 +6,7 @@ import imageRight from 'Src/static/media/tomat-right.png';
 
 // style
 import classnames from 'classnames';
-import style from './style.scss';
+import style from './style.module.scss';
 
 export default function TomatLayout() {
   const tomatTopStyle = classnames(style.tomatImg, style.tomatImgSmall);

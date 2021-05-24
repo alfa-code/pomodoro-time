@@ -1,7 +1,7 @@
 import React from 'react';
 
 // style
-import style from './style.scss';
+import style from './style.module.scss';
 
 export default function ShareButton(props) {
   return (
