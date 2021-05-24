@@ -1,16 +1,22 @@
-// image
-import tomat from 'src/static/media/tomat-left.png';
+import tomat from 'Src/static/media/tomat-left.png';
 
-//
-let canvasDomElement;
+let canvasDomElement: any;
 
 const image = new Image();
 image.src = tomat;
 
-const imagesArray = [];
+const imagesArray: any = [];
 const imagesPositions = ['top', 'middle', 'bottom'];
 
 class CanvasImage {
+    pos: any;
+    s: any;
+    w: any;
+    h: any;
+    x: any;
+    y: any;
+    r: any;
+
   constructor(w = 200, h = 200, r = 0, pos = imagesPositions[2], speed = 0) {
     this.pos = pos;
     this.s = speed;
@@ -39,12 +45,12 @@ class CanvasImage {
     }
   }
 
-  setSize = (percentHeight, percentValue) => {
+  setSize = (percentHeight: any, percentValue: any) => {
     this.w = percentHeight * percentValue;
     this.h = percentHeight * percentValue;
   }
 
-  setYPosition = (heightPercent) => {
+  setYPosition = (heightPercent: any) => {
     switch (this.pos) {
       case imagesPositions[0]:
         this.y = heightPercent * 10;
@@ -81,7 +87,7 @@ imagesArray.push(new CanvasImage(0, 0, 0, imagesPositions[0], 0.1));
 imagesArray.push(new CanvasImage(0, 0, 0, imagesPositions[1], 0.3));
 imagesArray.push(new CanvasImage(0, 0, 0, imagesPositions[2], 0.7));
 
-function clearContext(context) {
+function clearContext(context: any) {
   canvasDomElement.width = canvasDomElement.width;
   context.fillStyle = 'rgba(0, 0, 0, 0)';
   context.shadowOffsetX = 10;
@@ -91,14 +97,14 @@ function clearContext(context) {
   context.fillRect(0, 0, canvasDomElement.width, canvasDomElement.height);
 }
 
-function drawImage(context, img) {
+function drawImage(context: any, img: any) {
   context.drawImage(image, img.x, img.y, img.w, img.h);
 }
 
-function drawCanvas(context) {
+function drawCanvas(context: any) {
   clearContext(context);
   const imagesArrayLength = imagesArray.length - 1;
-  imagesArray.forEach((item, i) => {
+  imagesArray.forEach((item: any, i: any) => {
     item.stepLeft();
     if (i !== imagesArrayLength) {
       drawImage(context, item);
@@ -111,10 +117,10 @@ function drawCanvas(context) {
   });
 }
 
-function setRenderInterval(context) {
+function setRenderInterval(context: any) {
   setInterval(() => {
     requestAnimationFrame(() => {
-      drawCanvas(context, canvasDomElement);
+      drawCanvas(context);
     });
   }, 17);
 }
@@ -123,7 +129,7 @@ function setImagesParams() {
   const { innerHeight } = window;
   const heightPercent = Math.round(innerHeight / 100);
 
-  imagesArray.forEach((item) => {
+  imagesArray.forEach((item: any) => {
     switch (item.pos) {
       case imagesPositions[0]:
         item.setSize(heightPercent, 14);
@@ -145,10 +151,10 @@ function setImagesParams() {
   });
 }
 
-export default function startDraw(canvasElement) {
+export function startDraw(canvasElement: any) {
   canvasDomElement = canvasElement;
   const context = canvasDomElement.getContext('2d');
-  clearContext(context, canvasDomElement);
+  clearContext(context);
   setImagesParams();
 
   window.addEventListener('resize', () => {
@@ -159,6 +165,6 @@ export default function startDraw(canvasElement) {
   });
 
   image.onload = () => {
-    setRenderInterval(context, canvasDomElement);
+    setRenderInterval(context);
   };
 }

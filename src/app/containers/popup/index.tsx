@@ -1,17 +1,16 @@
-import Popup from 'src/app/components/popup';
+import Popup from 'Src/app/components/popup';
 import { connect } from 'react-redux';
 
 // actions
-import { setPopupSettingsCloseClear } from 'src/actions/index';
+import { setPopupSettingsCloseClear } from 'Src/actions/index';
 
-
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     popup: state.popup,
   };
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     setPopupSettingsCloseClear:
       () => dispatch(setPopupSettingsCloseClear())

@@ -1,9 +1,8 @@
 import React from 'react';
 
-// style
-import style from './style.scss';
+import style from './style.module.scss';
 
-export default function Logo() {
+export function Logo() {
   return (
     <a
       href="/"

@@ -1,8 +1,8 @@
 import React from 'react';
 
 // images
-import imageLeft from 'src/static/media/tomat-left.png';
-import imageRight from 'src/static/media/tomat-right.png';
+import imageLeft from 'Src/static/media/tomat-left.png';
+import imageRight from 'Src/static/media/tomat-right.png';
 
 // style
 import classnames from 'classnames';

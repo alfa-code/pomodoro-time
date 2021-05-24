@@ -6,89 +6,94 @@ const devConfig = {
     mode: 'development',
     context: path.resolve(__dirname, '../src'),
     entry: {
-        app: ['babel-polyfill', './index.jsx']
+        app: ['./index.tsx']
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].bundle.js'
     },
     module: {
-        rules: [{
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/, /\.svg$/],
-            loader: require.resolve('url-loader'),
-            options: {
-                limit: 10000,
-                name: 'static/media/[name].[ext]'
-            }
-        },
-        {
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        modules: false
-                    }
-                }
-            ]
-        },
-        {
-            test: /\.worker\.js$/,
-            use: {
-                loader: 'worker-loader',
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
+                test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.jpg$/, /\.png$/, /\.svg$/],
+                loader: require.resolve('url-loader'),
                 options: {
-                    name: '[name].js'
+                    limit: 10000,
+                    name: 'static/media/[name].[ext]'
                 }
-            }
-        },
-        {
-            test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
-            exclude: path.resolve(__dirname, 'node_modules'),
-            // use: ['babel-loader', 'eslint-loader']
-            use: ['babel-loader']
-        },
-        {
-            test: [/\.scss$/],
-            use: [
-                require.resolve('style-loader'),
-                {
-                    loader: require.resolve('css-loader'),
+            },
+            {
+                test: /\.worker\.js$/,
+                use: {
+                    loader: 'worker-loader',
                     options: {
-                        modules: {
-                            localIdentName: '[name]__[local]___[hash:base64:5]'
-                        }
-                    }
-                },
-                {
-                    loader: require.resolve('sass-loader'),
-                    options: {
-                        sassOptions: {
-                            includePaths: ['./src/styles']
-                        }
+                        name: '[name].js'
                     }
                 }
-            ]
-        },
-        {
-            test: /\.(ttf|eot|woff|woff2)$/,
-            loader: require.resolve('file-loader'),
-            options: {
-                name: 'fonts/[name].[ext]'
-            }
-        },
-        {
-            test: /\.(mp3|aac)$/,
-            loader: require.resolve('file-loader'),
-            options: {
-                name: 'sounds/[name].[ext]'
-            }
-        }]
+            },
+            // {
+            //     test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
+            //     exclude: path.resolve(__dirname, 'node_modules'),
+            //     use: ['babel-loader']
+            // },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: false
+                        }
+                    }
+                ]
+            },
+            {
+                test: [/\.module\.scss$/],
+                use: [
+                    require.resolve('style-loader'),
+                    {
+                        loader: require.resolve('css-loader'),
+                        options: {
+                            modules: {
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                            }
+                        }
+                    },
+                    {
+                        loader: require.resolve('sass-loader'),
+                        options: {
+                            sassOptions: {
+                                includePaths: ['./src/styles']
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                loader: require.resolve('file-loader'),
+                options: {
+                    name: 'fonts/[name].[ext]'
+                }
+            },
+            {
+                test: /\.(mp3|aac)$/,
+                loader: require.resolve('file-loader'),
+                options: {
+                    name: 'sounds/[name].[ext]'
+                }
+            }]
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.json', 'svg'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', 'svg'],
         alias: {
-            src: path.resolve(__dirname, '../src')
+            Src: path.resolve(__dirname, '../src')
         }
     },
     devServer: {

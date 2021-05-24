@@ -1,4 +1,4 @@
-import * as constants from 'src/constants';
+import * as constants from 'Src/constants';
 
 const initState = {
   openState: false,

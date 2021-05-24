@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 // svg icons
-import iconFacebook from 'src/static/media/svg/facebook.svg';
-import iconTwitter from 'src/static/media/svg/twitter.svg';
-import iconVkontakte from 'src/static/media/svg/vkontakte.svg';
+import iconFacebook from 'Src/static/media/svg/facebook.svg';
+import iconTwitter from 'Src/static/media/svg/twitter.svg';
+import iconVkontakte from 'Src/static/media/svg/vkontakte.svg';
 
 // image
-import promoImg from 'src/static/media/img/promo/promo.jpg';
+import promoImg from 'Src/static/media/img/promo/promo.jpg';
 
 // components
 import ShareButton from './share-button';

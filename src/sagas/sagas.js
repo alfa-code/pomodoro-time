@@ -1,12 +1,12 @@
 import { call, put, takeEvery, takeLatest, delay } from "redux-saga/effects";
-import * as constants from 'src/constants';
+import * as constants from 'Src/constants';
 import * as Cookies from 'js-cookie';
 
-import testAudio1 from 'src/static/sounds/alert_1.mp3';
-import testAudio2 from 'src/static/sounds/alert_2.mp3';
-import testAudio3 from 'src/static/sounds/alert_3.mp3';
-import testAudio4 from 'src/static/sounds/alert_4.mp3';
-import testAudio5 from 'src/static/sounds/alert_5.mp3';
+import testAudio1 from 'Src/static/sounds/alert_1.mp3';
+import testAudio2 from 'Src/static/sounds/alert_2.mp3';
+import testAudio3 from 'Src/static/sounds/alert_3.mp3';
+import testAudio4 from 'Src/static/sounds/alert_4.mp3';
+import testAudio5 from 'Src/static/sounds/alert_5.mp3';
 
 const createAudioContext = require('ios-safe-audio-context');
 

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // styles
 import classnames from 'classnames';
-import style from './style.scss';
+import style from './style.module.scss';
 
-export default class RadioButton extends Component {
-  checkKeyPress = (e, callback) => {
+export default class RadioButton extends Component<any> {
+  checkKeyPress = (e: any, callback: any) => {
     if (e.key === 'Enter' || e.key === ' ') {
       callback();
     }
@@ -48,17 +47,3 @@ export default class RadioButton extends Component {
     );
   }
 }
-
-RadioButton.propTypes = {
-  onClick: PropTypes.func,
-  label: PropTypes.string,
-  active: PropTypes.bool,
-  className: PropTypes.string,
-};
-
-RadioButton.defaultProps = {
-  onClick: () => {},
-  label: 'label',
-  active: false,
-  className: '',
-};

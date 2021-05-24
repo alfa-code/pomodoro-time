@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // style
 import style from './style.scss';
@@ -22,12 +21,6 @@ export default function ShareButton(props) {
     </a>
   );
 }
-
-ShareButton.propTypes = {
-  icon: PropTypes.string,
-  text: PropTypes.string,
-  link: PropTypes.string,
-};
 
 ShareButton.defaultProps = {
   icon: 'icon',

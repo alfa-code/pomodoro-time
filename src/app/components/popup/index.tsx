@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // constants
-import * as constants from 'src/constants';
+import * as constants from 'Src/constants';
 
-import SettingsContent from 'src/app/containers/settings/settings-content';
-import InfoContent from 'src/app/components/info/info-content';
+import SettingsContent from 'Src/app/containers/settings/settings-content';
+import InfoContent from 'Src/app/components/info/info-content';
 
 // style
-import style from './style.scss';
+import style from './style.module.scss';
 
-export default class Popup extends Component {
+export default class Popup extends Component<any> {
+  defaultProps: any;
+  
   closePopup = () => {
     const { setPopupSettingsCloseClear } = this.props;
     setPopupSettingsCloseClear();
   }
 
-  checkKeyPress = (e, callback) => {
+  checkKeyPress = (e: any, callback: any) => {
     if (e.key === 'Enter' || e.key === ' ') {
       callback();
     }
@@ -59,21 +60,3 @@ export default class Popup extends Component {
     return null;
   }
 }
-
-Popup.propTypes = {
-  popup: PropTypes.shape({
-    openState: PropTypes.bool,
-    content: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-  }),
-};
-
-Popup.defaultProps = {
-  popup: {
-    openState: false,
-    content: 'popup_settings',
-  },
-};

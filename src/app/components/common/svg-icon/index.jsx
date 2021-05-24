@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import style from './style.scss';
 
@@ -30,12 +29,6 @@ export default class SvgIcon extends Component {
     );
   }
 }
-
-SvgIcon.propTypes = {
-  glyph: PropTypes.string,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-};
 
 SvgIcon.defaultProps = {
   glyph: {},

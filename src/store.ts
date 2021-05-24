@@ -3,13 +3,14 @@ import {
     applyMiddleware,
     compose
 } from 'redux';
-import rootReducer from 'src/reducers/index';
-import createSagaMiddleware from 'redux-saga';
-import sagaWatcher from 'src/sagas/sagas';
 import {
     createLogger
 } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+
+import rootReducer from 'Src/reducers/index';
+import sagaWatcher from 'Src/sagas/sagas';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();

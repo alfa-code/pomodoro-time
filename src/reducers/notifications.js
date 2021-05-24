@@ -1,4 +1,4 @@
-import * as constants from 'src/constants';
+import * as constants from 'Src/constants';
 import * as Cookies from 'js-cookie';
 
 function getStartState() {

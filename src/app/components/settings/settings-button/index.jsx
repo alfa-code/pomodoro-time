@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // constants
-import * as constants from 'src/constants';
+import * as constants from 'Src/constants';
 
 // actions
-import { setPopupSettingsOpenSettings } from 'src/actions/index';
+import { setPopupSettingsOpenSettings } from 'Src/actions/index';
 
 // style
 import style from './style.scss';

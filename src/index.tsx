@@ -5,17 +5,15 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-
-// components
-import MainContainer from 'src/app/components/main-container';
-
-// r/r
 import { Provider } from 'react-redux';
-import store from 'src/store';
+
+import { MainContainer } from 'Src/app/components/main-container';
+
+import store from 'Src/store';
 
 // global styles
 import 'normalize.css/normalize.css';
-import 'src/styles';
+import 'Src/styles/global.css';
 
 const App = function App() {
     return (
@@ -32,3 +30,4 @@ const App = function App() {
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.render(<div>1111</div>, document.getElementById('app'));

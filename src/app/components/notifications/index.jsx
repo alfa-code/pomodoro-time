@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // components
-import Switcher from 'src/app/components/common/switcher';
+import Switcher from 'Src/app/components/common/switcher';
 
 // styles
 import style from './style.scss';
@@ -55,14 +54,6 @@ export default class Notifications extends Component {
     return null;
   }
 }
-
-Notifications.propTypes = {
-  notifications: PropTypes.shape({
-    notificationsEnabled: PropTypes.bool,
-    notificationsPermission: PropTypes.string,
-    notificationsSupport: PropTypes.bool,
-  }),
-};
 
 Notifications.defaultProps = {
   notifications: {

@@ -1,8 +1,8 @@
-import * as constants from 'src/constants';
-import store from 'src/store';
+import * as constants from 'Src/constants';
+import store from 'Src/store';
 import * as Cookies from 'js-cookie';
 
-export function setNotificationsPermission(val) {
+export function setNotificationsPermission(val: any) {
   const { permission } = window.Notification;
   let permissionValue;
   switch (permission) {
@@ -21,7 +21,7 @@ export function setNotificationsPermission(val) {
               notificationsPermission: window.Notification.permission,
             },
           });
-          Cookies.set('notificationsEnabled', permissionValue);
+          Cookies.set('notificationsEnabled', `${permissionValue}`);
         });
       break;
     case constants.NOTIFICATIONS_PERMISSION_DENIED:
@@ -34,7 +34,7 @@ export function setNotificationsPermission(val) {
           notificationsPermission: window.Notification.permission,
         },
       });
-      Cookies.set('notificationsEnabled', permissionValue);
+      Cookies.set('notificationsEnabled', `${permissionValue}`);
       break;
     case constants.NOTIFICATIONS_PERMISSION_GRANTED:
       permissionValue = !val;
@@ -45,7 +45,7 @@ export function setNotificationsPermission(val) {
           notificationsPermission: window.Notification.permission,
         },
       });
-      Cookies.set('notificationsEnabled', permissionValue);
+      Cookies.set('notificationsEnabled', `${permissionValue}`);
       break;
     default:
       permissionValue = false;
@@ -56,13 +56,13 @@ export function setNotificationsPermission(val) {
           notificationsPermission: window.Notification.permission,
         },
       });
-      Cookies.set('notificationsEnabled', permissionValue);
+      Cookies.set('notificationsEnabled', `${permissionValue}`);
   }
 }
 
 /* action creators */
 
-export function setTimerSettings(obj) {
+export function setTimerSettings(obj: any) {
   store.dispatch({
     type: constants.SET_TIMER_SETTINGS,
     payload: obj,
@@ -92,7 +92,7 @@ export function setPopupSettingsOpenSettings() {
 }
 
 
-export function setPopupSettingsCloseClear() {
+export function setPopupSettingsCloseClear(): any {
   return {
     type: constants.SET_POPUP_SETTINGS,
     payload: {

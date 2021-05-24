@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // constants
-import * as constants from 'src/constants';
+import * as constants from 'Src/constants';
 
 // actions
-import sendNotification from 'src/actions/sendNotification';
-import { setTimerSettings } from 'src/actions/index';
+import sendNotification from 'Src/actions/sendNotification';
+import { setTimerSettings } from 'Src/actions/index';
 
 // svg icons
-import svgIconReload from 'src/static/svg/reset.svg';
-import svgIconPlay from 'src/static/svg/play.svg';
-import svgIconPause from 'src/static/svg/pause.svg';
+import svgIconReload from 'Src/static/svg/reset.svg';
+import svgIconPlay from 'Src/static/svg/play.svg';
+import svgIconPause from 'Src/static/svg/pause.svg';
 // image
-import pomodoroImage from 'src/static/images/notify/notify.png';
+import pomodoroImage from 'Src/static/images/notify/notify.png';
 
 import classnames from 'classnames';
 import { utc } from 'moment';
-import TimerWorker from 'src/app/workers/timer.worker';
+import TimerWorker from 'Src/app/workers/timer.worker';
 
 // style
 import style from './style.scss';
@@ -302,22 +301,6 @@ class Timer extends Component {
     );
   }
 }
-
-Timer.propTypes = {
-  notificationsEnabled: PropTypes.bool,
-  timer: PropTypes.shape({
-    timerTime: PropTypes.number,
-    timerState: PropTypes.string,
-    mode: PropTypes.string,
-    timerActivated: PropTypes.bool,
-    period: PropTypes.number,
-    breakTime: PropTypes.number,
-    timeStart: PropTypes.number,
-    timeEnd: PropTypes.number,
-    timeDifference: PropTypes.number,
-  }),
-  playAudioNotification: PropTypes.func
-};
 
 Timer.defaultProps = {
   notificationsEnabled: false,

@@ -1,7 +1,7 @@
 import React from "react";
 
 // styles
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 const email = "hydrock@yandex.ru";
 const text = [

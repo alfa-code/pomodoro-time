@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-// constants
-import * as constants from 'src/constants';
-
-// components
-import RadioButton from 'src/app/components/common/radio-button';
-
-// actions
-import { setTimerSettings } from 'src/actions/index';
 import * as Cookies from 'js-cookie';
 
+// constants
+import * as constants from 'Src/constants';
+
+// components
+import RadioButton from 'Src/app/components/common/radio-button';
+
+// actions
+import { setTimerSettings } from 'Src/actions/index';
+
 // style
-import style from './style.scss';
+import style from './style.module.scss';
 
 const regexp = /^\d+$|^$/;
 
-class SettingsContent extends Component {
-  constructor(props) {
+class SettingsContent extends Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = {
       activeRingtone: Cookies.get('ringtone'),
@@ -33,7 +32,7 @@ class SettingsContent extends Component {
     };
   }
 
-  setRingtoneCookie = (name) => {
+  setRingtoneCookie = (name: any) => {
     const { playAudioNotification } = this.props;
     Cookies.set('ringtone', name);
     this.setState({
@@ -42,7 +41,7 @@ class SettingsContent extends Component {
     playAudioNotification();
   }
 
-  setNewPeriodValue = (e) => {
+  setNewPeriodValue = (e: any) => {
     e.preventDefault();
 
     let { value } = e.target;
@@ -52,7 +51,7 @@ class SettingsContent extends Component {
 
     if (test) {
       if (isNaN(value)) {
-        Cookies.set('timerPeriod', 25);
+        Cookies.set('timerPeriod', `${25}`);
         this.startNewTimer(25, this.state.timerBreak);
         this.setState({ timerPeriod: '' });
       } else if (value >= 999) {
@@ -70,7 +69,7 @@ class SettingsContent extends Component {
     e.target.value = this.state.timerPeriod;
   }
 
-  setNewBreakValue = (e) => {
+  setNewBreakValue = (e: any) => {
     e.preventDefault();
 
     let { value } = e.target;
@@ -80,7 +79,7 @@ class SettingsContent extends Component {
 
     if (test) {
       if (isNaN(value)) {
-        Cookies.set('timerBreak', 5);
+        Cookies.set('timerBreak', `${5}`);
         this.startNewTimer(this.state.timerPeriod, 5);
         this.setState({ timerBreak: '' });
       } else if (value >= 60) {
@@ -98,7 +97,7 @@ class SettingsContent extends Component {
     e.target.value = this.state.timerBreak;
   }
 
-  startNewTimer = (timerPeriod, timerBreak) => {
+  startNewTimer = (timerPeriod: any, timerBreak: any) => {
     setTimerSettings({
       mode: constants.TIMER_MODE_POMODORO,
       timerState: constants.TIMER_STATE_PAUSE,
@@ -112,7 +111,7 @@ class SettingsContent extends Component {
   }
 
   renderRingtoneButtons = () => (
-    this.state.ringtones.map((item, i) => {
+    this.state.ringtones.map((item: any, i: any) => {
       const active = (this.state.activeRingtone === item);
       return (
         <RadioButton
@@ -171,16 +170,5 @@ class SettingsContent extends Component {
     );
   }
 }
-
-SettingsContent.propTypes = {
-  period: PropTypes.number,
-  breakTime: PropTypes.number,
-  playAudioNotification: PropTypes.func
-};
-
-SettingsContent.defaultProps = {
-  period: 0,
-  breakTime: 0,
-};
 
 export default SettingsContent;

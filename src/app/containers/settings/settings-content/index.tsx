@@ -1,16 +1,16 @@
-import SettingsContent from 'src/app/components/settings/settings-content';
+import SettingsContent from 'Src/app/components/settings/settings-content';
 import { connect } from 'react-redux';
 
-import { playAudioNotification } from 'src/actions/index';
+import { playAudioNotification } from 'Src/actions/index';
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     period: state.timer.period,
     breakTime: state.timer.breakTime,
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
   return {
     playAudioNotification: () => {
       dispatch(playAudioNotification())

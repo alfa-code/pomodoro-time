@@ -1,8 +1,8 @@
-import Timer from 'src/app/components/timer';
+import Timer from 'Src/app/components/timer';
 import { connect } from 'react-redux';
 
 // actions
-import { playAudioNotification } from 'src/actions/index';
+import { playAudioNotification } from 'Src/actions/index';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

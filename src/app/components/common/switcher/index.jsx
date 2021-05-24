@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 // actions
-import * as actions from 'src/actions/index';
+import * as actions from 'Src/actions/index';
 import * as Cookies from 'js-cookie';
 
 // styles
@@ -88,11 +86,6 @@ export default class Switcher extends Component {
     );
   }
 }
-
-Switcher.propTypes = {
-  enabled: PropTypes.bool,
-  permission: PropTypes.string,
-};
 
 Switcher.defaultProps = {
   enabled: false,
