@@ -6,7 +6,7 @@ import Switcher from 'Src/app/components/common/switcher';
 // styles
 import style from './style.module.scss';
 
-export default class Notifications extends Component {
+export default class Notifications extends Component<any> {
   setText() {
     if (this.props.notifications.notificationsPermission === 'denied') {
       return (

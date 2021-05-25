@@ -1,4 +1,4 @@
-export default function sendNotification(titleName, tagName, textName, iconSrc) {
+export default function sendNotification(titleName: any, tagName: any, textName: any, iconSrc: any) {
   new Notification(titleName, {
     tag: tagName,
     icon: iconSrc,

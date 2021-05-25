@@ -2,8 +2,8 @@
 
 console.log('Timer Worker loaded!');
 
-let timeDifferenceGlobal;
-let interval;
+let timeDifferenceGlobal: any;
+let interval: any;
 
 function minusSecond() {
   const newTimeDifference = timeDifferenceGlobal - 1000;
@@ -13,14 +13,16 @@ function minusSecond() {
     newTimeDifference,
   };
 
+  // @ts-ignore
   self.postMessage(workerMessage);
 
   if (newTimeDifference === 0) {
+    // @ts-ignore
     self.postMessage({ command: 'playTimeoutSound' });
   }
 }
 
-function timerInterval(data) {
+function timerInterval(data: any) {
   if (data.startNewTimer || data.fromPauseToWarkTimer) {
     interval = setInterval(() => {
       minusSecond();

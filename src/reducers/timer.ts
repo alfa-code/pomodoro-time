@@ -1,17 +1,17 @@
 import * as constants from 'Src/constants';
 import * as Cookies from 'js-cookie';
 
-let period = Cookies.get('timerPeriod');
+let period: any= Cookies.get('timerPeriod');
 if (!period) {
-  Cookies.set('timerPeriod', 999);
+  Cookies.set('timerPeriod', '999');
   period = 999;
 } else {
   period = Number.parseInt(period, 10);
 }
 
-let breakTime = Cookies.get('timerBreak');
+let breakTime: any = Cookies.get('timerBreak');
 if (!breakTime) {
-  Cookies.set('timerBreak', 5);
+  Cookies.set('timerBreak', '5');
   breakTime = 5;
 } else {
   breakTime = Number.parseInt(breakTime, 10);
@@ -29,7 +29,7 @@ const startState = {
   timeDifference: 0,
 };
 
-export default function timer(state = startState, action) {
+export default function timer(state = startState, action: any) {
   switch (action.type) {
     case constants.SET_TIMER_SETTINGS:
       state = Object.assign({}, state, action.payload);

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // actions
 import { playAudioNotification } from 'Src/actions/index';
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
   return {
     playAudioNotification: () => {
       dispatch(playAudioNotification())
@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     timer: state.timer,
     notificationsEnabled: state.notifications.notificationsEnabled,

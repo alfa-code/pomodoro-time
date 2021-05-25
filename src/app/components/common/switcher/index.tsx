@@ -5,17 +5,17 @@ import * as Cookies from 'js-cookie';
 
 // styles
 import classnames from 'classnames';
-import style from './style.scss';
+import style from './style.module.scss';
 
-export default class Switcher extends Component {
-  constructor(props) {
+export default class Switcher extends Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = {
       status: this.props.enabled,
     };
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: any) {
     this.setState({
       status: props.enabled,
     });
@@ -55,7 +55,7 @@ export default class Switcher extends Component {
     }
   }
 
-  checkKeyPress = (e, callback) => {
+  checkKeyPress = (e: any, callback: any) => {
     if (e.key === 'Enter' || e.key === ' ') {
       callback();
     }
@@ -86,8 +86,3 @@ export default class Switcher extends Component {
     );
   }
 }
-
-Switcher.defaultProps = {
-  enabled: false,
-  permission: 'default',
-};

@@ -28,13 +28,18 @@ const devConfig = {
                 }
             },
             {
-                test: /\.worker\.js$/,
-                use: {
-                    loader: 'worker-loader',
-                    options: {
-                        name: '[name].js'
-                    }
-                }
+                test: /\.worker\.ts$/,
+                use: [
+                    {
+                        loader: 'worker-loader',
+                        options: {
+                            name: '[name].js'
+                        }
+                    },
+                    {
+                        loader: 'ts-loader',
+                    },
+                ]
             },
             // {
             //     test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,

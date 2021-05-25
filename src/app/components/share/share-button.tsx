@@ -3,7 +3,7 @@ import React from 'react';
 // style
 import style from './style.module.scss';
 
-export default function ShareButton(props) {
+export default function ShareButton(props: any) {
   return (
     <a
       className={style.button}

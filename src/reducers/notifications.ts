@@ -14,7 +14,7 @@ function getStartState() {
   };
 }
 
-export default function notifications(state = getStartState(), action) {
+export default function notifications(state = getStartState(), action: any) {
   switch (action.type) {
     case constants.SET_NOTIFICATIONS_PERMISSION:
       state = Object.assign({}, state, action.payload);

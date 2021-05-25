@@ -5,7 +5,7 @@ const initState = {
   content: 'popup_settings',
 };
 
-export default function popup(state = initState, action) {
+export default function popup(state = initState, action: any) {
   switch (action.type) {
     case constants.SET_POPUP_SETTINGS:
       state = Object.assign({}, state, action.payload);

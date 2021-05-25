@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // constants
-import * as constants from 'Src/constants';
+// import * as constants from 'Src/constants';
 
 // actions
 import { setPopupSettingsOpenSettings } from 'Src/actions/index';
@@ -10,22 +10,13 @@ import { setPopupSettingsOpenSettings } from 'Src/actions/index';
 // style
 import style from './style.module.scss';
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    setPopupSettingsOpenSettings:
-      () => {
-        dispatch(setPopupSettingsOpenSettings())
-      } 
-  }
-}
-
-class SettingsButton extends Component {
+class SettingsButton extends Component<any> {
   showPopup = () => {
     const { setPopupSettingsOpenSettings } = this.props;
     setPopupSettingsOpenSettings();
   }
 
-  checkKeyPress = (e, callback) => {
+  checkKeyPress = (e: any, callback: any) => {
     if (e.key === 'Enter' || e.key === ' ') {
       callback();
     }
@@ -41,6 +32,15 @@ class SettingsButton extends Component {
         }}
       />
     );
+  }
+}
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {
+    setPopupSettingsOpenSettings:
+      () => {
+        dispatch(setPopupSettingsOpenSettings())
+      } 
   }
 }
 

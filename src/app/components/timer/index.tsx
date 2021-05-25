@@ -16,16 +16,20 @@ import pomodoroImage from 'Src/static/images/notify/notify.png';
 
 import classnames from 'classnames';
 import { utc } from 'moment';
-import TimerWorker from 'Src/app/workers/timer.worker';
+
+// import TimerWorker from 'Src/app/workers/timer.worker';
 
 // style
 import style from './style.module.scss';
 
-class Timer extends Component {
-  constructor(props) {
+class Timer extends Component<any, any> {
+  timer: any;
+  // timerWorker: any;
+
+  constructor(props: any) {
     super(props);
     this.timer = '';
-    this.timerWorker = new TimerWorker();
+    // this.timerWorker = new TimerWorker();
     this.state = {
       hours: '00',
       minutes: '00',
@@ -40,30 +44,30 @@ class Timer extends Component {
     this.setState({
       // hours: utc(period * 60 * 1000).format('h'),
       // (366000 / 1000 / 60 / 60).toFixed()
-      hours: parseInt(period / 60),
+      hours: parseInt(`${period / 60}`),
       minutes: utc(period * 60 * 1000).format('mm'),
       seconds: utc(period * 60 * 1000).format('ss'),
     });
 
-    this.timerWorker.addEventListener('message', (e) => {
-      switch (e.data.command) {
-        case 'updateTimeDifference':
-          setTimerSettings({
-            timeDifference: e.data.newTimeDifference,
-          });
-          break;
-        case 'playTimeoutSound':
-          playAudioNotification();
-          break;
-        default:
-          break;
-      }
-    }, false);
+    // this.timerWorker.addEventListener('message', (e: any) => {
+    //   switch (e.data.command) {
+    //     case 'updateTimeDifference':
+    //       setTimerSettings({
+    //         timeDifference: e.data.newTimeDifference,
+    //       });
+    //       break;
+    //     case 'playTimeoutSound':
+    //       playAudioNotification();
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // }, false);
 
     this.checkTimer(this.props.timer, this.props.timer);
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: any) {
     const {
       timeDifference,
       period,
@@ -90,7 +94,7 @@ class Timer extends Component {
       }
     }
 
-    const hours = parseInt(timeDifference / 1000 / 60 / 60);
+    const hours = parseInt(`${timeDifference / 1000 / 60 / 60}`);
     const minutes = utc(timeDifference).format('mm');
     const seconds = utc(timeDifference).format('ss');
 
@@ -106,12 +110,12 @@ class Timer extends Component {
     this.setDocumentTitle(hours, minutes, seconds);
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: any) {
     this.checkTimer(this.props.timer, nextProps.timer);
     return true;
   }
 
-  setDocumentTitle = (hours, minutes, seconds) => {
+  setDocumentTitle = (hours: any, minutes: any, seconds: any) => {
     if (this.props.timer.timerState === constants.TIMER_STATE_WORKING) {
       document.title = `(${hours}:${minutes}:${seconds}) Pomodoro Time - time management method.`;
     } else {
@@ -170,7 +174,7 @@ class Timer extends Component {
     });
   }
 
-  checkTimer = (oldProps, newProps) => {
+  checkTimer = (oldProps: any, newProps: any) => {
     const startNewTimer = (
       oldProps.timerActivated === false
       && newProps.timerActivated === true
@@ -186,13 +190,13 @@ class Timer extends Component {
     const timerNotWork = (newProps.timerActivated === false);
     const { timeDifference } = newProps;
 
-    this.timerWorker.postMessage({
-      startNewTimer,
-      fromPauseToWarkTimer,
-      timerOnPause,
-      timerNotWork,
-      timeDifference,
-    });
+    // this.timerWorker.postMessage({
+    //   startNewTimer,
+    //   fromPauseToWarkTimer,
+    //   timerOnPause,
+    //   timerNotWork,
+    //   timeDifference,
+    // });
   }
 
   controlButtonOnClick = () => {
@@ -222,7 +226,7 @@ class Timer extends Component {
     }
   }
 
-  startNewTimer = (timerMode, timerPeriod) => {
+  startNewTimer = (timerMode: any, timerPeriod: any) => {
     setTimerSettings({
       mode: timerMode,
       timerState: constants.TIMER_STATE_WORKING,
@@ -233,7 +237,7 @@ class Timer extends Component {
     });
   }
 
-  checkKeyPress = (e, callback) => {
+  checkKeyPress = (e: any, callback: any) => {
     if (e.key === 'Enter' || e.key === ' ') {
       callback();
     }

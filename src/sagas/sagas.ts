@@ -14,10 +14,12 @@ const createAudioContext = require('ios-safe-audio-context');
 function getPlayAudioFunc () {
   const context = createAudioContext();
 
-  return function* (action) {
+  return function* (action: any) {
     try {
       yield put({ type: constants.PLAY_AUDIO_START });
+      // @ts-ignore
       const audioData = yield action.payload.audioFetch.arrayBuffer();
+      // @ts-ignore
       const AudioBuffer = yield context.decodeAudioData(audioData);
       let source = context.createBufferSource();
       source.buffer = AudioBuffer;
@@ -33,7 +35,7 @@ function getPlayAudioFunc () {
 
 const playAudio = getPlayAudioFunc();
 
-function* fetchAudioFile (action) {
+function* fetchAudioFile (action: any) {
   // get ringtone name from cookies
   let ringtoneName = Cookies.get('ringtone');
   // if ringtone name exists, set default ringtone in cookies
@@ -42,7 +44,7 @@ function* fetchAudioFile (action) {
     Cookies.set('ringtone', constants.RINGTONE_1);
   }
 
-  const choiseSound = (name) => {
+  const choiseSound = (name: any) => {
     try {
       switch (name) {
         case constants.RINGTONE_1:
@@ -73,7 +75,8 @@ function* fetchAudioFile (action) {
 
   // fetch audio
   try {
-    const audioFetch = yield fetch(ringtoneUrl, fetchOptions);
+    // @ts-ignore
+    const audioFetch: any = yield fetch(ringtoneUrl, fetchOptions);
     yield put({ type: constants.AUDIO_FETCH_SUCCEEDED,  payload: {audioFetch} });
   } catch (e) {
     console.log(e)
