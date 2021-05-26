@@ -15,6 +15,11 @@ const devConfig = {
     module: {
         rules: [
             {
+                test: /\.worker\.ts$/,
+                loader: 'worker-loader',
+                options: { inline: 'no-fallback' }
+            },
+            {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
@@ -27,20 +32,20 @@ const devConfig = {
                     name: 'static/media/[name].[ext]'
                 }
             },
-            {
-                test: /\.worker\.ts$/,
-                use: [
-                    {
-                        loader: 'worker-loader',
-                        options: {
-                            name: '[name].js'
-                        }
-                    },
-                    {
-                        loader: 'ts-loader',
-                    },
-                ]
-            },
+            // {
+            //     test: /\.worker\.ts$/,
+            //     use: [
+            //         {
+            //             loader: 'worker-loader',
+            //             options: {
+            //                 name: '[name].js'
+            //             }
+            //         },
+            //         {
+            //             loader: 'ts-loader',
+            //         },
+            //     ]
+            // },
             // {
             //     test: /(?=^(?!.*worker))(?=.*\.(js|jsx)$)/,
             //     exclude: path.resolve(__dirname, 'node_modules'),
