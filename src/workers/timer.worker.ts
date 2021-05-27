@@ -6,8 +6,51 @@ let timerInterval: any = null;
 let startTime: any;
 let pauseTime: any;
 
-let basePeriod = 1000 * 60 * 1; // 1 500 000
+let basePeriod = 15000; // 1 500 000
+let breakPeriod = 5000; // 1 500 000
 let currentPeriod = basePeriod;
+
+type PomodoroPhase = 'work' | 'break';
+let pomodoroPhase: PomodoroPhase = 'work';
+
+function sendTime() {
+    postMessage({
+        type: 'time',
+        payload: {
+            minutes: formatTimeValue(getMinutesByPeriod(currentPeriod)),
+            seconds: formatTimeValue(getSecondsByPeriod(currentPeriod)),
+        }
+    }, undefined);
+}
+
+sendTime();
+
+function changePomodoroPhase(){
+    switch (pomodoroPhase) {
+        case 'work': {
+            pomodoroPhase = 'break';
+            currentPeriod = breakPeriod;
+            postMessage({
+                type: 'pomodoroPhase',
+                payload: {
+                    pomodoroPhase: 'break'
+                }
+            }, undefined);
+            break;
+        }
+        case 'break': {
+            pomodoroPhase = 'work';
+            currentPeriod = basePeriod;
+            postMessage({
+                type: 'pomodoroPhase',
+                payload: {
+                    pomodoroPhase: 'work'
+                }
+            }, undefined);
+            break;
+        }
+    }
+}
 
 function formatTimeValue(value: number | string) {
     let newValue = value.toString();
@@ -61,16 +104,10 @@ function myTimer(d0: any)
    if (currentPeriod > 1000) {
        currentPeriod = currentPeriod - 1000;
    } else {
-        currentPeriod = basePeriod;
+        changePomodoroPhase();
    }
 
-   postMessage({
-        type: 'time',
-        payload: {
-        minutes: formatTimeValue(getMinutesByPeriod(currentPeriod)),
-        seconds: formatTimeValue(getSecondsByPeriod(currentPeriod)),
-        }
-    }, undefined);
+   sendTime();
 }
 
 function startTimer() {
@@ -111,8 +148,6 @@ function pauseTimer() {
 function resumeTimer() {
     const currentTime = (new Date()).valueOf();
     const diff = pauseTime - startTime;
-    // const diff2 = currentTime - startTime;
-    console.log('diff', diff)
     startTime = currentTime - diff;  // (pauseTime - startTime) + startTime;
     timerInterval=setInterval(function(){myTimer(startTime)}, 1000);
 

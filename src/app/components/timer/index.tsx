@@ -33,6 +33,7 @@ class Timer extends Component<any, any> {
         this.timerWorker = new TimerWorker();
 
         this.state = {
+            pomodoroPhase: 'work', // work | break
             phase: 'initial', // initial | started | paused
             hours: '00',
             minutes: '00',
@@ -52,6 +53,12 @@ class Timer extends Component<any, any> {
                 case 'phase': {
                     const { phase } = payload;
                     this.setState({ phase });
+                    break;
+                }
+                case 'pomodoroPhase': {
+                    const { pomodoroPhase } = payload;
+                    console.log('pomodoroPhase', pomodoroPhase)
+                    this.setState({ pomodoroPhase });
                     break;
                 }
                 default: {}
@@ -100,7 +107,7 @@ class Timer extends Component<any, any> {
     }
 
     render() {
-        const { phase } = this.state;
+        const { phase, pomodoroPhase } = this.state;
         const playIcon = (phase === 'started') ? svgIconPause : svgIconPlay;
 
         return (
@@ -159,6 +166,9 @@ class Timer extends Component<any, any> {
                         alt="controls icon"
                     />
                 </div>
+                <span className={ style.phaseLabel }>
+                    { pomodoroPhase }
+                </span>
             </div>
         );
     }
