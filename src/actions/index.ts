@@ -2,6 +2,8 @@ import * as constants from 'Src/constants';
 import store from 'Src/store';
 import * as Cookies from 'js-cookie';
 
+import { TimerState } from 'Src/reducers/timer';
+
 export function setNotificationsPermission(val: any) {
   const { permission } = window.Notification;
   let permissionValue;
@@ -62,11 +64,49 @@ export function setNotificationsPermission(val: any) {
 
 /* action creators */
 
-export function setTimerSettings(obj: any) {
+export function setTimerSettings(obj: TimerState | any) {
   store.dispatch({
     type: constants.SET_TIMER_SETTINGS,
     payload: obj,
   });
+}
+
+export function setTimerSettingsAC(obj: TimerState | any) {
+    return {
+        type: constants.SET_TIMER_SETTINGS,
+        payload: obj,
+    }
+}
+  
+
+export function initTimer() {
+    store.dispatch({
+      type: constants.INIT_TIMER,
+    });
+}
+
+export function startTimer() {
+    store.dispatch({
+      type: constants.START_TIMER,
+    });
+}
+
+export function pauseTimer() {
+    store.dispatch({
+      type: constants.PAUSE_TIMER,
+    });
+}
+
+export function resumeTimer() {
+    store.dispatch({
+      type: constants.RESUME_TIMER,
+    });
+}
+
+export function reloadTimer() {
+    store.dispatch({
+      type: constants.RELOAD_TIMER,
+    });
 }
 
 // update popup settings
@@ -106,7 +146,12 @@ export function setPopupSettingsCloseClear(): any {
 
 export function playAudioNotification() {
   return {
-    type: constants.PLAY_AUDIO,
-    payload: {}
+    type: constants.PLAY_AUDIO
   }
+}
+
+export function dispatchPlayAudioNotification() {
+    store.dispatch({
+        type: constants.PLAY_AUDIO,
+    });
 }

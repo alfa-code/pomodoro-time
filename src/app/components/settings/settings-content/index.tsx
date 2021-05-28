@@ -41,74 +41,74 @@ class SettingsContent extends Component<any, any> {
     playAudioNotification();
   }
 
-  setNewPeriodValue = (e: any) => {
-    e.preventDefault();
+//   setNewPeriodValue = (e: any) => {
+//     e.preventDefault();
 
-    let { value } = e.target;
-    const test = regexp.test(value);
+//     let { value } = e.target;
+//     const test = regexp.test(value);
 
-    value = parseInt(e.target.value, 10);
+//     value = parseInt(e.target.value, 10);
 
-    if (test) {
-      if (isNaN(value)) {
-        Cookies.set('timerPeriod', `${25}`);
-        this.startNewTimer(25, this.state.timerBreak);
-        this.setState({ timerPeriod: '' });
-      } else if (value >= 999) {
-        value = 999;
-        Cookies.set('timerPeriod', value);
-        this.setState({ timerPeriod: value });
-        this.startNewTimer(value, this.state.timerBreak);
-      } else {
-        Cookies.set('timerPeriod', value);
-        this.setState({ timerPeriod: value });
-        this.startNewTimer(value, this.state.timerBreak);
-      }
-    }
+//     if (test) {
+//       if (isNaN(value)) {
+//         Cookies.set('timerPeriod', `${25}`);
+//         this.startNewTimer(25, this.state.timerBreak);
+//         this.setState({ timerPeriod: '' });
+//       } else if (value >= 999) {
+//         value = 999;
+//         Cookies.set('timerPeriod', value);
+//         this.setState({ timerPeriod: value });
+//         this.startNewTimer(value, this.state.timerBreak);
+//       } else {
+//         Cookies.set('timerPeriod', value);
+//         this.setState({ timerPeriod: value });
+//         this.startNewTimer(value, this.state.timerBreak);
+//       }
+//     }
 
-    e.target.value = this.state.timerPeriod;
-  }
+//     e.target.value = this.state.timerPeriod;
+//   }
 
-  setNewBreakValue = (e: any) => {
-    e.preventDefault();
+//   setNewBreakValue = (e: any) => {
+//     e.preventDefault();
 
-    let { value } = e.target;
-    const test = regexp.test(value);
+//     let { value } = e.target;
+//     const test = regexp.test(value);
 
-    value = parseInt(e.target.value, 10);
+//     value = parseInt(e.target.value, 10);
 
-    if (test) {
-      if (isNaN(value)) {
-        Cookies.set('timerBreak', `${5}`);
-        this.startNewTimer(this.state.timerPeriod, 5);
-        this.setState({ timerBreak: '' });
-      } else if (value >= 60) {
-        value = 59;
-        Cookies.set('timerBreak', value);
-        this.startNewTimer(this.state.timerPeriod, value);
-        this.setState({ timerBreak: value });
-      } else {
-        Cookies.set('timerBreak', value);
-        this.startNewTimer(this.state.timerPeriod, value);
-        this.setState({ timerBreak: value });
-      }
-    }
+//     if (test) {
+//       if (isNaN(value)) {
+//         Cookies.set('timerBreak', `${5}`);
+//         this.startNewTimer(this.state.timerPeriod, 5);
+//         this.setState({ timerBreak: '' });
+//       } else if (value >= 60) {
+//         value = 59;
+//         Cookies.set('timerBreak', value);
+//         this.startNewTimer(this.state.timerPeriod, value);
+//         this.setState({ timerBreak: value });
+//       } else {
+//         Cookies.set('timerBreak', value);
+//         this.startNewTimer(this.state.timerPeriod, value);
+//         this.setState({ timerBreak: value });
+//       }
+//     }
 
-    e.target.value = this.state.timerBreak;
-  }
+//     e.target.value = this.state.timerBreak;
+//   }
 
-  startNewTimer = (timerPeriod: any, timerBreak: any) => {
-    setTimerSettings({
-      mode: constants.TIMER_MODE_POMODORO,
-      timerState: constants.TIMER_STATE_PAUSE,
-      timerActivated: true,
-      timeStart: Date.now(),
-      timeEnd: Date.now() + (timerPeriod * 60 * 1000),
-      timeDifference: timerPeriod * 60 * 1000,
-      period: timerPeriod,
-      breakTime: timerBreak,
-    });
-  }
+//   startNewTimer = (timerPeriod: any, timerBreak: any) => {
+//     setTimerSettings({
+//       mode: constants.TIMER_MODE_POMODORO,
+//       timerState: constants.TIMER_STATE_PAUSE,
+//       timerActivated: true,
+//       timeStart: Date.now(),
+//       timeEnd: Date.now() + (timerPeriod * 60 * 1000),
+//       timeDifference: timerPeriod * 60 * 1000,
+//       period: timerPeriod,
+//       breakTime: timerBreak,
+//     });
+//   }
 
   renderRingtoneButtons = () => (
     this.state.ringtones.map((item: any, i: any) => {
@@ -151,7 +151,7 @@ class SettingsContent extends Component<any, any> {
               type="text"
               className={style.customTimeCellInput}
               value={this.state.timerPeriod}
-              onChange={this.setNewPeriodValue}
+              // onChange={this.setNewPeriodValue}
             />
           </div>
           <div className={style.customTimeCell}>
@@ -162,7 +162,7 @@ class SettingsContent extends Component<any, any> {
               type="text"
               className={style.customTimeCellInput}
               value={this.state.timerBreak}
-              onChange={this.setNewBreakValue}
+              // onChange={this.setNewBreakValue}
             />
           </div>
         </div>

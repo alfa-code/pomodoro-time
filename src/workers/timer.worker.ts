@@ -1,8 +1,6 @@
 const ctx: Worker = self as any;
 
-// var timerStart = true;
 let timerInterval: any = null;
-// let currentTime: any;
 let startTime: any;
 let pauseTime: any;
 

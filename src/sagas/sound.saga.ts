@@ -1,4 +1,5 @@
-import { call, put, takeEvery, takeLatest, delay } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
+
 import * as constants from 'Src/constants';
 import * as Cookies from 'js-cookie';
 
@@ -83,13 +84,8 @@ function* fetchAudioFile (action: any) {
     yield put({ type: constants.AUDIO_FETCH_FAILED, message: e.message });
   }
 }
-/*** /audio ***/
 
-/* saga watcher */
-function* sagaWatcher() {
-  // audio
-  yield takeLatest(constants.PLAY_AUDIO, fetchAudioFile);
-  yield takeLatest(constants.AUDIO_FETCH_SUCCEEDED, playAudio);
+export function* soundSaga() {
+    yield takeLatest(constants.PLAY_AUDIO, fetchAudioFile);
+    yield takeLatest(constants.AUDIO_FETCH_SUCCEEDED, playAudio);
 }
-
-export default sagaWatcher;

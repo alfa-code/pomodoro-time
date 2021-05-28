@@ -11,9 +11,15 @@ import { MainContainer } from 'Src/app/components/main-container';
 
 import store from 'Src/store';
 
+import {
+    initTimer,
+} from 'Src/actions/index';
+
 // global styles
 import 'normalize.css/normalize.css';
 import 'Src/styles/global.css';
+
+initTimer();
 
 const App = function App() {
     return (

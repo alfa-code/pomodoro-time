@@ -10,7 +10,9 @@ import {
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from 'Src/reducers/index';
-import sagaWatcher from 'Src/sagas/sagas';
+import { rootSaga } from 'Src/sagas/root.saga';
+
+export type Store = ReturnType<typeof rootReducer>;;
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -34,6 +36,6 @@ const store = createStore(
     composedMiddlewares,
 );
 
-sagaMiddleware.run(sagaWatcher);
+sagaMiddleware.run(rootSaga);
 
 export default store;

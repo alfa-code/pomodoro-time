@@ -74,6 +74,7 @@
         "redux-saga": "^1.1.3",
         "redux-thunk": "^2.3.0",
         "ts-loader": "^9.2.2",
+        "typesafe-actions": "^5.1.0",
         "typescript": "^4.2.4"
     }
 }

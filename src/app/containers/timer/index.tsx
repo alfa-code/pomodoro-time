@@ -1,4 +1,4 @@
-import Timer from 'Src/app/components/timer';
+import { Timer } from 'Src/app/components/timer';
 import { connect } from 'react-redux';
 
 // actions
