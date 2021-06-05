@@ -15,7 +15,7 @@ export default class Switcher extends Component<any, any> {
     };
   }
 
-  componentWillReceiveProps(props: any) {
+  UNSAFE_componentWillReceiveProps(props: any) {
     this.setState({
       status: props.enabled,
     });

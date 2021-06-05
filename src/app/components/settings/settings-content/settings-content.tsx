@@ -8,6 +8,21 @@ import RadioButton from 'Src/app/components/common/radio-button';
 // import { setTimerSettings } from 'Src/actions/index';
 
 import { dispatchTimerWorkerSettings } from 'Src/actions/timer';
+import { dispatchPlayAudio, dispatchCreateAudioContext } from 'Src/actions/audio';
+
+import testAudio1 from 'Src/static/sounds/alert_1.mp3';
+import testAudio2 from 'Src/static/sounds/alert_2.mp3';
+import testAudio3 from 'Src/static/sounds/alert_3.mp3';
+import testAudio4 from 'Src/static/sounds/alert_4.mp3';
+import testAudio5 from 'Src/static/sounds/alert_5.mp3';
+
+const audioTracks = {
+    testAudio1,
+    testAudio2,
+    testAudio3,
+    testAudio4,
+    testAudio5,
+}
 
 import style from './style.module.scss';
 
@@ -30,13 +45,18 @@ export class SettingsContent extends Component<any, any> {
         };
     }
 
-    setRingtoneCookie = (name: any) => {
-        const { playAudioNotification } = this.props;
-        Cookies.set('ringtone', name);
+    setRingtoneCookie = (ringtoneId: number, ringtoneName: string) => {
+        Cookies.set('ringtone', `${ringtoneName}`);
+
         this.setState({
-            activeRingtone: name,
+            activeRingtone: ringtoneName,
         });
-        playAudioNotification();
+
+        // @ts-ignore
+        let audioUrl = audioTracks[`testAudio${ringtoneId}`];
+
+        dispatchCreateAudioContext(audioUrl);
+        dispatchPlayAudio();
     }
 
     setNewPeriodValue = (e: any) => {
@@ -120,23 +140,6 @@ export class SettingsContent extends Component<any, any> {
     //     });
     //   }
 
-    renderRingtoneButtons = () => (
-        this.state.ringtones.map((item: any, i: any) => {
-            const active = (this.state.activeRingtone === item);
-            return (
-                <RadioButton
-                    label={`Ringtone ${i + 1}`}
-                    onClick={
-                        () => { this.setRingtoneCookie(item); }
-                    }
-                    key={item}
-                    active={active}
-                    className={style.marginBottom20}
-                />
-            );
-        })
-    )
-
     setNewTimerSettings = (action: { type: 'setPeriod' | 'setBreak' | 'setSound', event: any }) => {
         const { type, event } = action;
         switch (type) {
@@ -149,10 +152,36 @@ export class SettingsContent extends Component<any, any> {
                 break;
             }
             case 'setSound': {
+                const { ringtoneName, ringtoneId  } = event;
+                this.setRingtoneCookie(ringtoneId, ringtoneName);
                 break;
             }
         }
     }
+
+    renderRingtoneButtons = () => (
+        this.state.ringtones.map((ringtoneName: any, i: any) => {
+            const active = (this.state.activeRingtone === ringtoneName);
+            const ringtoneId = i + 1;
+            return (
+                <RadioButton
+                    label={`Ringtone ${ringtoneId}`}
+                    onClick={ (_e: any) => {
+                        this.setNewTimerSettings({
+                            type: 'setSound',
+                            event: {
+                                ringtoneName,
+                                ringtoneId,
+                            }
+                        })
+                    }}
+                    key={ ringtoneName }
+                    active={active}
+                    className={style.marginBottom20}
+                />
+            );
+        })
+    )
 
     render() {
         return (
@@ -167,7 +196,7 @@ export class SettingsContent extends Component<any, any> {
                     Ringtone
                 </h3>
                 <div className={style.ringtoneContainer}>
-                    {this.renderRingtoneButtons()}
+                    { this.renderRingtoneButtons() }
                 </div>
                 <h3>
                     Set Custom Times

@@ -165,7 +165,6 @@ function setTimerWorkerSettings(options: {
     pomodoro?: number;
     break?: number;
 }) {
-    console.log('options', options)
     if (options.pomodoro) {
         timerSettings.basePeriod = options.pomodoro;
         timerSettings.currentPeriod = options.pomodoro;

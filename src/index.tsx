@@ -24,10 +24,18 @@ import 'Src/styles/global.css';
 const timerPeriod = Cookies.get('timerPeriod');
 const timerBreak = Cookies.get('timerBreak');
 
+if (!timerPeriod) {
+    Cookies.set('timerPeriod', '25');
+}
+
+if (!timerBreak) {
+    Cookies.set('timerBreak', '5');
+}
+
 // Init The timer
 initTimer({
-    pomodoro: (typeof timerPeriod === 'string' ? (parseInt(timerPeriod) * 60000) : 20000),
-    break: (typeof timerBreak === 'string' ? (parseInt(timerBreak) * 60000) : 5000),
+    pomodoro: (typeof timerPeriod === 'string' ? (parseInt(timerPeriod) * 60000) : (1000 * 60 * 25)),
+    break: (typeof timerBreak === 'string' ? (parseInt(timerBreak) * 60000) : (1000 * 60 * 5000)),
 });
 
 const App = function App() {

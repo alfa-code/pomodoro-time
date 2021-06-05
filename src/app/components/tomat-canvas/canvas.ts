@@ -102,27 +102,34 @@ function drawImage(context: any, img: any) {
 }
 
 function drawCanvas(context: any) {
-  clearContext(context);
-  const imagesArrayLength = imagesArray.length - 1;
-  imagesArray.forEach((item: any, i: any) => {
-    item.stepLeft();
-    if (i !== imagesArrayLength) {
-      drawImage(context, item);
-    } else {
-      context.save();
-      context.filter = 'blur(3px)';
-      drawImage(context, item);
-      context.restore();
-    }
-  });
+    clearContext(context);
+    const imagesArrayLength = imagesArray.length - 1;
+    imagesArray.forEach((item: any, i: any) => {
+        item.stepLeft();
+        if (i !== imagesArrayLength) {
+            drawImage(context, item);
+        } else {
+            context.save();
+            context.filter = 'blur(3px)';
+            drawImage(context, item);
+            context.restore();
+        }
+    });
 }
 
-function setRenderInterval(context: any) {
-  setInterval(() => {
-    requestAnimationFrame(() => {
-      drawCanvas(context);
-    });
-  }, 17);
+function setRender(context: any) {
+    function draw() {
+        drawCanvas(context);
+        window.requestAnimationFrame(draw);
+    }
+
+    window.requestAnimationFrame(draw);
+
+    // const draw = () => {
+    //     drawCanvas(context);
+    // }
+
+    // window.setInterval(draw, 20);
 }
 
 function setImagesParams() {
@@ -152,19 +159,19 @@ function setImagesParams() {
 }
 
 export function startDraw(canvasElement: any) {
-  canvasDomElement = canvasElement;
-  const context = canvasDomElement.getContext('2d');
-  clearContext(context);
-  setImagesParams();
-
-  window.addEventListener('resize', () => {
-    canvasDomElement.width = window.innerWidth;
-    canvasDomElement.height = window.innerHeight;
-
+    canvasDomElement = canvasElement;
+    const context = canvasDomElement.getContext('2d');
+    clearContext(context);
     setImagesParams();
-  });
 
-  image.onload = () => {
-    setRenderInterval(context);
-  };
+    window.addEventListener('resize', () => {
+        canvasDomElement.width = window.innerWidth;
+        canvasDomElement.height = window.innerHeight;
+
+        setImagesParams();
+    });
+
+    image.onload = () => {
+        setRender(context);
+    };
 }

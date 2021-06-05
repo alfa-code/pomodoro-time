@@ -49,7 +49,6 @@ function* initTimerWorker(action: any) {
     // console.log('options', options)
 
     if (options) {
-        console.log('задаем новые тесттинги')
         yield put(setTimerWorkerSettingsAC({
             options
         }))
@@ -103,8 +102,6 @@ function* setWorkerTimerSettings(action: {
     };
 }) {
     const { payload } = action;
-
-    console.log('payload', payload)
 
     timerWorker.postMessage({
         type: 'action',

@@ -17,6 +17,8 @@ import {
     reloadTimer,
 } from 'Src/actions/index';
 
+import { dispatchCreateAudioContext } from 'Src/actions/audio';
+
 // svg icons
 import svgIconReload from 'Src/static/svg/reset.svg';
 import svgIconPlay from 'Src/static/svg/play.svg';
@@ -28,7 +30,7 @@ import classnames from 'classnames';
 
 // import TimerWorker from 'Src/app/workers/timer.worker';
 
-import TimerWorker from 'Src/workers/timer.worker';
+// import TimerWorker from 'Src/workers/timer.worker';
 
 // style
 import style from './style.module.scss';
@@ -37,15 +39,29 @@ type Props = {
     timer: TimerState;
 }
 
-class TimerComponent extends Component<Props, any> {
-    // timer: any;
+type State = {
+    dirty: boolean;
+}
+
+class TimerComponent extends Component<Props, State> {
     // timerWorker: any;
 
     constructor(props: any) {
         super(props);
+        this.state = {
+            dirty: false,
+        };
     }
 
     startOrPauseTimer = () => {
+        const { dirty } = this.state;
+        if (dirty === false) {
+            dispatchCreateAudioContext();
+        }
+        if (dirty === false) {
+            this.setState({ dirty: true });
+        }
+
         const {
             timerPhase
         } = this.props.timer;

@@ -18,6 +18,7 @@ export const RINGTONE_3 = 'ringtone_3';
 export const RINGTONE_4 = 'ringtone_4';
 export const RINGTONE_5 = 'ringtone_5';
 
+export const CREATE_AUDIO_CONTEXT = 'CREATE_AUDIO_CONTEXT';
 export const PLAY_AUDIO = 'PLAY_AUDIO';
 export const AUDIO_FETCH_SUCCEEDED = 'AUDIO_FETCH_SUCCEEDED';
 export const AUDIO_FETCH_FAILED = 'AUDIO_FETCH_FAILED';
