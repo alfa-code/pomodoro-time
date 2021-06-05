@@ -64,25 +64,29 @@ export function setNotificationsPermission(val: any) {
 
 /* action creators */
 
-export function setTimerSettings(obj: TimerState | any) {
-  store.dispatch({
-    type: constants.SET_TIMER_SETTINGS,
-    payload: obj,
-  });
+export function dispatchTimerSettings(obj: TimerState | any) {
+    store.dispatch(setTimerSettingsAC(obj));
 }
 
 export function setTimerSettingsAC(obj: TimerState | any) {
     return {
-        type: constants.SET_TIMER_SETTINGS,
+        type: constants.SET_TIMER_VIEW,
         payload: obj,
     }
 }
   
 
-export function initTimer() {
-    store.dispatch({
-      type: constants.INIT_TIMER,
-    });
+export function initTimer(options: any | undefined) {
+    if (options) {
+        store.dispatch({
+            type: constants.INIT_TIMER,
+            payload: options,
+        });
+    } else {
+        store.dispatch({
+            type: constants.INIT_TIMER,
+        });
+    }
 }
 
 export function startTimer() {

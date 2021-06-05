@@ -4,9 +4,11 @@ let timerInterval: any = null;
 let startTime: any;
 let pauseTime: any;
 
-let basePeriod = 15000; // 1 500 000
-let breakPeriod = 5000; // 1 500 000
-let currentPeriod = basePeriod;
+const timerSettings = {
+    basePeriod: 15000,
+    breakPeriod: 5000,
+    currentPeriod: 15000,
+}
 
 type PomodoroPhase = 'work' | 'break';
 let pomodoroPhase: PomodoroPhase = 'work';
@@ -15,8 +17,8 @@ function sendTime() {
     postMessage({
         type: 'time',
         payload: {
-            minutes: formatTimeValue(getMinutesByPeriod(currentPeriod)),
-            seconds: formatTimeValue(getSecondsByPeriod(currentPeriod)),
+            minutes: formatTimeValue(getMinutesByPeriod(timerSettings.currentPeriod)),
+            seconds: formatTimeValue(getSecondsByPeriod(timerSettings.currentPeriod)),
         }
     }, undefined);
 }
@@ -27,7 +29,7 @@ function changePomodoroPhase(){
     switch (pomodoroPhase) {
         case 'work': {
             pomodoroPhase = 'break';
-            currentPeriod = breakPeriod;
+            timerSettings.currentPeriod = timerSettings.breakPeriod;
             postMessage({
                 type: 'pomodoroPhase',
                 payload: {
@@ -38,7 +40,7 @@ function changePomodoroPhase(){
         }
         case 'break': {
             pomodoroPhase = 'work';
-            currentPeriod = basePeriod;
+            timerSettings.currentPeriod = timerSettings.basePeriod;
             postMessage({
                 type: 'pomodoroPhase',
                 payload: {
@@ -99,8 +101,8 @@ function myTimer(d0: any)
       seconds = "0"+seconds;
    }
 
-   if (currentPeriod > 1000) {
-       currentPeriod = currentPeriod - 1000;
+   if (timerSettings.currentPeriod > 1000) {
+        timerSettings.currentPeriod = timerSettings.currentPeriod - 1000;
    } else {
         changePomodoroPhase();
    }
@@ -129,6 +131,8 @@ function reloadTimer() {
             phase: 'initial'
         }
     }, undefined);
+
+    sendTime();
 }
 
 function pauseTimer() {
@@ -157,8 +161,26 @@ function resumeTimer() {
     }, undefined);
 }
 
+function setTimerWorkerSettings(options: {
+    pomodoro?: number;
+    break?: number;
+}) {
+    console.log('options', options)
+    if (options.pomodoro) {
+        timerSettings.basePeriod = options.pomodoro;
+        timerSettings.currentPeriod = options.pomodoro;
+    }
+
+    if (options.break) {
+        timerSettings.breakPeriod = options.break;
+    }
+
+    // Перезагружаем таймер после установки новых настроек
+    reloadTimer();
+}
+
 ctx.addEventListener("message", (event) => {
-    console.log('event.data', event.data);
+    // console.log('event.data', event.data);
     const { type, payload } = event.data;
 
     switch (type) {
@@ -176,6 +198,9 @@ ctx.addEventListener("message", (event) => {
             }
             if (command === 'resume') {
                 resumeTimer();
+            }
+            if (command === 'settings') {
+                setTimerWorkerSettings(payload.options);
             }
             break;
         }

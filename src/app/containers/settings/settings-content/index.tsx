@@ -1,4 +1,4 @@
-import SettingsContent from 'Src/app/components/settings/settings-content';
+import { SettingsContent } from 'Src/app/components/settings/settings-content';
 import { connect } from 'react-redux';
 
 import { playAudioNotification } from 'Src/actions/index';

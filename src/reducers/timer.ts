@@ -24,7 +24,7 @@ const initialState: TimerState = {
 
 export default function timer(state: TimerState = initialState, action: any): TimerState {
     switch (action.type) {
-        case constants.SET_TIMER_SETTINGS: {
+        case constants.SET_TIMER_VIEW: {
             const newState = action.payload;
             return {
                 ...state,

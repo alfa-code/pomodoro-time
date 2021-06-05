@@ -4,11 +4,14 @@ import TimerWorker from 'Src/workers/timer.worker';
 
 import * as constants from 'Src/constants';
 
-import { setTimerSettings, dispatchPlayAudioNotification } from 'Src/actions';
+import { dispatchTimerSettings, dispatchPlayAudioNotification } from 'Src/actions';
+import { setTimerWorkerSettingsAC } from 'Src/actions/timer';
 
 let timerWorker: Worker;
 
-function* initTimerWorker() {
+function* initTimerWorker(action: any) {
+    const { payload: options } = action;
+
     timerWorker = new TimerWorker();
 
     timerWorker.onmessage = (event: any) => {
@@ -16,7 +19,7 @@ function* initTimerWorker() {
         switch (type) {
             case 'time': {
                 const { minutes, seconds } = payload;
-                setTimerSettings({
+                dispatchTimerSettings({
                     time: {
                         minutes,
                         seconds
@@ -26,14 +29,14 @@ function* initTimerWorker() {
             }
             case 'phase': {
                 const { phase } = payload;
-                setTimerSettings({
+                dispatchTimerSettings({
                     timerPhase: phase
                 });
                 break;
             }
             case 'pomodoroPhase': {
                 const { pomodoroPhase } = payload;
-                setTimerSettings({
+                dispatchTimerSettings({
                     pomodoroPhase,
                 });
                 dispatchPlayAudioNotification();
@@ -42,6 +45,15 @@ function* initTimerWorker() {
             default: {}
         }
     };
+
+    // console.log('options', options)
+
+    if (options) {
+        console.log('задаем новые тесттинги')
+        yield put(setTimerWorkerSettingsAC({
+            options
+        }))
+    }
 }
 
 function* startTimer() {
@@ -81,10 +93,33 @@ function* reloadTimer() {
     });
 }
 
+function* setWorkerTimerSettings(action: {
+    type: string;
+    payload: {
+        options: {
+            pomodoro?: number;
+            break?: number;
+        }
+    };
+}) {
+    const { payload } = action;
+
+    console.log('payload', payload)
+
+    timerWorker.postMessage({
+        type: 'action',
+        payload: {
+            command: 'settings',
+            options: payload.options
+        },
+    });
+}
+
 export function* timerSaga() {
    yield takeLatest(constants.INIT_TIMER, initTimerWorker);
    yield takeLatest(constants.START_TIMER, startTimer);
    yield takeLatest(constants.PAUSE_TIMER, pauseTimer);
    yield takeLatest(constants.RESUME_TIMER, resumeTimer);
    yield takeLatest(constants.RELOAD_TIMER, reloadTimer);
+   yield takeLatest(constants.SET_SETTINGS_TIMER, setWorkerTimerSettings);
 }

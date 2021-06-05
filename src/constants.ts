@@ -2,7 +2,6 @@ export const SET_NOTIFICATIONS_PERMISSION = 'set_notification_permission';
 export const NOTIFICATIONS_PERMISSION_DEFAULT = 'default';
 export const NOTIFICATIONS_PERMISSION_DENIED = 'denied';
 export const NOTIFICATIONS_PERMISSION_GRANTED = 'granted';
-export const SET_TIMER_SETTINGS = 'set_timer_settings';
 export const TIMER_STATE_OFF = 'off';
 export const TIMER_STATE_ON = 'on';
 export const TIMER_STATE_WORKING = 'working';
@@ -31,4 +30,7 @@ export const START_TIMER = 'START_TIMER';
 export const RESUME_TIMER = 'RESUME_TIMER';
 export const PAUSE_TIMER = 'PAUSE_TIMER';
 export const RELOAD_TIMER = 'RELOAD_TIMER';
+export const SET_SETTINGS_TIMER = 'SET_SETTINGS_TIMER';
+
+export const SET_TIMER_VIEW = 'SET_TIMER_VIEW';
 
