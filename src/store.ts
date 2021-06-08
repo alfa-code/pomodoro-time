@@ -20,15 +20,43 @@ const reduxLogger = createLogger({
     collapsed: true
 });
 
-const composedMiddlewares = compose(
+const middlewaresForCompose = [
     applyMiddleware(
         // ReduxThunk,
         sagaMiddleware,
         reduxLogger
     ),
-    // @ts-ignore
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+]
+
+// const composedMiddlewares = compose(
+//     applyMiddleware(
+//         // ReduxThunk,
+//         sagaMiddleware,
+//         reduxLogger
+//     ),
+//     // @ts-ignore
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+
+let composedMiddlewares;
+// @ts-ignore
+if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    composedMiddlewares = compose(
+        applyMiddleware(
+            // ReduxThunk,
+            sagaMiddleware,
+            reduxLogger
+        ),
+        // @ts-ignore
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
+} else {
+    composedMiddlewares = applyMiddleware(
+        // ReduxThunk,
+        sagaMiddleware,
+        reduxLogger
+    );
+}
 
 /* eslint no-underscore-dangle: 0 */
 const store = createStore(
