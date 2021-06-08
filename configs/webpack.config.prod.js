@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const ManifestPlugin = require('webpack-manifest-plugin');
@@ -52,26 +52,26 @@ const prodConfig = {
         new BundleAnalyzerPlugin({
             analyzerMode: 'static'
         }),
-        new FaviconsWebpackPlugin({
-            logo: './static/images/favicon/tomat.png',
-            emitStats: true,
-            statsFilename: 'iconstats-[hash].json',
-            persistentCache: true,
-            inject: true,
-            background: '#fff',
-            icons: {
-                android: true,
-                appleIcon: true,
-                appleStartup: true,
-                coast: true,
-                favicons: true,
-                firefox: true,
-                opengraph: true,
-                twitter: true,
-                yandex: true,
-                windows: true
-            }
-        }),
+        // new FaviconsWebpackPlugin({
+        //     logo: './static/images/favicon/tomat.png',
+        //     emitStats: true,
+        //     statsFilename: 'iconstats-[hash].json',
+        //     persistentCache: true,
+        //     inject: true,
+        //     background: '#fff',
+        //     icons: {
+        //         android: true,
+        //         appleIcon: true,
+        //         appleStartup: true,
+        //         coast: true,
+        //         favicons: true,
+        //         firefox: true,
+        //         opengraph: true,
+        //         twitter: true,
+        //         yandex: true,
+        //         windows: true
+        //     }
+        // }),
         // new ManifestPlugin({
         //     fileName: 'manifest.json',
         //     basePath: '/',
