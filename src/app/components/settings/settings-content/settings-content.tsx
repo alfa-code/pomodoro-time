@@ -70,23 +70,20 @@ export class SettingsContent extends Component<any, any> {
         if (test) {
             if (isNaN(value)) {
                 Cookies.set('timerPeriod', `${25}`);
-                // this.startNewTimer(25, this.state.timerBreak);
                 this.setState({ timerPeriod: '' });
             } else if (value >= 999) {
                 value = 999;
                 Cookies.set('timerPeriod', value);
                 this.setState({ timerPeriod: value });
-                // this.startNewTimer(value, this.state.timerBreak);
 
                 dispatchTimerWorkerSettings({
                     options: {
-                        break: (value * 60000)
+                        pomodoro: (value * 60000)
                     }
                 });
             } else {
                 Cookies.set('timerPeriod', value);
                 this.setState({ timerPeriod: value });
-                // this.startNewTimer(value, this.state.timerBreak);
 
                 dispatchTimerWorkerSettings({
                     options: {
@@ -110,17 +107,32 @@ export class SettingsContent extends Component<any, any> {
         if (test) {
             if (isNaN(value)) {
                 Cookies.set('timerBreak', `${5}`);
-                //this.startNewTimer(this.state.timerPeriod, 5);
                 this.setState({ timerBreak: '' });
+
+                dispatchTimerWorkerSettings({
+                    options: {
+                        break: (5 * 60000)
+                    }
+                });
             } else if (value >= 60) {
                 value = 59;
                 Cookies.set('timerBreak', value);
-                // this.startNewTimer(this.state.timerPeriod, value);
                 this.setState({ timerBreak: value });
+
+                dispatchTimerWorkerSettings({
+                    options: {
+                        break: (value * 60000)
+                    }
+                });
             } else {
                 Cookies.set('timerBreak', value);
-                // this.startNewTimer(this.state.timerPeriod, value);
                 this.setState({ timerBreak: value });
+
+                dispatchTimerWorkerSettings({
+                    options: {
+                        break: (value * 60000)
+                    }
+                });
             }
         }
 

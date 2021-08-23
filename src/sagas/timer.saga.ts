@@ -46,8 +46,6 @@ function* initTimerWorker(action: any) {
         }
     };
 
-    // console.log('options', options)
-
     if (options) {
         yield put(setTimerWorkerSettingsAC({
             options
