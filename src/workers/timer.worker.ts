@@ -185,7 +185,6 @@ function setTimerWorkerSettings(options: {
     }
 
     if (options.break) {
-        console.log('options', options)
         timerState.breakPeriod = options.break;
     }
 
